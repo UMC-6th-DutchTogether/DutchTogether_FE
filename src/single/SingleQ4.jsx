@@ -84,30 +84,34 @@ const Input = styled.input`
   border-radius: 5px;
 `;
 
-export default function SingleQ4() {
-    const [Q4, setQ4] = useState('');
+export default function SingleQ3() {
+  const [Q4, setQ4] = useState('');
 
-    const handleInputChange = (e) => {
-        setQ4(e.target.value);
-    };
+  const handleInputChange = (e) => {
+    setQ4(e.target.value);
+  };
 
-    return (
-        <SingleLoginContainer>
-            <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
-            <QuestionContainer>
-                <Link to="/SingleQ3">
-                    <LeftArrowButton />
-                </Link>
+  const isInputValid = () => {
+    return Q4.trim() !== '';
+  };
 
-                <SingleQ1Box>
-                    <QuestionText>Q.정산하고자하는 금액이 얼마인가요?</QuestionText>
-                    <Input type="text" value={Q4} onChange={handleInputChange} />
-                </SingleQ1Box>
+  return (
+    <SingleLoginContainer>
+      <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
+      <QuestionContainer>
+        <Link to="/SingleQ3">
+          <LeftArrowButton />
+        </Link>
 
-                <Link to="/SingleQ5">
-                    <RightArrowButton type="button" />
-                </Link>
-            </QuestionContainer>
-        </SingleLoginContainer>
-    );
+        <SingleQ1Box>
+          <QuestionText>Q.정산하고자하는 금액이 얼마인가요?</QuestionText>
+          <Input type="text" value={Q4} onChange={handleInputChange} />
+        </SingleQ1Box>
+
+        <Link to="/SingleQ5">
+          <RightArrowButton type="button" disabled={!isInputValid()} />
+        </Link>
+      </QuestionContainer>
+    </SingleLoginContainer>
+  );
 }

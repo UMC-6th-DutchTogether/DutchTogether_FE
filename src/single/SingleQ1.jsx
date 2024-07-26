@@ -85,29 +85,33 @@ const Input = styled.input`
 `;
 
 export default function SingleQ1() {
-    const [Q1, setQ1] = useState('');
+  const [Q1, setQ1] = useState('');
 
-    const handleInputChange = (e) => {
-        setQ1(e.target.value);
-    };
+  const handleInputChange = (e) => {
+    setQ1(e.target.value);
+  };
 
-    return (
-        <SingleLoginContainer>
-            <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
-            <QuestionContainer>
-                <Link to="/SingleQ2">
-                    <LeftArrowButton />
-                </Link>
+  const isInputValid = () => {
+    return Q1.trim() !== '';
+  };
 
-                <SingleQ1Box>
-                    <QuestionText>Q.정산 모임 이름이 무엇인가요?</QuestionText>
-                    <Input type="text" value={Q1} onChange={handleInputChange} />
-                </SingleQ1Box>
+  return (
+    <SingleLoginContainer>
+      <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
+      <QuestionContainer>
+        <Link to="/SingleLogin">
+          <LeftArrowButton />
+        </Link>
 
-                <Link to="/SingleQ2">
-                    <RightArrowButton type="summit" />
-                </Link>
-            </QuestionContainer>
-        </SingleLoginContainer>
-    );
+        <SingleQ1Box>
+          <QuestionText>Q.정산 모임 이름이 무엇인가요?</QuestionText>
+          <Input type="text" value={Q1} onChange={handleInputChange} />
+        </SingleQ1Box>
+
+        <Link to="/SingleQ2">
+          <RightArrowButton type="summit" disabled={!isInputValid()} />
+        </Link>
+      </QuestionContainer>
+    </SingleLoginContainer>
+  );
 }

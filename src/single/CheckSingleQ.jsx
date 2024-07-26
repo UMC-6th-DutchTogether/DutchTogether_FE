@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 
 const SLoginContainer = styled.div`
   display: flex;
@@ -7,10 +7,11 @@ const SLoginContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  margin-top: 70px;
 `;
 
 
-const SLoginBox = styled.div`
+const CheckBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -27,16 +28,55 @@ const SLoginTitle = styled.h2`
     width: 70%;
 `;
 
-const SQuestion = styled.div`
+const SingleQ = styled.div`
   font-size: 16px;
+  font-weight: bold;
+  color: #0d5eaf;
   margin-bottom: 8px;
 `;
 
-const SInput = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-bottom: 1px solid skyblue;
+const SingleA = styled.div`
+  margin-left: 20px;
+  border-bottom: 2px solid #0d5eaf;
+  margin-bottom: 20px;
+  width: 30%;
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const BackButton = styled.button`
+  background-color: white;
+  border: 2px solid #0d5eaf !important;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 50px 10px 50px;
+  color: #0d5eaf;
+`;
+
+const LinkButton = styled.button`
+  background-color: white;
+  border: 2px solid #0d5eaf !important;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 50px 10px 50px;
+  color: #0d5eaf;
+`;
+
+const SingleCost = styled.div`
+    display: flex;
+    gap: 30px;
+`;
+
+const Receipt = styled.button`
+  background-color: white;
+  border: 2px solid #0d5eaf !important;
+  color: #0d5eaf;
+  text-align: center;
+  padding: 5px;
 `;
 
 
@@ -45,32 +85,34 @@ export default function CheckSingleQ() {
     return (
         <SLoginContainer>
             <SLoginTitle>나만 정산하기</SLoginTitle>
-            <SLoginBox>
-                <div>
-                    <SQuestion>Q. 정산 모임 이름이 무엇인가요?</SQuestion>
-                    <SInput type="text" />
-                </div>
-                <div>
-                    <SQuestion>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SQuestion>
-                    <SInput type="text" />
-                </div>
-                <div>
-                    <SQuestion>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SQuestion>
-                    <SInput type="text" />
-                </div>
-                <div>
-                    <SQuestion>Q. 예금주를 입력해주세요.</SQuestion>
-                    <SInput type="text" />
-                </div>
-                <div>
-                    <SQuestion>Q. 정산하고자 하는 금액이 얼마인가요?</SQuestion>
-                    <SInput type="text" />
-                </div>
-                <div>
-                    <SQuestion>Q. 몇 명이 정산하나요?</SQuestion>
-                    <SInput type="text" />
-                </div>
-            </SLoginBox>
+            <CheckBox>
+                <SingleQ>Q. 정산 모임 이름이 무엇인가요?</SingleQ>
+                <SingleA>Q1답변</SingleA>
+
+                <SingleQ>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
+                <SingleA>Q2답변</SingleA>
+
+                <SingleQ>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
+                <SingleA>Q3답변</SingleA>
+
+                <SingleCost>
+                    <SingleQ>Q. 정산하고자 하는 금액이 얼마인가요?</SingleQ>
+                    <Receipt>영수증 첨부하기</Receipt>
+                </SingleCost>
+                <SingleA>Q4답변 </SingleA>
+
+
+
+                <SingleQ>Q. 몇 명이 정산하나요?</SingleQ>
+                <SingleA>Q5답변</SingleA>
+
+                <ButtonContainer>
+                    <Link to="/SingleQ5">
+                        <BackButton>뒤로가기</BackButton>
+                    </Link>
+                    <LinkButton>링크 생성하기</LinkButton>
+                </ButtonContainer>
+            </CheckBox>
         </SLoginContainer>
 
 
