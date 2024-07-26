@@ -85,7 +85,7 @@ const Input = styled.input`
   border-radius: 5px;
 `;
 
-export default function SingleQ4() {
+export default function SingleQ3() {
   //store 동기화
   const dispatch = useDispatch();
   const { amount } = useSelector((state) => state.singlePay);
@@ -94,7 +94,10 @@ export default function SingleQ4() {
   const handleInputChange = (e) => {
     dispatch(setAmount(e.target.value))
   };
-
+  //공백 확인 함수
+  const isInputValid = () => {
+    return amount.trim() !== '';
+  };
   return (
     <SingleLoginContainer>
       <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
@@ -105,11 +108,11 @@ export default function SingleQ4() {
 
         <SingleQ1Box>
           <QuestionText>Q.정산하고자하는 금액이 얼마인가요?</QuestionText>
-          <Input type="text" onChange={handleInputChange} value={amount} />
+          <Input type="text" value={amount} onChange={handleInputChange} />
         </SingleQ1Box>
 
         <Link to="/SingleQ5">
-          <RightArrowButton type="button" />
+          <RightArrowButton type="button" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
     </SingleLoginContainer>

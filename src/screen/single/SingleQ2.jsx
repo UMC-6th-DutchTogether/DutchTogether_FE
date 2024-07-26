@@ -94,7 +94,10 @@ export default function SingleQ2() {
   const handleInputChange = (e) => {
     dispatch(setBankName(e.target.value))
   };
-
+  //공백 확인 함수
+  const isInputValid = () => {
+    return bankName.trim() !== '';
+  };
   return (
     <SingleLoginContainer>
       <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
@@ -105,11 +108,11 @@ export default function SingleQ2() {
 
         <SingleQ1Box>
           <QuestionText>Q.정산 금액을 받는 은행과 계좌번호를 입력해주세요.</QuestionText>
-          <Input type="text" onChange={handleInputChange} value={bankName} />
+          <Input type="text" value={bankName} onChange={handleInputChange} />
         </SingleQ1Box>
 
         <Link to="/SingleQ3">
-          <RightArrowButton type="summit" />
+          <RightArrowButton type="summit" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
     </SingleLoginContainer>

@@ -79,6 +79,16 @@ export default function SingleLogin() {
     return passwordPattern.test(password);
   };
 
+  const isFormValid = () => {
+    return (
+      id.trim() !== '' &&
+      password.trim() !== '' &&
+      password.length >= 4 &&
+      password.length <= 12 &&
+      validatePassword(password)
+    );
+  };
+
   return (
     <SLoginContainer>
       <SLoginTitle>나만 정산하기</SLoginTitle>
@@ -98,11 +108,11 @@ export default function SingleLogin() {
           {password !== '' && !validatePassword(password) && password.length >= 4 && password.length <= 12 && <ErrorMessage>비밀번호는 영어, 숫자, 특수문자를 모두 포함해야 합니다!</ErrorMessage>}
 
           <Link to="/SingleQ1">
-            <Button type="summit">나만 정산하기 페이지 만들기</Button>
+            <Button type="summit" disabled={!isFormValid()}> 나만 정산하기 페이지 만들기</Button>
           </Link>
         </div>
       </SLoginBox>
-    </SLoginContainer>
+    </SLoginContainer >
 
 
   )

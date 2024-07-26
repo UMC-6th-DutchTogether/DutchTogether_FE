@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { setAccountHolder } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 const SingleLoginContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -95,7 +94,10 @@ export default function SingleQ3() {
   const handleInputChange = (e) => {
     dispatch(setAccountHolder(e.target.value))
   };
-
+  //공백 확인 함수
+  const isInputValid = () => {
+    return accountHolder.trim() !== '';
+  };
   return (
     <SingleLoginContainer>
       <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
@@ -106,11 +108,11 @@ export default function SingleQ3() {
 
         <SingleQ1Box>
           <QuestionText>Q.예금주를 입력해주세요.</QuestionText>
-          <Input type="text" onChange={handleInputChange} value={accountHolder} />
+          <Input type="text" value={accountHolder} onChange={handleInputChange} />
         </SingleQ1Box>
 
         <Link to="/SingleQ4">
-          <RightArrowButton type="button" />
+          <RightArrowButton type="button" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
     </SingleLoginContainer>

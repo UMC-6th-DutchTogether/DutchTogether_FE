@@ -85,7 +85,7 @@ const Input = styled.input`
   border-radius: 5px;
 `;
 
-export default function SingleQ5() {
+export default function SingleQ3() {
   //store 동기화
   const dispatch = useDispatch();
   const { numberOfPeople } = useSelector((state) => state.singlePay);
@@ -94,7 +94,10 @@ export default function SingleQ5() {
   const handleInputChange = (e) => {
     dispatch(setNumberOfPeople(e.target.value))
   };
-
+  //공백 확인 함수
+  const isInputValid = () => {
+    return numberOfPeople.trim() !== '';
+  };
   return (
     <SingleLoginContainer>
       <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
@@ -105,11 +108,11 @@ export default function SingleQ5() {
 
         <SingleQ1Box>
           <QuestionText>Q.몇 명이 정산하나요?</QuestionText>
-          <Input type="text" onChange={handleInputChange} value={numberOfPeople} />
+          <Input type="text" value={numberOfPeople} onChange={handleInputChange} />
         </SingleQ1Box>
 
         <Link to="/CheckSingleQ">
-          <RightArrowButton type="button" />
+          <RightArrowButton type="button" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
     </SingleLoginContainer>

@@ -95,6 +95,9 @@ export default function SingleQ1() {
     dispatch(setMeetingName(e.target.value))
   };
 
+  const isInputValid = () => {
+    return meetingName.trim() !== '';
+  };
   return (
     <SingleLoginContainer>
       <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
@@ -105,11 +108,11 @@ export default function SingleQ1() {
 
         <SingleQ1Box>
           <QuestionText>Q.정산 모임 이름이 무엇인가요?</QuestionText>
-          <Input type="text" onChange={handleInputChange} value={meetingName} />
+          <Input type="text" value={meetingName} onChange={handleInputChange} />
         </SingleQ1Box>
 
         <Link to="/SingleQ2">
-          <RightArrowButton type="summit" />
+          <RightArrowButton type="summit" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
     </SingleLoginContainer>
