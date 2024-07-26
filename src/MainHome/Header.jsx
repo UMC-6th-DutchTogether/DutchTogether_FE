@@ -11,7 +11,7 @@ const Title = styled.p`
 `;
 
 
-export default function TitleBar() {
+export default function Header() {
     return (
         <Title>더치투게더</Title>
     )
