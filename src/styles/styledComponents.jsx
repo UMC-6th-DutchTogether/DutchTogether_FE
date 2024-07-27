@@ -75,7 +75,7 @@ export const MainFomrButtonContainer = styled.div`
 `;
 
 //--------------ChekSingleQ------------------
-export const SingleCheckContainer = styled.div`
+export const SLoginContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -153,45 +153,11 @@ export const Receipt = styled.button`
   padding: 5px;
 `;
 
-//----------SingleCreateLink--------------
 
-export const SingleLinkBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 70%;
-  height: 500px;
-  background-color: #a7d0f8;
-  padding: 20px;
-`;
-
-export const LinkButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-`;
-
-export const NewSingleLink = styled.div`
-  padding: 6vw;
-  font-size: 2vw;
-  font-weight: bold;
-
-`;
 
 
 
 //----------SingleLogin--------------
-
-
-export const SLoginContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  margin-top: 50px;
-`;
 
 export const SLoginBox = styled.div`
   display: flex;
@@ -250,7 +216,6 @@ export const SingleLoginContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  margin-top: 50px;
 `;
 
 export const QuestionContainer = styled.div`

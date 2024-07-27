@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { setBankName } from '../../store/singlePaySlice';
+import { setBankName, setAccountNumber } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { SingleLoginContainer, QuestionContainer, SingleLoginTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, Input } from '../../styles/styledComponents'
 

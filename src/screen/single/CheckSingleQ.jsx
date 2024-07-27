@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { SingleCheckContainer, CheckBox, SLoginTitle, SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost, Receipt } from '../../styles/styledComponents'
+import { SLoginContainer, CheckBox, SLoginTitle, SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost, Receipt } from '../../styles/styledComponents'
 
 
 
@@ -10,18 +10,18 @@ import { SingleCheckContainer, CheckBox, SLoginTitle, SingleQ, SingleA, ButtonCo
 
 
 export default function CheckSingleQ() {
-  const { meetingName, bankName, accountHolder, amount, numberOfPeople } = useSelector((state) => state.singlePay);
+  const { meetingName, bankName, accountNumber, accountHolder, amount, numberOfPeople } = useSelector((state) => state.singlePay);
   return (
-    <SingleCheckContainer>
+    <SLoginContainer>
       <SLoginTitle>나만 정산하기</SLoginTitle>
       <CheckBox>
-        <SingleQ>Q.정산 모임 이름이 무엇인가요?</SingleQ>
+        <SingleQ>Q. 정산 모임 이름이 무엇인가요?</SingleQ>
         <SingleA>{meetingName}</SingleA>
 
-        <SingleQ>Q.정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
+        <SingleQ>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
         <SingleA>{bankName}</SingleA>
 
-        <SingleQ>Q.예금주를 입력해주세요.</SingleQ>
+        <SingleQ>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
         <SingleA>{accountHolder}</SingleA>
 
         <SingleCost>
@@ -39,13 +39,10 @@ export default function CheckSingleQ() {
           <Link to="/SingleQ5">
             <BackButton>뒤로가기</BackButton>
           </Link>
-
-          <Link to="/SingleCreateLink">
-            <LinkButton>링크 생성하기</LinkButton>
-          </Link>
+          <LinkButton>링크 생성하기</LinkButton>
         </ButtonContainer>
       </CheckBox>
-    </SingleCheckContainer>
+    </SLoginContainer>
 
 
   )
