@@ -1,66 +1,8 @@
-import styled from 'styled-components';
 import { useState } from "react"
 import { Link } from 'react-router-dom';
-
-const SLoginContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-`;
+import { SLoginContainer, SLoginBox, SLoginTitle, TextContainer, Input, Button, ErrorMessage } from '../../styles/styledComponents'
 
 
-const SLoginBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 70%;
-  height: 500px;
-  background-color: #a7d0f8;
-  padding: 20px;
-  
-`;
-
-const SLoginTitle = styled.h2`
-    padding-top: 50px;
-    margin-bottom: 0px;
-    text-align: left;
-    width: 70%;
-`;
-
-const TextContainer = styled.div`
-  margin-top: 10px;
-  text-align: center;
-`;
-
-const Input = styled.input`
-  margin: 10px;
-  padding: 10px 10px;
-  width: 100%;
-  max-width: 500px;
-  box-sizing: border-box;
-`;
-
-const Button = styled.button`
-  margin-top: 50px;
-  padding: 10px;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 50px;
-  background-color: white;
-  color: skyblue;
-  font-weight: bold;
-  cursor: pointer;
-  box-sizing: border-box;
-
-`;
-
-const ErrorMessage = styled.span`
-  color: red;
-  padding-left: 20px;
-  font-size: 13px;
-`;
 
 export default function SingleLogin() {
   const [id, setId] = useState('');

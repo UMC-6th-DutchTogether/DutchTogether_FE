@@ -1,84 +1,11 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-const SLoginContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  margin-top: 70px;
-`;
+import { SLoginContainer, CheckBox, SLoginTitle, SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost, Receipt } from '../../styles/styledComponents'
 
 
-const CheckBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  width: 70%;
-  height: 530px;
-  padding: 20px;
-  
-`;
 
-const SLoginTitle = styled.h2`
-    padding-top: 50px;
-    margin-bottom: 0px;
-    text-align: left;
-    width: 70%;
-`;
 
-const SingleQ = styled.div`
-  font-size: 16px;
-  font-weight: bold;
-  color: #0d5eaf;
-  margin-bottom: 8px;
-`;
 
-const SingleA = styled.div`
-  margin-left: 20px;
-  border-bottom: 2px solid #0d5eaf;
-  margin-bottom: 20px;
-  width: 30%;
-`;
-
-const ButtonContainer = styled.div`
-  margin-top: 70px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BackButton = styled.button`
-  background-color: white;
-  border: 2px solid #0d5eaf !important;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 50px 10px 50px;
-  color: #0d5eaf;
-`;
-
-const LinkButton = styled.button`
-  background-color: white;
-  border: 2px solid #0d5eaf !important;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 50px 10px 50px;
-  color: #0d5eaf;
-`;
-
-const SingleCost = styled.div`
-    display: flex;
-    gap: 30px;
-`;
-
-const Receipt = styled.button`
-  background-color: white;
-  border: 2px solid #0d5eaf !important;
-  color: #0d5eaf;
-  text-align: center;
-  padding: 5px;
-`;
 
 
 
