@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { setAmount } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SingleLoginContainer, QuestionContainer, SingleLoginTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, Input } from '../../styles/styledComponents'
+import { SinglePageContainer, QuestionContainer, SingleLoginTitle, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, SingleText1, Input } from '../../styles/styledComponents'
 
 
 export default function SingleQ3() {
@@ -18,15 +18,15 @@ export default function SingleQ3() {
     return amount.trim() !== '';
   };
   return (
-    <SingleLoginContainer>
-      <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
+    <SinglePageContainer>
+      <SinglePageTitle>나만 정산하기</SinglePageTitle>
       <QuestionContainer>
         <Link to="/SingleQ3">
           <LeftArrowButton />
         </Link>
 
         <SingleQ1Box>
-          <QuestionText>Q.정산하고자하는 금액이 얼마인가요?</QuestionText>
+          <SingleText1>Q.정산하고자하는 금액이 얼마인가요?</SingleText1>
           <Input type="text" value={amount} onChange={handleInputChange} />
         </SingleQ1Box>
 
@@ -34,6 +34,6 @@ export default function SingleQ3() {
           <RightArrowButton type="button" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
-    </SingleLoginContainer>
+    </SinglePageContainer>
   );
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { setAccountHolder } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SingleLoginContainer, QuestionContainer, SingleLoginTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, Input } from '../../styles/styledComponents'
+import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, SingleText1, Input } from '../../styles/styledComponents'
 
 
 export default function SingleQ3() {
@@ -18,15 +18,15 @@ export default function SingleQ3() {
     return accountHolder.trim() !== '';
   };
   return (
-    <SingleLoginContainer>
-      <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
+    <SinglePageContainer>
+      <SinglePageTitle>나만 정산하기</SinglePageTitle>
       <QuestionContainer>
         <Link to="/SingleQ2">
           <LeftArrowButton />
         </Link>
 
         <SingleQ1Box>
-          <QuestionText>Q.예금주를 입력해주세요.</QuestionText>
+          <SingleText1>Q.예금주를 입력해주세요.</SingleText1>
           <Input type="text" value={accountHolder} onChange={handleInputChange} />
         </SingleQ1Box>
 
@@ -34,6 +34,6 @@ export default function SingleQ3() {
           <RightArrowButton type="button" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
-    </SingleLoginContainer>
+    </SinglePageContainer>
   );
 }

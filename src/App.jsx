@@ -14,10 +14,6 @@ import SingleQ5 from './screen/single/SingleQ5';
 import CheckSingleQ from './screen/single/CheckSingleQ';
 
 
-
-
-
-
 function App() {
   return (
     <BrowserRouter>
