@@ -12,6 +12,7 @@ import SingleQ3 from './screen/single/SingleQ3';
 import SingleQ4 from './screen/single/SingleQ4';
 import SingleQ5 from './screen/single/SingleQ5';
 import CheckSingleQ from './screen/single/CheckSingleQ';
+import SingleCreateLink from './screen/single/SingleCreateLink';
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/SingleQ4" element={<SingleQ4 />} />
         <Route path="/SingleQ5" element={<SingleQ5 />} />
         <Route path="/CheckSingleQ" element={<CheckSingleQ />} />
+        <Route path="/SingleCreateLink" element={<SingleCreateLink />} />
       </Routes>
       <Footer />
     </BrowserRouter>
