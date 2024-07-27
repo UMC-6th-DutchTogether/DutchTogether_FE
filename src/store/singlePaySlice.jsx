@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 초기 상태 정의
 const initialState = {
-  meetingName: "",
-  bankName: "",
-  accountNumber: "",
-  accountHolder: "",
-  amount: "",
-  numberOfPeople: "",
+  meetingName: " ",
+  bankName: " ",
+  accountNumber: " ",
+  accountHolder: " ",
+  amount: " ",
+  numberOfPeople: " ",
 };
 
 // createSlice를 사용하여 slice 정의

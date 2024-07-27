@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { setMeetingName } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SingleLoginContainer, QuestionContainer, SingleLoginTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, Input } from '../../styles/styledComponents'
+import { SinglePageContainer, SingleLoginTitle, QuestionContainer, LeftArrowButton, RightArrowButton, QuestionText, Input, SingleQ1Box, SinglePageTitle, SingleText1 } from '../../styles/styledComponents'
 
 
 
@@ -23,15 +23,16 @@ export default function SingleQ1() {
 
 
   return (
-    <SingleLoginContainer>
-      <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
+    <SinglePageContainer>
+      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+
       <QuestionContainer>
         <Link to="/SingleLogin">
           <LeftArrowButton />
         </Link>
 
         <SingleQ1Box>
-          <QuestionText>Q.정산 모임 이름이 무엇인가요?</QuestionText>
+          <SingleText1>Q.정산 모임 이름이 무엇인가요?</SingleText1>
           <Input type="text" value={meetingName} onChange={handleInputChange} />
         </SingleQ1Box>
 
@@ -39,6 +40,6 @@ export default function SingleQ1() {
           <RightArrowButton type="summit" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
-    </SingleLoginContainer>
+    </SinglePageContainer>
   );
 }
