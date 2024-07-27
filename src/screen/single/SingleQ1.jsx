@@ -95,9 +95,12 @@ export default function SingleQ1() {
     dispatch(setMeetingName(e.target.value))
   };
 
+  //공백 확인 함수
   const isInputValid = () => {
     return meetingName.trim() !== '';
   };
+
+
   return (
     <SingleLoginContainer>
       <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
