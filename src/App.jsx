@@ -1,15 +1,15 @@
-import MainFrom from './MainHome/MainForm';
-import Header from './MainHome/Header';
-import Footer from './MainHome/Footer';
+import './styles/App.css'
+import MainFrom from './screen/MainForm';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SingleLogin from './single/SingleLogin';
-import SingleQ1 from './single/SingleQ1';
-import SingleQ2 from './single/SingleQ2';
-import SingleQ3 from './single/SingleQ3';
-import SingleQ4 from './single/SingleQ4';
-import SingleQ5 from './single/SingleQ5';
-import CheckSingleQ from './single/CheckSingleQ';
-
+import SingleLogin from './screen/single/SingleLogin';
+import SingleQ1 from './screen/single/SingleQ1';
+import SingleQ2 from './screen/single/SingleQ2';
+import SingleQ3 from './screen/single/SingleQ3';
+import SingleQ4 from './screen/single/SingleQ4';
+import SingleQ5 from './screen/single/SingleQ5';
+import CheckSingleQ from './screen/single/CheckSingleQ';
 
 
 
