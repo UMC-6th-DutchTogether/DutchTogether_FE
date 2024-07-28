@@ -55,12 +55,13 @@ export const MainText2 = styled.div`
 `;
 
 export const ServiceContainer = styled.section`
-  padding: 0px 20px; 
+  padding: 100px 20px; 
   display:flex;
   flex-direction:column;
-  justify-content:center;
+
   align-items:center;
   height:700px;
+
 `;
 
 
@@ -117,10 +118,12 @@ export const SinglePageBox = styled.div`
   display: flex;
   flex-direction: column;
    width: 70%;
-  height: 60vh;
+  height: 50vh;
+  min-height: 550px;
   background-color: #E2F0FF;
-  padding: 20px;  
-  margin-top:10px;
+  padding-top: 20px; 
+    z-index: 10;
+
 `;
 
 export const TextContainer = styled.div`
@@ -183,9 +186,13 @@ export const SingleLoginContainer = styled.div`
 export const Input = styled.input`
   margin-top: 10px;
   padding: 10px 10px;
-  width: 100%;
+  width: 500px;
+  height:70px;
   max-width: 500px;
   box-sizing: border-box;
+  border:none;
+  font-size:20px;
+  font-weight:bold;
 `;
 export const QuestionContainer = styled(SinglePageBox)`
   display: flex;
@@ -193,9 +200,11 @@ export const QuestionContainer = styled(SinglePageBox)`
   align-items: center;
   width: 70%;
   height: 50vh;
-
-  padding: 20px;
+  padding-top: 20px;
   position: relative;
+  z-index:1;
+          min-height: 550px;
+        min-width: 1000px;
 `;
 export const SingleLoginTitle = styled.h2`
   padding-top: 50px;
@@ -206,12 +215,13 @@ export const SingleLoginTitle = styled.h2`
 
 export const SingleQ1Box = styled.div`
   display: flex;
+  padding-top:100px;
   flex-direction: column;
   align-items: center;
-  gap: 200px;
-  justify-content: center;
+
   height: 100%;
   margin-top: 100px;
+
 `;
 
 export const ArrowButton = styled.button`
@@ -250,14 +260,28 @@ export const QuestionText = styled.p`
   margin: 0 20px;
 `;
 
+export const StyledImage = styled.img`
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+`;
+
+export const ReciptInputContainer = styled.img`
+display: flex;
+ flexDirection: column
+`;
+
+
+
 
 //--------------ChekSingleQ------------------
 export const SinglePageContainer = styled.div`
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 70px;
+
+  padding-top:100px;
+  height: calc(100vh - 230px);
 `;
 
 
@@ -272,7 +296,7 @@ margin-top:50px;
 `;
 
 export const SinglePageTitle = styled.h2`
-    margin-top: 70px;
+
     margin-bottom: 30px;
     height:50px;
     color: ${INDIGO};
@@ -281,7 +305,6 @@ export const SinglePageTitle = styled.h2`
     width: 70%;
 `;
 export const CheckSinglePageTitle = styled(SinglePageTitle)`
-    margin-top: 140px;
 margin-bottom: 0px;
 `;
 
@@ -290,7 +313,8 @@ export const SingleText1 = styled.h2`
   font-size: 30px;
   font-weight: 600;
   color: ${INDIGO};
-  margin-bottom: 8px;
+  margin-bottom: 70px;
+
 `;
 export const SingleText2 = styled.h2`
   font-size: 20px;
@@ -363,15 +387,14 @@ margin:0 0 0 45px;
 //---------------Footer--------------
 export const FooterContainer = styled.div`
   background-color: ${INDIGO};
-  height:150px;
+  height:130px;
   color: white;
-  position: fixed;
   bottom: 0;
   width: 100%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-
+  z-index: 1000;
 `;
 
 export const FooterTextContainer = styled.div`
@@ -383,14 +406,20 @@ export const FooterTextContainer = styled.div`
 
 
 //----------------Header--------------
-export const HeaderTitle = styled.p`
+export const HeaderTitle = styled.div`
   background-color: ${INDIGO};
-  padding: 30px 0 30px 15%;
-  color: white;
-  position: fixed;
   top: 0;
-  width: 100%;
-  margin: 0;
+  width: 100vw;
+  display:flex;
+  height:100px;
+  z-index: 1000;
+  
+`;
+export const HeaderText = styled.p`
+color:white;
   font-size:36px;
   font-weight:700;
+  margin: 20px 0 0 200px;
+  
 `;
+

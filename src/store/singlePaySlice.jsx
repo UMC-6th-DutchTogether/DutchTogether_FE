@@ -8,6 +8,7 @@ const initialState = {
   accountHolder: " ",
   amount: " ",
   numberOfPeople: " ",
+  receiptUrl: null
 };
 
 // createSlice를 사용하여 slice 정의
@@ -33,6 +34,9 @@ const singlePaySlice = createSlice({
     setNumberOfPeople: (state, action) => {
       state.numberOfPeople = action.payload;
     },
+    setReceipt: (state, action) => {
+      state.receiptUrl = action.payload;
+    },
   },
 });
 
@@ -44,7 +48,8 @@ export const {
   setAccountNumber,
   setAccountHolder,
   setAmount,
-  setNumberOfPeople
+  setNumberOfPeople,
+  setReceipt
 } = singlePaySlice.actions;
 
 export default singlePaySlice.reducer;
