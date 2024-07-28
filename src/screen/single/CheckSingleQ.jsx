@@ -42,7 +42,9 @@ export default function CheckSingleQ() {
           <Link to="/SingleQ5">
             <BackButton>뒤로가기</BackButton>
           </Link>
-          <LinkButton>링크 생성하기</LinkButton>
+          <Link to="/SingleCreateLink">
+            <LinkButton>링크 생성하기</LinkButton>
+          </Link>
         </ButtonContainer>
       </CheckBox>
     </SinglePageContainer>
