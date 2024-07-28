@@ -109,6 +109,40 @@ export const MainFomrButtonContainer = styled.div`
 `;
 
 
+//----------SingCreateLink--------------
+
+export const SingleLinkContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 70px;
+  gap: 10px;
+  align-items: center;
+`;
+
+export const SingleLinkBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 70%;
+  height: 500px;
+  background-color: #a7d0f8;
+  padding: 20px;
+`;
+
+export const LinkButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+`;
+
+export const NewSingleLink = styled.div`
+  padding: 6vw;
+  font-size: 2vw;
+  font-weight: bold;
+
+`;
 
 
 
