@@ -4,18 +4,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAmount, setReceipt } from '../../store/singlePaySlice';
 import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, ReceiptButton, SingleText1, Input, StyledImage } from '../../styles/styledComponents';
 
-
-
 export default function SingleQ4() {
   const dispatch = useDispatch();
   const { amount, receiptUrl } = useSelector((state) => state.singlePay);
-  const fileInputRef = useRef(null); // 
+  const fileInputRef = useRef(null);
 
   const handleInputChange = (e) => {
-    dispatch(setAmount(e.target.value));
+    const value = e.target.value;
+
+    // 숫자만 허용
+    if (/^\d*$/.test(value)) {
+      // 입력값을 숫자로 변환 
+      const numericValue = parseFloat(value);
+
+      // NaN 검사를 통해 유효한 숫자인지 확인
+      if (!isNaN(numericValue)) {
+        dispatch(setAmount(numericValue));
+      } else {
+        dispatch(setAmount(0)); // NaN인 경우  0으로 설정
+      }
+    }
   };
 
-  //파일->문자열(리덕스 저장)
+  // 파일->문자열
   const convertFileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -25,14 +36,14 @@ export default function SingleQ4() {
     });
   };
 
-
-  //버튼 클릭->파일 인풋 함수
+  // 버튼 클릭->파일 인풋 함수
   const handleReceiptButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-  //파일 인풋 함수
+
+  // 파일 인풋 함수
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -41,9 +52,9 @@ export default function SingleQ4() {
     }
   };
 
-  //유효성 검사
+  // 유효성 검사
   const isInputValid = () => {
-    return amount.trim() !== '';
+    return amount !== '' && !isNaN(amount) && amount !== 0;
   };
 
   return (
@@ -63,7 +74,7 @@ export default function SingleQ4() {
                 <StyledImage src={receiptUrl} alt="Receipt Preview" style={{ width: '300px', height: '100px' }} />
               )}
             </div>
-            <Input type="text" value={amount} onChange={handleInputChange} />
+            <Input type="text" value={amount} onChange={handleInputChange} inputMode="numeric" />
 
             <input
               type="file"
@@ -72,9 +83,6 @@ export default function SingleQ4() {
               accept="image/*"
               onChange={handleFileChange}
             />
-
-
-
           </div>
         </SingleQ1Box>
 

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { setAccountHolder } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, SingleText1, Input } from '../../styles/styledComponents'
+import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleText1, Input } from '../../styles/styledComponents'
 
-
+//예금주
 export default function SingleQ3() {
   //store 동기화
   const dispatch = useDispatch();

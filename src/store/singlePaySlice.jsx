@@ -2,13 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 초기 상태 정의
 const initialState = {
-  meetingName: " ",
-  bankName: " ",
-  accountNumber: " ",
-  accountHolder: " ",
-  amount: " ",
-  numberOfPeople: " ",
-  receiptUrl: null
+  meetingName: "",
+  bankName: "",
+  accountNumber: "",
+  accountHolder: "",
+  amount: "",
+  numberOfPeople: "",
+  receiptUrl: null,
+  meetingNum: null
 };
 
 // createSlice를 사용하여 slice 정의
@@ -23,19 +24,22 @@ const singlePaySlice = createSlice({
       state.bankName = action.payload;
     },
     setAccountNumber: (state, action) => {
-      state.accountNumber = action.payload;
+      state.accountNumber = parseFloat(action.payload);
     },
     setAccountHolder: (state, action) => {
       state.accountHolder = action.payload;
     },
     setAmount: (state, action) => {
-      state.amount = action.payload;
+      state.amount = parseFloat(action.payload);
     },
     setNumberOfPeople: (state, action) => {
-      state.numberOfPeople = action.payload;
+      state.numberOfPeople = parseFloat(action.payload);
     },
     setReceipt: (state, action) => {
       state.receiptUrl = action.payload;
+    },
+    setMeetingNum: (state, action) => {
+      state.meetingNum = action.payload;
     },
   },
 });
@@ -49,7 +53,8 @@ export const {
   setAccountHolder,
   setAmount,
   setNumberOfPeople,
-  setReceipt
+  setReceipt,
+  setMeetingNum
 } = singlePaySlice.actions;
 
 export default singlePaySlice.reducer;

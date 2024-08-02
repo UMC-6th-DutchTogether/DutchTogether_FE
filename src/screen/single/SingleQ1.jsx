@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { setMeetingName } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, SingleLoginTitle, QuestionContainer, LeftArrowButton, RightArrowButton, QuestionText, Input, SingleQ1Box, SinglePageTitle, SingleText1 } from '../../styles/styledComponents'
+import { SinglePageContainer, QuestionContainer, LeftArrowButton, RightArrowButton, Input, SingleQ1Box, SinglePageTitle, SingleText1 } from '../../styles/styledComponents'
 
 
 

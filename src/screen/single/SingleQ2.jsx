@@ -1,39 +1,55 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import { setBankName, setAccountNumber } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, QuestionContainer, SingleLoginTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, Input, SinglePageTitle, SingleText1 } from '../../styles/styledComponents'
-
-
+import { setBankName, setAccountNumber } from '../../store/singlePaySlice';
+import { SinglePageContainer, QuestionContainer, SingleQ1Box, LeftArrowButton, RightArrowButton, Input, SinglePageTitle, SingleText1 } from '../../styles/styledComponents';
 
 export default function SingleQ2() {
-  //store 동기화
   const dispatch = useDispatch();
-  const { bankName } = useSelector((state) => state.singlePay);
+  const { bankName, accountNumber } = useSelector((state) => state.singlePay);
+  const [inputValue, setInputValue] = useState(bankName + accountNumber);
 
-  //입력시 호출 함수
+  useEffect(() => {
+    // 문자열과 숫자 분리
+    const bankNameMatch = inputValue.match(/^\D+/); // 문자
+    const accountNumberMatch = inputValue.match(/\d+/); // 숫자
+
+    // 각각의 값을 추출
+    const newBankName = bankNameMatch ? bankNameMatch[0].trim() : '';
+    const newAccountNumber = accountNumberMatch ? accountNumberMatch[0] : '';
+
+    // store에 저장
+    dispatch(setBankName(newBankName));
+    dispatch(setAccountNumber(newAccountNumber));
+  }, [inputValue, dispatch]);
+
+  // 입력시 호출 함수
   const handleInputChange = (e) => {
-    dispatch(setBankName(e.target.value))
+    setInputValue(e.target.value);
   };
-  //공백 확인 함수
+
+  // 공백 확인 함수
   const isInputValid = () => {
-    return bankName.trim() !== '';
+    // accountNumber가 문자열이 아니라면 toString()으로 변환
+    const accountNumberStr = accountNumber ? accountNumber.toString() : '';
+    return bankName.trim() !== '' && accountNumberStr.trim() !== '';
   };
+
   return (
     <SinglePageContainer>
       <SinglePageTitle>나만 정산하기</SinglePageTitle>
       <QuestionContainer>
         <Link to="/SingleQ1">
-          <LeftArrowButton type="summit" />
+          <LeftArrowButton type="button" />
         </Link>
 
         <SingleQ1Box>
           <SingleText1>Q.정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleText1>
-          <Input type="text" value={bankName} onChange={handleInputChange} />
+          <Input type="text" value={inputValue} onChange={handleInputChange} />
         </SingleQ1Box>
 
         <Link to="/SingleQ3">
-          <RightArrowButton type="summit" disabled={!isInputValid()} />
+          <RightArrowButton type="button" disabled={!isInputValid()} />
         </Link>
       </QuestionContainer>
     </SinglePageContainer>

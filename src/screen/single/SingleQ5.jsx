@@ -1,22 +1,36 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { setNumberOfPeople } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, QuestionText, SingleText1, Input } from '../../styles/styledComponents'
+import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleText1, Input } from '../../styles/styledComponents';
 
-
-export default function SingleQ3() {
+export default function SingleQ5() {
   //store 동기화
   const dispatch = useDispatch();
   const { numberOfPeople } = useSelector((state) => state.singlePay);
 
-  //입력시 호출 함수
+  // 입력시 호출 함수
   const handleInputChange = (e) => {
-    dispatch(setNumberOfPeople(e.target.value))
+    const value = e.target.value;
+
+    // 숫자만 허용하도록 처리하고 NaN 예외 처리
+    if (/^\d*$/.test(value)) {
+      const numericValue = parseInt(value);
+
+      if (!isNaN(numericValue)) {
+        dispatch(setNumberOfPeople(numericValue));
+      } else {
+        dispatch(setNumberOfPeople(0)); // NaN인 경우 빈 문자열로 설정
+      }
+    }
   };
-  //공백 확인 함수
+
+  // 공백 확인 함수
   const isInputValid = () => {
-    return numberOfPeople.trim() !== '';
+    // numberOfPeople이 숫자가 아닌 경우를 대비하여 처리
+    return numberOfPeople !== '' && !isNaN(numberOfPeople);
   };
+
   return (
     <SinglePageContainer>
       <SinglePageTitle>나만 정산하기</SinglePageTitle>

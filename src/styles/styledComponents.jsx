@@ -148,12 +148,13 @@ export const NewSingleLink = styled.div`
 
 //----------SingleLogin--------------
 
-export const SinglePageBox = styled.div`
+export const LoginConatiner = styled.div`
   display: flex;
   flex-direction: column;
    width: 70%;
+   min-width:1000px;
   height: 50vh;
-  min-height: 550px;
+  min-height: 650px;
   background-color: #E2F0FF;
   padding-top: 20px; 
     z-index: 10;
@@ -228,7 +229,7 @@ export const Input = styled.input`
   font-size:20px;
   font-weight:bold;
 `;
-export const QuestionContainer = styled(SinglePageBox)`
+export const QuestionContainer = styled(LoginConatiner)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -319,27 +320,32 @@ export const SinglePageContainer = styled.div`
 `;
 
 
-export const CheckBox = styled.div`
+export const CheckContainer = styled.div`
 margin-top:50px;
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 70%;
+  min-width:800px;
   height: 530px;
   padding: 20px;
 `;
 
 export const SinglePageTitle = styled.h2`
-
     margin-bottom: 30px;
     height:50px;
     color: ${INDIGO};
     font-size:36px;
     font-weight:700;
     width: 70%;
+    min-width:1000px;
+
+
 `;
 export const CheckSinglePageTitle = styled(SinglePageTitle)`
 margin-bottom: 0px;
+
+min-width:800px;
 `;
 
 
