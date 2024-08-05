@@ -1,10 +1,12 @@
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { setReceipt } from '../../store/singlePaySlice';
-import { SinglePageContainer, CheckContainer, CheckSinglePageTitle, SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost, ReceiptButton, LongSingleA, StyledImage } from '../../styles/styledComponents';
+import { SyncLoader } from "react-spinners";
 import axios from 'axios';
+import { SinglePageContainer, CheckContainer, CheckSinglePageTitle, SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost, ReceiptButton, LongSingleA, StyledImage, LoadingConatiner } from '../../styles/styledComponents';
 
+//영수증 파일전환
 const convertFileToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -17,9 +19,11 @@ const convertFileToBase64 = (file) => {
 export default function CheckSingleQ() {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const { meetingName, bankName, accountNumber, accountHolder, amount, numberOfPeople, receiptUrl, meetingNum } = useSelector((state) => state.singlePay);
 
+  //영수증 버튼 클릭
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -28,15 +32,16 @@ export default function CheckSingleQ() {
       dispatch(setReceipt(base64));
     }
   };
-
+  // 영수증 버튼 클릭(전달)
   const handleReceiptButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-
+  // 링크 생성하기 버튼
   const submitData = async () => {
-    console.log(meetingNum, meetingName, bankName, accountNumber, accountHolder, amount, numberOfPeople, receiptUrl);
+    console.log(meetingNum, bankName, accountNumber, accountHolder, amount, numberOfPeople, receiptUrl);
+    setLoading(true);
     try {
       // 정산 정보 api post
       const response = await axios.post('https://umc.dutchtogether.com/api/settlement/single', {
@@ -51,10 +56,13 @@ export default function CheckSingleQ() {
         console.log(response);
         navigate('/SingleCreateLink'); // 성공 시 페이지 이동
       } else {
-        console.error('정산 정보 전송에 실패했습니다.');
+        alert('정산 정보 전송에 실패했습니다.');
       }
     } catch (err) {
       console.error('정산 정보 요청 중 오류가 발생했습니다.', err);
+      alert('정산 정보 요청 중 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,6 +72,11 @@ export default function CheckSingleQ() {
 
   return (
     <SinglePageContainer>
+      {loading && (
+        <LoadingConatiner>
+          <SyncLoader />
+        </LoadingConatiner>
+      )}
       <CheckSinglePageTitle>나만 정산하기</CheckSinglePageTitle>
       <CheckContainer>
         <SingleQ>Q. 정산 모임 이름이 무엇인가요?</SingleQ>

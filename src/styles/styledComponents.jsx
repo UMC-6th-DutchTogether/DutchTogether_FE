@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 //자주쓰는 색
 const INDIGO = '#05284b'
 
@@ -109,7 +111,7 @@ export const MainFomrButtonContainer = styled.div`
 `;
 
 
-//----------SingCreateLink--------------
+//----------SingleCreateLink--------------
 
 export const SingleLinkContainer = styled.div`
   display: flex;
@@ -120,33 +122,49 @@ export const SingleLinkContainer = styled.div`
   align-items: center;
 `;
 
-export const SingleLinkBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 70%;
-  height: 500px;
-  background-color: #a7d0f8;
-  padding: 20px;
-`;
+
 
 export const LinkButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  margin-bottom:50px;
+  width: 100%
+  
 `;
 
 export const NewSingleLink = styled.div`
-  padding: 6vw;
-  font-size: 2vw;
+  display:flex;
+  font-size: 25px;
   font-weight: bold;
 
 `;
 
-
+export const StyledCopyIcon = styled(FontAwesomeIcon)`
+  margin-left: 10px;
+  cursor: pointer;
+  transition: color 0.1s ease-in-out, transform 0.1s ease-in-out;
+color: rgba(0,0,0,0.6);
+  &:hover {
+    color: rgba(0,0,0,1);
+    transform: scale(1.1);
+  }
+`;
 
 //----------SingleLogin--------------
+export const LoadingConatiner = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-Content: center;
+  align-Items: center;
+  background-color: rgba(0, 0, 0,0.1);
+  z-Index: 1000;
+`;
+
 
 export const LoginConatiner = styled.div`
   display: flex;
@@ -196,6 +214,9 @@ export const NextButton = styled.button`
   box-sizing: border-box;
 border: 2px solid #062C53;
  font-size:20px;
+   &:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
 `;
 
 export const ErrorMessage = styled.span`
@@ -238,24 +259,17 @@ export const QuestionContainer = styled(LoginConatiner)`
   padding-top: 20px;
   position: relative;
   z-index:1;
-          min-height: 550px;
-        min-width: 1000px;
+    min-height: 550px;
+    min-width: 1000px;
 `;
-export const SingleLoginTitle = styled.h2`
-  padding-top: 50px;
-  margin-bottom: 0px;
-  text-align: left;
-  width: 70%;
-`;
+
 
 export const SingleQ1Box = styled.div`
   display: flex;
-  padding-top:100px;
   flex-direction: column;
   align-items: center;
-
   height: 100%;
-  margin-top: 100px;
+  margin-top: 180px;
 
 `;
 
@@ -266,6 +280,7 @@ export const ArrowButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
 `;
 
 export const LeftArrowButton = styled(ArrowButton)`

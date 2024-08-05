@@ -1,21 +1,41 @@
 import { useState, useEffect } from 'react';
-import { SingleLinkContainer, SingleLoginTitle, SingleLinkBox, TextContainer, LinkButtonContainer, LinkButton, NewSingleLink } from '../../styles/styledComponents'
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { setMeetingLink } from '../../store/singlePaySlice';
+import { SyncLoader } from "react-spinners";
+import { SinglePageContainer, SinglePageTitle, TextContainer, LinkButtonContainer, LinkButton, NewSingleLink, SingleText1, SingleQ1Box, QuestionContainer, SingleText2, StyledCopyIcon, LoadingConatiner } from '../../styles/styledComponents';
 
-
-
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
 export default function SingleCreateLink() {
-    const [link, setLink] = useState('');
-
+    const dispatch = useDispatch();
+    const { meetingNum, meetingLink } = useSelector((state) => state.singlePay);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // 여기에 링크 생성 API 호출 (현재는 Mock Data 사용)
-        const newLink = 'https://dutchtogether.com/OOOO_nnnn';
-        setLink(newLink);
+        setLoading(true);
+        const fetchMeetingLink = async () => {
+            try {
+                // Link 호출 api
+                const response = await axios.get(`https://umc.dutchtogether.com/api/meetings/${meetingNum}/link`);
+                if (response.status === 200) {
+                    console.log(response);
+                    dispatch(setMeetingLink(response.data.data.meetingLink));
+                } else {
+                    console.error('링크 호출 중 오류가 발생했습니다.');
+                }
+            } catch (err) {
+                console.error('링크 호출 실패했습니다.', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMeetingLink();
     }, []);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(link);
+        navigator.clipboard.writeText(meetingLink);
         alert('링크가 복사되었습니다!');
     };
 
@@ -23,7 +43,7 @@ export default function SingleCreateLink() {
         if (navigator.share) {
             navigator.share({
                 title: '정산 링크',
-                url: link,
+                url: meetingLink,
             })
                 .then(() => {
                     console.log('Link shared successfully');
@@ -36,29 +56,30 @@ export default function SingleCreateLink() {
         }
     };
 
-
-
     return (
-        <SingleLinkContainer>
-            <SingleLoginTitle>나만 정산하기</SingleLoginTitle>
-            <SingleLinkBox>
-                <TextContainer>
-                    <p>링크가 생성되었습니다.</p>
-                    <p>아래 링크를 공유하여 정산을 진행해주세요!</p>
-                </TextContainer>
+        <SinglePageContainer>
+            {loading && (
+                <LoadingConatiner>
+                    <SyncLoader />
+                </LoadingConatiner>
+            )}
+            <SinglePageTitle>나만 정산하기</SinglePageTitle>
+            <QuestionContainer>
+                <SingleQ1Box>
+                    <SingleText1>링크가 생성되었습니다.</SingleText1>
+
+                </SingleQ1Box>
 
                 <NewSingleLink>
-                    {link}
+                    {meetingLink}
+                    <StyledCopyIcon icon={faCopy} onClick={handleCopy} />
                 </NewSingleLink>
 
                 <LinkButtonContainer>
                     <LinkButton onClick={handleCopy}>링크 복사하기</LinkButton>
                     <LinkButton onClick={handleShare}>링크 공유하기</LinkButton>
                 </LinkButtonContainer>
-            </SingleLinkBox>
-        </SingleLinkContainer>
+            </QuestionContainer>
+        </SinglePageContainer>
     );
 }
-
-
-

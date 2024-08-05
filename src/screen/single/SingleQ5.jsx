@@ -20,7 +20,7 @@ export default function SingleQ5() {
       if (!isNaN(numericValue)) {
         dispatch(setNumberOfPeople(numericValue));
       } else {
-        dispatch(setNumberOfPeople(0)); // NaN인 경우 빈 문자열로 설정
+        dispatch(setNumberOfPeople(0));
       }
     }
   };

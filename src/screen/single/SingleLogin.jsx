@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setMeetingNum } from '../../store/singlePaySlice';
+import { SyncLoader } from "react-spinners";
 import {
   SinglePageContainer,
   LoginConatiner,
@@ -13,13 +14,15 @@ import {
   ErrorMessage,
   SingleText1,
   SingleText2,
-  ErrorConatiner
+  ErrorConatiner,
+  LoadingConatiner
 } from '../../styles/styledComponents';
 
 export default function SingleLogin() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState("");
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -50,6 +53,7 @@ export default function SingleLogin() {
 
   //제출함수
   const handleSubmit = async () => {
+    setLoading(true);
     // 유효성 검사
     const idError = validateId(id);
     const passwordError = validatePassword(password);
@@ -79,11 +83,18 @@ export default function SingleLogin() {
       setError('회원가입 요청 중 오류가 발생했습니다.');
       console.error(err);
       //console.log(response);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <SinglePageContainer>
+      {loading && (
+        <LoadingConatiner>
+          <SyncLoader />
+        </LoadingConatiner>
+      )}
       <SinglePageTitle>나만 정산하기</SinglePageTitle>
       <LoginConatiner>
         <TextContainer>

@@ -13,6 +13,7 @@ import SingleQ4 from './screen/single/SingleQ4';
 import SingleQ5 from './screen/single/SingleQ5';
 import CheckSingleQ from './screen/single/CheckSingleQ';
 import SingleCreateLink from './screen/single/SingleCreateLink';
+import MeetingDetails from './screen/getLink/MeetingDetails';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/SingleQ5" element={<SingleQ5 />} />
         <Route path="/CheckSingleQ" element={<CheckSingleQ />} />
         <Route path="/SingleCreateLink" element={<SingleCreateLink />} />
+        <Route path="/:meetingURL" element={<MeetingDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>
