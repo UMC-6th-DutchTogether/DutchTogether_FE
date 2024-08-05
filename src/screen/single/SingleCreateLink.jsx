@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setMeetingLink } from '../../store/singlePaySlice';
 import { SyncLoader } from "react-spinners";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SinglePageContainer, SinglePageTitle, TextContainer, LinkButtonContainer, LinkButton, NewSingleLink, SingleText1, SingleQ1Box, QuestionContainer, SingleText2, StyledCopyIcon, LoadingConatiner } from '../../styles/styledComponents';
 
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
@@ -35,7 +36,6 @@ export default function SingleCreateLink() {
     }, []);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(meetingLink);
         alert('링크가 복사되었습니다!');
     };
 
@@ -72,11 +72,15 @@ export default function SingleCreateLink() {
 
                 <NewSingleLink>
                     {meetingLink}
-                    <StyledCopyIcon icon={faCopy} onClick={handleCopy} />
+                    <CopyToClipboard text={meetingLink} onCopy={handleCopy}>
+                        <StyledCopyIcon icon={faCopy} />
+                    </CopyToClipboard>
                 </NewSingleLink>
 
                 <LinkButtonContainer>
-                    <LinkButton onClick={handleCopy}>링크 복사하기</LinkButton>
+                    <CopyToClipboard text={meetingLink} onCopy={handleCopy}>
+                        <LinkButton>링크 복사하기</LinkButton>
+                    </CopyToClipboard>
                     <LinkButton onClick={handleShare}>링크 공유하기</LinkButton>
                 </LinkButtonContainer>
             </QuestionContainer>
