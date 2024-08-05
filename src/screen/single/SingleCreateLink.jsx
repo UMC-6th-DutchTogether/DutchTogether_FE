@@ -4,7 +4,7 @@ import axios from 'axios';
 import { setMeetingLink } from '../../store/singlePaySlice';
 import { SyncLoader } from "react-spinners";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { SinglePageContainer, SinglePageTitle, TextContainer, LinkButtonContainer, LinkButton, NewSingleLink, SingleText1, SingleQ1Box, QuestionContainer, SingleText2, StyledCopyIcon, LoadingConatiner } from '../../styles/styledComponents';
+import { SinglePageContainer, SinglePageTitle, LinkButtonContainer, LinkButton, NewSingleLink, SingleText1, SingleQ1Box, QuestionContainer, StyledCopyIcon, LoadingConatiner } from '../../styles/styledComponents';
 
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 

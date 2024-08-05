@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopy } from '@fortawesome/free-solid-svg-icons';
+//import { faCopy } from '@fortawesome/free-solid-svg-icons';
 //자주쓰는 색
 const INDIGO = '#05284b'
 
@@ -435,8 +434,53 @@ padding:0px;
 margin:0 0 0 45px;
 `;
 
+//----------------MeetingDetail--------------
 
+export const SingleDetailText = styled.p`
+  font-size: 25px;
+  font-weight: 600;
+  color: ${INDIGO};
+  margin-bottom: 30px;
 
+`;
+
+export const Transferbutton = styled.button`
+  display: flex;
+  justify-content: space-around;
+  width: 100%
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 10px 70px 10px 70px;
+  background-color: white;
+  
+`;
+
+//----------------MeetingCheck--------------
+
+export const CompleteButton = styled.button`
+  display: flex;
+  justify-content: space-around;
+  width: 100%
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 10px 50px 10px 50px;
+  background-color: white;
+`;
+
+export const CheckMeetingContainer = styled.div`
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+`;
+
+export const SingleNameInput = styled.input`
+  padding: 10px 100px 10px 100px;
+`;
 
 
 //---------------Footer--------------
