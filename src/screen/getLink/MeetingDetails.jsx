@@ -5,11 +5,11 @@ import { SinglePageContainer, SingleDetailText, Transferbutton } from '../../sty
 
 // 은행명과 URL 스킴을 매핑한 객체
 const bankUrlSchemes = {
-  '토스': 'toss://',
-  '국민': 'kb-bank://',
-  '카카오뱅크': 'kakaobank://',
-  '신한': 'shinhan-sbank://',
-  '우리': 'wooribank://'
+  '토스': 'supertoss://send',
+  '국민': 'kbbank://send',
+  '카카오뱅크': 'kakaobank://send',
+  '신한': 'smshinhanansimclick://send',
+  '농협': 'nonghyupcardansimclick://send'
 };
 
 function MeetingDetails() {
