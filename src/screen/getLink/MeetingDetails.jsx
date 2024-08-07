@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { SinglePageContainer, SingleDetailText, Transferbutton, StyledCopyIcon } from '../../styles/styledComponents';
 import axios from 'axios';
-import { SinglePageContainer, SingleDetailText, Transferbutton } from '../../styles/styledComponents';
+
 
 // 은행명과 URL 스킴을 매핑한 객체
 const bankUrlSchemes = {
@@ -68,13 +71,22 @@ function MeetingDetails() {
 
   const finalAmount = (meetingData.total_amount / meetingData.num_people).toFixed(2);
 
+  const handleCopy = () => {
+    alert('계좌번호가 복사되었습니다!');
+  };
+
   return (
     <SinglePageContainer>
       <SingleDetailText>{`${meetingData.meetingName}의 정산 요청이 왔습니다.`}</SingleDetailText>
       <SingleDetailText>정산을 진행합니다.</SingleDetailText>
       <SingleDetailText>{`${meetingData.total_amount} / ${meetingData.num_people} = ${finalAmount}원`}</SingleDetailText>
       <SingleDetailText>{`${finalAmount}원을 아래 계좌번호로 송금해주세요.`}</SingleDetailText>
-      <SingleDetailText>{`${meetingData.bank} ${meetingData.account_num}`}</SingleDetailText>
+      <SingleDetailText>
+        {`${meetingData.bank} ${meetingData.account_num}`}
+        <CopyToClipboard text={meetingData.account_num} onCopy={handleCopy}>
+          <StyledCopyIcon icon={faCopy} />
+        </CopyToClipboard>
+      </SingleDetailText>
       <SingleDetailText>{meetingData.payer}</SingleDetailText>
 
       <div style={{ display: "flex", gap: "10px" }}>
