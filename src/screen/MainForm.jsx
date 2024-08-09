@@ -9,7 +9,7 @@ export default function MainForm() {
   };
 
   const handleMultipleLogin = () => {
-    navigate('/');
+    navigate('/MultiLogin');
   };
 
   const handleStatus = () => {

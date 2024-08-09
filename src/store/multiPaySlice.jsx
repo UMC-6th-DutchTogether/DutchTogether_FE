@@ -4,6 +4,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   meetingNum: null,
   meetingName: "",
+  payerNames: [],
+
+
+
   bankName: "",
   accountNumber: "",
   accountHolder: "",
@@ -14,8 +18,8 @@ const initialState = {
 };
 
 // createSlice를 사용하여 slice 정의
-const singlePaySlice = createSlice({
-  name: 'singlePay',
+const multiPaySlice = createSlice({
+  name: 'multiPay',
   initialState,
   reducers: {
     setMeetingNum: (state, action) => {
@@ -24,6 +28,11 @@ const singlePaySlice = createSlice({
     setMeetingName: (state, action) => {
       state.meetingName = action.payload;
     },
+    setPayerNames: (state, action) => {
+      state.payerNames = action.payload;
+    },
+
+
     setBankName: (state, action) => {
       state.bankName = action.payload;
     },
@@ -42,6 +51,7 @@ const singlePaySlice = createSlice({
     setReceipt: (state, action) => {
       state.receiptUrl = action.payload;
     },
+
     setMeetingLink: (state, action) => {
       state.meetingLink = action.payload;
     },
@@ -50,7 +60,10 @@ const singlePaySlice = createSlice({
 
 // export
 export const {
+  setMeetingNum,
   setMeetingName,
+  setPayerNames,
+
   setSettlementAmount,
   setBankName,
   setAccountNumber,
@@ -58,8 +71,7 @@ export const {
   setAmount,
   setNumberOfPeople,
   setReceipt,
-  setMeetingNum,
   setMeetingLink
-} = singlePaySlice.actions;
+} = multiPaySlice.actions;
 
-export default singlePaySlice.reducer;
+export default multiPaySlice.reducer;

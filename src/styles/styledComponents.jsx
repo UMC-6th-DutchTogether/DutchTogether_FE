@@ -483,42 +483,58 @@ export const SingleNameInput = styled.input`
 `;
 
 
-//---------------Footer--------------
-export const FooterContainer = styled.div`
-  background-color: ${INDIGO};
-  height:130px;
-  color: white;
-  bottom: 0;
-  width: 100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index: 1000;
-`;
 
-export const FooterTextContainer = styled.div`
-  margin: 0 5% 0 10%;
-      > div {
-    margin-top:8px;
-  }
-`;
 
 
 //----------------Header--------------
-export const HeaderTitle = styled.div`
-  background-color: ${INDIGO};
-  top: 0;
-  width: 100vw;
-  display:flex;
-  height:100px;
-  z-index: 1000;
-  
+export const HeaderBar = styled.div`
+display: flex;
+width: 100vw;
+height: 123px;
+padding: 25px 30px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+
 `;
-export const HeaderText = styled.p`
-color:white;
-  font-size:36px;
-  font-weight:700;
-  margin: 20px 0 0 200px;
+export const HeaderContentContainer = styled.div`
+display: flex;
+width:90%;
+justify-content: space-between;
+align-items: center;
+
+`;
+
+export const HeaderLogo = styled.div`
+display: flex;
+align-items: center;
+gap: 30px;
+margin-right:100px;
+`;
+
+export const HeaderTitle = styled.p`
+color: #000;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+white-space : nowrap;
   
 `;
 
+export const HeaderMenu = styled.p`
+display: flex;
+align-items: center;
+gap: 360px;  
+`;
+
+export const HeaderMenuText = styled.p`
+color: #000;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+white-space : nowrap;
+`;
