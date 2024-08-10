@@ -1,4 +1,3 @@
-import React from 'react';
 import { HeaderBar, HeaderContentContainer, HeaderMenu, HeaderTitle, HeaderMenuText, HeaderLogo } from '../styles/styledComponents';
 import img from '../assets/LOGO 2.png';
 

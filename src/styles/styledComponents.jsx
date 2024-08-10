@@ -5,110 +5,62 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const INDIGO = '#05284b'
 
 //----------------------MainForm--------------------------
-export const Container = styled.div`
-  text-align: center;
-  font-family: 'Arial, sans-serif';
-`;
 
-export const MainImage = styled.div`
-  background: url("https://s3-alpha-sig.figma.com/img/e806/b914/08c2bb1b24699ab916d34417d5db6430?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BbyPSHoIK54n98SaMU7YTcx7BICL8zpD-jXYHf~mOZh2xyo-Kf-LdiQvzZECL~fPdy5KYRXsfoyeuwfDV1Y71KV4yBQ0EatM6MJj6tb1amq~zC4TDksxveF1cK0olmLgQWFwyp2t2dcLukCA9gGR0nGbzzRrACmh5MzlfAa8stRc1dNFYz0TNP3cgADhJ2oWAPQ9R~gc7oxlYzTcW-~kj~9mZSrX0FBTlTvJw55c8F7APX7Oag6bKZfqEJj4OWaYHJpdE6KQPHAlDaunXBIO9CTE5OX3duUjCrVzLLRyFi2RQNp8l9A7Zg2PZYCs1n8AMJr-8hinvq5dQx~frVe-3g__");
-  background-size: cover;
-  background-position: center;
-  height: 809px;
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  width: 1920px;
+  min-height: 1080px;
+  padding-top: 229px;
+  box-sizing: border-box;
+`;
+
+export const ButtonCon = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 1920px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: center;
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.5);
-    z-index: 1; 
-  }
-  
-  > * {
-    position: relative;
-    z-index: 2;
-  }
-`
-
-export const MainText1 = styled.div`
-  font-size: 50px;
-  font-weight: bold;
-  text-align: left;
-  padding-left: 400px;
-    color: ${INDIGO};
-    z-index: 3;
 `;
 
-export const MainText2 = styled.div`
-  font-size: 36px;
-  font-weight: bold;
-  text-align: left;
-  padding: 50px 0px 0px 400px ;
-  color: ${INDIGO};
-  z-index: 3;
-`;
-
-export const ServiceContainer = styled.section`
-  padding: 100px 20px; 
-  display:flex;
-  flex-direction:column;
-
-  align-items:center;
-  height:700px;
-
-`;
-
-
-export const ServiceTitle = styled.div`
-  font-size: 36px;
-  font-weight: bold;
-  color: ${INDIGO};
-  padding-bottom: 50px;
-  position: relative;
-  left: -450px; 
-`;
-
-export const ServiceButton = styled.div`
-  padding: 0px 100px 100px 10px;
-  width: 290px;
-  height:290px;
-  font-size: 18px;
-  white-space: pre-wrap;
-  text-align: left;
-  background-color: #e3f2fd;
+export const LargeButton = styled.button`
+  width: 960px;
+  height: 435px;
+  background: none;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #90caf9;
-  }
 `;
 
-export const ButtonText = styled.span`
-  display: block;
-  font-weight: bold;
-  font-size: 32px;
+export const Logo = styled.img`
+  width: 662px;
+  height: 659px;
+  object-fit: contain;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
-export const LargeText = styled.span`
-  display: block;
-  font-size: 64px;
-  font-weight: bold;
-`;
-export const MainFomrButtonContainer = styled.div`
+export const FooterCon = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  align-items: center;
+  margin-top: 200px;
 `;
 
+export const FooterImage = styled.img`
+  margin-right: 20px;
+  width: auto;
+  height: auto;
+`;
+
+export const FooterButtonImage = styled.img`
+  cursor: pointer;
+  width: auto;
+  height: auto;
+`;
 
 //----------SingleCreateLink--------------
 

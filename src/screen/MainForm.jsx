@@ -1,5 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { Container, MainImage, MainText1, MainText2, ServiceContainer, ServiceTitle, ServiceButton, ButtonText, LargeText, MainFomrButtonContainer } from '../styles/styledComponents';
+import { Container, Logo, ButtonCon, LargeButton, FooterImage, FooterButtonImage, FooterCon } from '../styles/styledComponents';
+import logo1 from '../assets/LOGO 1.png';
+import buttonsImage from '../assets/혼자+같이.png';
+import footerTextImage from '../assets/정산을 편리하게 (1).png';
+import footerButtonImage from '../assets/정산 확인하기.png';
 
 export default function MainForm() {
   const navigate = useNavigate();
@@ -18,33 +22,15 @@ export default function MainForm() {
 
   return (
     <Container>
-
-      <MainImage>
-        <MainText1>정산을 빠르고</MainText1>
-        <MainText1>쉽게 하고 싶다면?</MainText1>
-        <MainText2>더치투게더 지금 시작하세요.</MainText2>
-      </MainImage>
-
-
-
-      <ServiceContainer>
-        <ServiceTitle>더치투게더 서비스</ServiceTitle>
-        <MainFomrButtonContainer>
-          <ServiceButton onClick={handleSingleLogin}>
-            <LargeText>나만</LargeText>
-            <ButtonText>정산하기</ButtonText>
-          </ServiceButton>
-          <ServiceButton onClick={handleMultipleLogin}>
-            <LargeText>여러명</LargeText>
-            <ButtonText>정산하기</ButtonText>
-          </ServiceButton>
-          <ServiceButton onClick={handleStatus}>
-            <LargeText>정산</LargeText>
-            <LargeText>현황</LargeText>
-          </ServiceButton>
-        </MainFomrButtonContainer>
-      </ServiceContainer>
-
+      <ButtonCon style={{ backgroundImage: `url(${buttonsImage})` }}>
+        <LargeButton onClick={handleSingleLogin} />
+        <Logo src={logo1} alt="Logo" />
+        <LargeButton onClick={handleMultipleLogin} />
+      </ButtonCon>
+      <FooterCon>
+        <FooterImage src={footerTextImage} alt="정산을 편리하게" />
+        <FooterButtonImage src={footerButtonImage} alt="정산 확인하기" onClick={handleStatus} />
+      </FooterCon>
 
     </Container>
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { setNumberOfPeople } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';

@@ -54,35 +54,35 @@ export default function SingleLogin() {
   //제출함수
   const handleSubmit = async () => {
     setLoading(true);
+
     // 유효성 검사
     const idError = validateId(id);
     const passwordError = validatePassword(password);
 
     if (idError || passwordError) {
       setError(idError || passwordError);
+      setLoading(false);
       return;
     }
 
     try {
-      // 회원가입 API 요청
       const response = await axios.post('https://umc.dutchtogether.com/api/meetings/', {
         meetingId: id,
         password: password,
-        name: 'UserName'
       });
-      if (response.status === 200) {
-        navigate('/SingleQ1');
-        console.log(response);
-        dispatch(setMeetingNum(response.data.data.meetingNum));
 
+      if (response.status === 200) {
+        dispatch(setMeetingNum(response.data.data.meetingNum));
+        navigate('/SingleQ1');
+        console.log('응답:', response);
       } else {
         setError('회원가입에 실패했습니다.');
-        //console.log(response);
+        console.log('응답 오류:', response);
       }
     } catch (err) {
+      // 요청 중 오류가 발생한 경우
       setError('회원가입 요청 중 오류가 발생했습니다.');
-      console.error(err);
-      //console.log(response);
+      console.error('요청 오류:', err);
     } finally {
       setLoading(false);
     }
