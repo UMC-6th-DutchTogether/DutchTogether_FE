@@ -40,6 +40,7 @@ function MeetingDetails() {
         const response = await axios.get(`https://umc.dutchtogether.com/api/meetings/${link}`);
         if (response.status === 200) {
           setMeetingData(response.data.data);
+          console.log('Meeting data:', response.data.data);
         } else {
           console.error('데이터를 가져오는 중 오류가 발생했습니다.');
         }

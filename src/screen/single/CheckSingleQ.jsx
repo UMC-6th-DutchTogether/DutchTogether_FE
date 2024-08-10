@@ -6,52 +6,77 @@ import { SyncLoader } from "react-spinners";
 import axios from 'axios';
 import { SinglePageContainer, CheckContainer, CheckSinglePageTitle, SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost, ReceiptButton, LongSingleA, StyledImage, LoadingConatiner } from '../../styles/styledComponents';
 
-//영수증 파일전환
-const convertFileToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};
-
 export default function CheckSingleQ() {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { meetingName, bankName, accountNumber, accountHolder, amount, numberOfPeople, receiptUrl, meetingNum } = useSelector((state) => state.singlePay);
+  const [receiptId, setReceiptId] = useState(null);
+  const [receiptPreview, setReceiptPreview] = useState(null); // 미리보기 상태 추가
+  const { meetingName, bankName, accountNumber, accountHolder, amount, numberOfPeople, meetingNum } = useSelector((state) => state.singlePay);
 
-  //영수증 버튼 클릭
+  // 파일 업로드 처리
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const base64 = await convertFileToBase64(file);
-      console.log("Generated Base64:", base64);
-      dispatch(setReceipt(base64));
+      setLoading(true);
+      setReceiptPreview(URL.createObjectURL(file)); // 파일 미리보기 URL 생성
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // 영수증 인식 API 호출
+        const response = await axios.post('https://umc.dutchtogether.com/api/receipt/recognize', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        console.log("Receipt Recognition Response:", response.data);
+
+        if (response.data.isSuccess) {
+          setReceiptId(response.data.data.receiptId);
+          dispatch(setReceipt(receiptPreview)); // 미리보기 URL을 상태로 저장
+          console.log("Receipt ID:", response.data.data.receiptId);
+        } else {
+          alert('영수증 인식에 실패했습니다: ' + response.data.message);
+        }
+      } catch (err) {
+        console.error('영수증 인식 요청 중 오류가 발생했습니다.', err);
+        alert('영수증 인식 요청 중 오류가 발생했습니다.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
+
   // 영수증 버튼 클릭(전달)
   const handleReceiptButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
+
   // 링크 생성하기 버튼
   const submitData = async () => {
-    console.log(meetingNum, bankName, accountNumber, accountHolder, amount, numberOfPeople, receiptUrl);
+    if (!receiptId) {
+      alert('영수증을 먼저 첨부해 주세요.');
+      return;
+    }
+
     setLoading(true);
     try {
-      // 정산 정보 api post
+      // 정산 정보 API 호출
       const response = await axios.post('https://umc.dutchtogether.com/api/settlement/single', {
         meetingNum: meetingNum,
         bankName: bankName,
         accountNumber: accountNumber,
         payer: accountHolder,
         totalAmount: amount,
-        numPeople: numberOfPeople
+        numPeople: numberOfPeople,
+        receiptId: receiptId
       });
+
       if (response.status === 200) {
         console.log(response);
         navigate('/SingleCreateLink'); // 성공 시 페이지 이동
@@ -101,8 +126,8 @@ export default function CheckSingleQ() {
             onChange={handleFileChange}
           />
         </SingleCost>
-        {receiptUrl && (
-          <StyledImage src={receiptUrl} alt="Receipt" style={{ width: '400px', height: '300px' }} />
+        {receiptPreview && (
+          <StyledImage src={receiptPreview} alt="Receipt" style={{ width: '400px', height: '300px' }} />
         )}
 
         <SingleQ>Q. 몇 명이 정산하나요?</SingleQ>
