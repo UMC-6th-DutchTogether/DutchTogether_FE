@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faCopy } from '@fortawesome/free-solid-svg-icons';
 //자주쓰는 색
 const INDIGO = '#05284b'
 
@@ -144,6 +143,7 @@ export const LoginInput = styled.input`
   box-sizing: border-box;
   font-size:25px;
   border: 2px solid #062C53;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 `;
 
 export const ErrorConatiner = styled.div`
@@ -436,19 +436,20 @@ export const SingleNameInput = styled.input`
 
 
 
-
+//---------여기서 부터 새로운 디자인---------
 
 //----------------Header--------------
 export const HeaderBar = styled.div`
 display: flex;
 width: 100vw;
 height: 123px;
-padding: 25px 30px;
+
 flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 10px;
 flex-shrink: 0;
+
 
 `;
 export const HeaderContentContainer = styled.div`
@@ -466,27 +467,283 @@ gap: 30px;
 margin-right:100px;
 `;
 
-export const HeaderTitle = styled.p`
+export const HeaderTitle = styled.button`
 color: #000;
 font-size: 40px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
 white-space : nowrap;
-  
+  background-color:inherit;
+border:none;
 `;
 
-export const HeaderMenu = styled.p`
+export const HeaderMenu = styled.div`
 display: flex;
 align-items: center;
 gap: 360px;  
 `;
 
-export const HeaderMenuText = styled.p`
+export const HeaderMenuText = styled.button`
 color: #000;
 font-size: 30px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
 white-space : nowrap;
+background-color:inherit;
+border:none;
+`;
+
+
+//------------------공통-----------------
+export const DecorationBarRight = styled.div`
+  display: flex;
+  width: 100%;
+  height: 375px;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 0px 100px 100px 0px;
+  background: conic-gradient(from -90deg at 0% 56.43%, rgba(116, 127, 211, 0.60) 0deg, rgba(196, 199, 236, 0.60) 360deg);
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+z-index: 5;
+`;
+
+
+export const DecorationBarRightText = styled.div`
+color: #FFF;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+font-size: 60px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-right:74px;
+`;
+
+
+export const DecorationBarLeft = styled(DecorationBarRight)`
+ border-radius: 100px 0px 0px 100px;
+  justify-content: flex-start;
+`;
+export const DecorationBarLeftText = styled(DecorationBarRightText)`
+margin-left:64px;
+`;
+
+export const TitleText = styled.div`
+color: #FFF;
+text-align: center;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+font-size: 55px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-top:35px;
+`;
+
+export const NormalText = styled.div`
+margin-top:11px;
+margin-bottom:28px;
+color: #000;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+`;
+
+export const BigSubmitButton = styled.button`
+display: flex;
+width: 1100px;
+height: 70px;
+justify-content: center;
+align-items: center;
+gap: 47px;
+flex-shrink: 0;
+border-radius: 15px;
+background: var(--400, #5562CA);
+font-size: 35px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+color:#fff;
+margin-left: 51px;
+`;
+
+export const ContentContainer = styled.div`
+display:flex
+width: 1300px;
+height: 743px;
+flex-shrink: 0;
+border-radius: 30px;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+background: var(--light, #EDEEFF);
+`;
+
+export const MultiPayContainerRight = styled.div`
+ flex-grow: 1;
+display:flex;
+align-items:center;
+flex-direction:column;
+height: 957px;
+border-radius: 0px 100px 100px 0px;
+box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
+z-index: 10;
+min-width: 1400px;
+`;
+
+
+export const MultiPayContainerLeft = styled(MultiPayContainerRight)`
+border-radius: 100px 0px 0px 100px;
+
+
+`;
+
+export const MainBackground = styled.div`
+  display: flex;
+  width: 100%;
+  height:1000px;
+
+  align-items: center;
+  justify-content: center;
+
+`;
+
+
+//------------------MultiPage-----------------
+
+export const TransparentBox = styled.div`
+height:10vh;
+width:500px;
+
+`;
+export const BorderLine = styled.div`
+height: 598;
+border:2px solid rgba(95, 96, 115, 1);
+border-style: dashed;
+margin: 0px 22px 0px 22px;
+`;
+
+
+export const InputListContainer = styled.div`
+margin-top:19px;
+margin-bottom:25px;
+margin-left:32px;
+margin-right:90px;
+height:598px;
+display:flex;
+`;
+
+export const InputListSmallSection = styled.div`
+height:100%;
+
+`;
+
+export const InputListHeader = styled.div`
+display: flex;
+width: 270px;
+padding: 10px 0px;
+justify-content: center;
+border-radius: 30px;
+background: linear-gradient(180deg, rgba(251, 224, 255, 0.60) 0%, rgba(241, 222, 255, 0.60) 30.5%, rgba(212, 217, 255, 0.60) 100%);
+`;
+
+export const InputListLongHeader = styled(InputListHeader)`
+display: flex;
+width: 830px;
+justify-content:start;
+
+padding-top:10px;
+padding-bottom:10px;
+gap: 340px;
+
+`;
+
+export const InputList = styled.ul`
+padding-top:65px;
+width: 270px;
+height: 476px;
+flex-shrink: 0;
+border-radius: 30px;
+background: #FFF;
+display:flex;
+flex-direction:column;
+`;
+
+export const LongInputList = styled(InputList)`
+width: 557px;
+margin-left: 22px;
+`;
+
+export const InputListItem = styled.div`
+list-style-type: none;
+margin-left:20px;
+height:30px;
+width:240px;
+align-self: stretch;
+color:black;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+border-bottom: 1.5px solid black;
+`;
+
+export const LongInputListItem = styled(InputListItem)`
+
+width:505px;
+
+`;
+
+
+
+
+//드롭다운
+export const DropdownContainer = styled.div`
+  position: relative;
+  width: 300px;
+      margin: 31px 0px 35px 0px;
+`;
+
+export const DropdownButton = styled.div`
+  background: #E6E9FD;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #4D4D4D;
+`;
+
+export const DropdownIcon = styled.span`
+  margin-left: 10px;
+`;
+
+export const DropdownList = styled.ul`
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  padding: 10px 0;
+  list-style: none;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+`;
+
+export const DropdownListItem = styled.li`
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background: #F0F0F0;
+  }
 `;
