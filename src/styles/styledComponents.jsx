@@ -700,6 +700,17 @@ width:505px;
 `;
 
 
+export const PayerContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+width: 509px;
+height: 68px;
+border-radius: 15px;
+background: var(--light, #EDEEFF);
+`;
+
 
 
 //드롭다운

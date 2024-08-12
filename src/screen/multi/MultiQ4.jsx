@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 import {
   DecorationBarLeft,
   DecorationBarLeftText,
   MultiPayContainerLeft,
   TitleText,
-  NormalText,
   BigSubmitButton,
   ContentContainer,
   TransparentBox,
@@ -18,46 +18,92 @@ import {
   InputList,
   InputListItem
 } from '../../styles/styledComponents';
-import { updateSettlement } from '../../store/multiPaySlice';
+import { updateSettlement, setSettlements } from '../../store/multiPaySlice';
 
 export default function MultiQ4() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { settlements } = useSelector((state) => state.multiPay);
+  const settlements = useSelector((state) => state.multiPay.settlements);
 
-  // 첫 번째 settlement 값을 로컬 상태로 관리
-  const [localSettlement, setLocalSettlement] = useState({
-    payer: '',
-    item: '',
-    amount: '',
-    settlers: ''
-  });
-
+  // 초기 상태로 기본 항목 추가
   useEffect(() => {
-    if (settlements.length > 0) {
-      setLocalSettlement(settlements[0]); // 첫 번째 settlement 값을 로컬 상태로 설정
+    if (settlements.length === 0) {
+      dispatch(setSettlements([
+        { payer: '', item: '', amount: '', settlers: '', id: Date.now() + Math.random() * 1000 }
+      ]));
     }
-  }, [settlements]);
+  }, [dispatch, settlements]);
 
   // 입력 변경 함수
-  const handleChange = (field, value) => {
-    setLocalSettlement(prevSettlement => ({
-      ...prevSettlement,
-      [field]: value
-    }));
+  const handleChange = (index, field, value) => {
+    const updatedSettlements = settlements.map((settlement, idx) =>
+      idx === index ? { ...settlement, [field]: value } : settlement
+    );
+
+    const currentRow = updatedSettlements[index];
+    if (
+      currentRow.payer.trim() !== '' &&
+      currentRow.item.trim() !== '' &&
+      currentRow.amount.trim() !== '' &&
+      currentRow.settlers.trim() !== ''
+    ) {
+      if (index === settlements.length - 1) {
+        updatedSettlements.push({
+          payer: '',
+          item: '',
+          amount: '',
+          settlers: '',
+          id: Date.now() + Math.random() * 1000
+        });
+      }
+    }
+
+    // Redux 상태를 업데이트
+    dispatch(setSettlements(updatedSettlements));
   };
 
   // 제출 함수
-  const handleSubmit = () => {
-    // 로컬 상태를 Redux 상태로 업데이트
-    dispatch(updateSettlement({
-      ...localSettlement,
-      id: localSettlement.id || Date.now() + Math.random() // ID가 없는 경우 임시 ID 생성
+  const handleSubmit = async () => {
+    const validSettlements = settlements.filter(
+      settlement =>
+        settlement.payer.trim() !== '' &&
+        settlement.item.trim() !== '' &&
+        settlement.amount.trim() !== '' &&
+        settlement.settlers.trim() !== ''
+    );
+
+    if (validSettlements.length === 0) {
+      console.log('유효한 정산 항목이 없습니다.');
+      return;
+    }
+
+    const settlementInfoList = validSettlements.map(settlement => ({
+      item: settlement.item,
+      settlementId: settlement.id,
+      totalAmount: parseFloat(settlement.amount),
+      receiptId: 0 // 수정
     }));
-    console.log('제출 데이터:', localSettlement);
-    navigate('/MultiQ5'); // 다음 페이지로 이동
+
+    try {
+      console.log(settlementInfoList);
+      const response = await axios.put('https://umc.dutchtogether.com/api/settlement/', {
+        settlementInfoList
+      });
+
+      if (response.status === 200) {
+        console.log('성공:', response.data);
+        //navigate('/MultiQ5');
+      } else {
+        console.error('오류:', response);
+      }
+    } catch (error) {
+      console.error('정산 제출 중 오류 발생:', error);
+    } finally {
+      navigate('/MultiQ5');
+    }
   };
 
+  // 뒤로 가기 함수
   const handleGoBack = () => {
     navigate('/MultiQ3');
   };
@@ -77,15 +123,17 @@ export default function MultiQ4() {
             <InputListSmallSection>
               <InputListHeader style={{ marginBottom: '32px' }}>결제자</InputListHeader>
               <InputList>
-                <InputListItem>
-                  <input
-                    type="text"
-                    placeholder="결제자 입력"
-                    value={localSettlement.payer}
-                    onChange={(e) => handleChange('payer', e.target.value)}
-                    style={{ width: '100%', border: "none" }}
-                  />
-                </InputListItem>
+                {settlements.map((settlement, index) => (
+                  <InputListItem key={settlement.id || index}>
+                    <input
+                      type="text"
+                      placeholder="결제자 입력"
+                      value={settlement.payer}
+                      onChange={(e) => handleChange(index, 'payer', e.target.value)}
+                      style={{ width: '100%', border: "none" }}
+                    />
+                  </InputListItem>
+                ))}
               </InputList>
             </InputListSmallSection>
 
@@ -94,15 +142,17 @@ export default function MultiQ4() {
             <InputListSmallSection>
               <InputListHeader style={{ marginBottom: '32px' }}>결제 품목</InputListHeader>
               <InputList>
-                <InputListItem>
-                  <input
-                    type="text"
-                    placeholder="결제품목 입력"
-                    value={localSettlement.item}
-                    onChange={(e) => handleChange('item', e.target.value)}
-                    style={{ width: '100%', border: "none" }}
-                  />
-                </InputListItem>
+                {settlements.map((settlement, index) => (
+                  <InputListItem key={settlement.id || index}>
+                    <input
+                      type="text"
+                      placeholder="결제품목 입력"
+                      value={settlement.item}
+                      onChange={(e) => handleChange(index, 'item', e.target.value)}
+                      style={{ width: '100%', border: "none" }}
+                    />
+                  </InputListItem>
+                ))}
               </InputList>
             </InputListSmallSection>
 
@@ -111,15 +161,17 @@ export default function MultiQ4() {
             <InputListSmallSection>
               <InputListHeader style={{ marginBottom: '32px' }}>금액</InputListHeader>
               <InputList>
-                <InputListItem>
-                  <input
-                    type="text"
-                    placeholder="금액 입력"
-                    value={localSettlement.amount}
-                    onChange={(e) => handleChange('amount', e.target.value)}
-                    style={{ width: '100%', border: "none" }}
-                  />
-                </InputListItem>
+                {settlements.map((settlement, index) => (
+                  <InputListItem key={settlement.id || index}>
+                    <input
+                      type="text"
+                      placeholder="금액 입력"
+                      value={settlement.amount}
+                      onChange={(e) => handleChange(index, 'amount', e.target.value)}
+                      style={{ width: '100%', border: "none" }}
+                    />
+                  </InputListItem>
+                ))}
               </InputList>
             </InputListSmallSection>
 
@@ -128,18 +180,21 @@ export default function MultiQ4() {
             <InputListSmallSection>
               <InputListHeader style={{ marginBottom: '32px' }}>정산인원</InputListHeader>
               <InputList>
-                <InputListItem>
-                  <input
-                    type="text"
-                    placeholder="정산인원 입력"
-                    value={localSettlement.settlers}
-                    onChange={(e) => handleChange('settlers', e.target.value)}
-                    style={{ width: '100%', border: "none" }}
-                  />
-                </InputListItem>
+                {settlements.map((settlement, index) => (
+                  <InputListItem key={settlement.id || index}>
+                    <input
+                      type="text"
+                      placeholder="정산인원 입력"
+                      value={settlement.settlers}
+                      onChange={(e) => handleChange(index, 'settlers', e.target.value)}
+                      style={{ width: '100%', border: "none" }}
+                    />
+                  </InputListItem>
+                ))}
               </InputList>
             </InputListSmallSection>
           </InputListContainer>
+
           <div style={{ display: 'flex' }}>
             <BigSubmitButton onClick={handleGoBack} style={{ width: '580px', marginLeft: '41px' }}>뒤로 가기</BigSubmitButton>
             <BigSubmitButton onClick={handleSubmit} style={{ width: '580px' }}>정산 시작하기</BigSubmitButton>

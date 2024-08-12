@@ -48,6 +48,8 @@ export default function MultiQ3() {
     setLocalPayers(updatedPayers);
   };
 
+
+  //제출함수
   const handleSubmit = async () => {
     // 로컬 상태를 Redux 상태로 업데이트
     localPayers.forEach(payer => {
@@ -91,7 +93,7 @@ export default function MultiQ3() {
             <InputListSmallSection>
               <InputListHeader style={{ marginBottom: '32px' }}>정산자명</InputListHeader>
               <InputList>
-                {localPayers.map((payer, index) => (
+                {localPayers.map((payer, _) => (
                   <InputListItem key={payer.id}>{payer.name}</InputListItem>
                 ))}
               </InputList>
@@ -106,7 +108,7 @@ export default function MultiQ3() {
               </InputListLongHeader>
               <div style={{ display: "flex" }}>
                 <InputList style={{ width: '251px' }}>
-                  {localPayers.map((payer, index) => (
+                  {localPayers.map((payer, _) => (
                     <InputListItem key={payer.id} style={{ width: '218px' }}>
                       <input
                         type="text"
@@ -119,7 +121,7 @@ export default function MultiQ3() {
                   ))}
                 </InputList>
                 <LongInputList>
-                  {localPayers.map((payer, index) => (
+                  {localPayers.map((payer, _) => (
                     <LongInputListItem key={payer.id}>
                       <input
                         type="text"

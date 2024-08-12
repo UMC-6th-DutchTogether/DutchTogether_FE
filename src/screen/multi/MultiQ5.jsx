@@ -24,7 +24,8 @@ import {
   DropdownList,
   DropdownIcon,
   DropdownButton,
-  DropdownContainer
+  DropdownContainer,
+  PayerContainer
 } from '../../styles/styledComponents';
 import { updatePayer } from '../../store/multiPaySlice';
 
@@ -78,10 +79,13 @@ export default function MultiQ5() {
       <DecorationBarLeft>
         <DecorationBarLeftText>같이 계산해요! </DecorationBarLeftText>
       </DecorationBarLeft>
-
       <TransparentBox />
 
-      <MultiPayContainerLeft>
+
+
+
+
+      <MultiPayContainerLeft style={{ height: "1100px", transform: 'translateY(100px)' }}>
         <TitleText>정산을 진행해주세요!</TitleText>
         <DropdownContainer>
           <DropdownButton onClick={toggleDropdown}>
@@ -101,6 +105,11 @@ export default function MultiQ5() {
             </DropdownList>
           )}
         </DropdownContainer>
+        <div style={{ display: 'flex' }}>
+          <TitleText style={{ padding: '0px', margin: "0px 20px 30px" }}>내가 정산해야할 사람은</TitleText>
+          <PayerContainer></PayerContainer>
+        </div>
+
 
         <ContentContainer>
           <InputListContainer>
@@ -134,16 +143,9 @@ export default function MultiQ5() {
 
                 <LongInputList style={{ marginLeft: '0px' }}>
                   {localPayers.map((payer, index) => (
-                    <LongInputListItem key={payer.id}>
-                      <input
-                        type="text"
-                        value={payer.bankName + " " + payer.accountNumber || ''}
-                        onChange={(e) => handleAccountNumberChange(e, payer.id)}
-                        placeholder="계좌번호 입력"
-                        style={{ width: '100%', border: "none" }}
-                      />
-                    </LongInputListItem>
+                    <LongInputListItem key={payer.id}>{payer.bankName + " " + payer.accountNumber || ''}</LongInputListItem>
                   ))}
+
                 </LongInputList>
               </div>
             </div>
