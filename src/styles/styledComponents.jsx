@@ -64,6 +64,16 @@ export const FooterButtonImage = styled.img`
 
 //----------SingleCreateLink--------------
 
+export const SinglePageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top:100px;
+  height: calc(100vh - 230px);
+`;
+
+
 export const SingleLinkContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -277,18 +287,12 @@ display: flex;
 
 
 //--------------ChekSingleQ------------------
-export const SinglePageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  padding-top:100px;
-  height: calc(100vh - 230px);
-`;
+
 
 
 export const CheckContainer = styled.div`
-margin-top:50px;
+  margin-top:50px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -387,28 +391,99 @@ padding:0px;
 margin:0 0 0 45px;
 `;
 
+
+
 //----------------MeetingDetail--------------
 
+export const SingleDetailContainer = styled.div`
+  background: linear-gradient(180deg, #C4C7EC 0%, #747FD3 100%);
+  height: 90vh;
+  width: 100%;
+  
+`;
+
+export const MeetingDetailInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+    background: #FFE1E1 url("../assets/noisy-background.png");
+    background-size: cover;
+    background-blend-mode: multiply; /* 또는 다른 blend mode */
+  padding: 150px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 30px 0px;
+  width: 50%;
+  max-width: 800px;
+  margin: 0 0 0 100px;
+  
+`;
+
+export const BankSelect = styled.select`
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid ${INDIGO};
+  margin-right: 10px;
+`;
+
+export const BankOption = styled.option`
+  font-size: 15px;
+`;
+
+export const TransferSection = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+`;
+
+export const MeetingNameText = styled.div`
+  display: flex;
+  gap: 10px;
+  padding: 100px;
+`;
+
 export const SingleDetailText = styled.p`
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 600;
   color: ${INDIGO};
-  margin-bottom: 30px;
-
+  margin-bottom: 20px;
 `;
+
 
 export const Transferbutton = styled.button`
   display: flex;
-  justify-content: space-around;
-  width: 100%
+  justify-content: center;
+  align-items: center;
+  padding: 10px 100px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
-  padding: 10px 70px 10px 70px;
-  background-color: white;
-  
+  background-color: ${INDIGO};
+  color: white;
+  &:hover {
+    background-color: darken(${INDIGO}, 10%);
+  }
 `;
+
+export const ReceiplBox = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+    background: #FFE1E1 url("../assets/noisy-background.png");
+    background-size: cover;
+    background-blend-mode: multiply; /* 또는 다른 blend mode */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 30px 0px;
+  width: 30%;
+  
+  margin: 0 100px 0 100px;
+`;
+
+
 
 //----------------MeetingCheck--------------
 
@@ -613,6 +688,7 @@ export const MainBackground = styled.div`
   justify-content: center;
 
 `;
+
 
 
 //------------------MultiPage-----------------
