@@ -145,17 +145,7 @@ export const TextContainer = styled.div`
   text-align: center;
 `;
 
-export const LoginInput = styled.input`
-  margin-top: 10px;
-  padding: 10px 10px;
-  width: 100%;
-  height: 60px;
-  max-width: 500px;
-  box-sizing: border-box;
-  font-size:25px;
-  border: 2px solid #062C53;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-`;
+
 
 export const ErrorConatiner = styled.div`
   height: 40px;
@@ -760,6 +750,100 @@ export const MainBackground = styled.div`
 
 `;
 
+export const LoginInputContainer = styled.div`
+display: flex;
+width: 600px;
+height: 85px;
+padding: 28px 36px;
+align-items: center;
+gap: 45px;
+flex-shrink: 0;
+border-radius: 15px;
+background: #FFF;
+`;
+export const IDText = styled.div`
+color: #062C53;
+text-align: center;
+font-size: 30px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+
+export const LoginInput = styled.input`
+color: #062C53;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+border:none;
+font-family: sans-serif;
+width:100%;
+`;
+
+
+export const LoginButton = styled.button`
+display: flex;
+width: 600px;
+height: 85px;
+padding: 28px 36px;
+justify-content: center;
+align-items: center;
+gap: 45px;
+flex-shrink: 0;
+border-radius: 15px;
+background: var(--400, #5562CA);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+color: #FFF;
+text-align: center;
+font-size: 30px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+
+export const TextInputContainer = styled.div`
+display: flex;
+width: 80%px;
+padding: 38px 50px;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
+border-radius: 30px;
+background: var(--light, #EDEEFF);
+`;
+export const TextInput = styled.input`
+background-color:inherit;
+border:none;
+color: black;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+width:900px;
+`;
+
+
+export const InputSubmitButton = styled.button`
+display: flex;
+width: 163px;
+height: 60px;
+padding: 8.348px 26.087px;
+justify-content: center;
+align-items: center;
+gap: 5.217px;
+flex-shrink: 0;
+border-radius: 15px;
+background: var(--400, #5562CA);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+color: var(--Purple-Light, var(--light, #EDEEFF));
+font-family: "SEBANG Gothic";
+font-size: 25px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
 
 
 //------------------MultiPage-----------------
@@ -838,7 +922,18 @@ font-size: 25px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+`;
+
+export const ItemInput = styled.input`
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+height:99%;
+border: 0px;
 border-bottom: 1.5px solid black;
+widht:240px;
 `;
 
 export const LongInputListItem = styled(InputListItem)`

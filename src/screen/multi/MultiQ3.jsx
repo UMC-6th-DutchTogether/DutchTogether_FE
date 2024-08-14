@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import {
   DecorationBarLeft,
@@ -20,48 +20,44 @@ import {
   InputListLongHeader,
   LongInputList,
   InputListItem,
-  LongInputListItem
+  LongInputListItem,
+  ItemInput
 } from '../../styles/styledComponents';
-import { updatePayer } from '../../store/multiPaySlice';
+import { getPayers, updatePayer } from '../../store/multiLinkSlice';  // getPayers와 updatePayer 액션 가져오기
 
 export default function MultiQ3() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { payers } = useSelector((state) => state.multiPay);
 
-  // 로컬 상태로 입력값 관리
-  const [localPayers, setLocalPayers] = useState(payers);
+  const { meetingNum } = useSelector((state) => state.multiPay);
+  const { payers, loading, error } = useSelector((state) => state.multiLink);
+
+  // 컴포넌트가 마운트될 때 getPayers를 통해 payers 데이터 로드
+  useEffect(() => {
+    dispatch(getPayers(meetingNum));
+  }, [dispatch, meetingNum]);
 
   // 예금주 이름 변경 함수
   const handleBankNameChange = (e, id) => {
-    const updatedPayers = localPayers.map(payer =>
-      payer.id === id ? { ...payer, bankName: e.target.value } : payer
-    );
-    setLocalPayers(updatedPayers);
+    const updatedPayer = { id, bankName: e.target.value };
+    dispatch(updatePayer(updatedPayer));  // 변경 사항을 리덕스 상태에 바로 반영
   };
 
   // 계좌번호 변경 함수
   const handleAccountNumberChange = (e, id) => {
-    const updatedPayers = localPayers.map(payer =>
-      payer.id === id ? { ...payer, accountNumber: e.target.value } : payer
-    );
-    setLocalPayers(updatedPayers);
+    const updatedPayer = { id, accountNumber: e.target.value };
+    dispatch(updatePayer(updatedPayer));  // 변경 사항을 리덕스 상태에 바로 반영
   };
 
-
-  //제출함수
+  // 제출 함수
   const handleSubmit = async () => {
-    // 로컬 상태를 Redux 상태로 업데이트
-    localPayers.forEach(payer => {
-      dispatch(updatePayer(payer));
-    });
 
     try {
       const response = await axios.put('https://umc.dutchtogether.com/api/payers/', {
-        payers: localPayers.map(payer => ({
+        payers: payers.map(payer => ({
           bank: payer.bankName,
           account: payer.accountNumber,
-          payerId: payer.id
+          payerId: payer.seettlementId
         }))
       });
 
@@ -89,11 +85,13 @@ export default function MultiQ3() {
         <NormalText style={{ color: "#FFF" }}>모든 구성원의 계좌번호 정보가 입력되어야 다음 단계로 넘어갈 수 있습니다.</NormalText>
 
         <ContentContainer>
+          {loading && <p>로딩 중...</p>}
+          {error && <p>오류 발생: {error}</p>}
           <InputListContainer>
             <InputListSmallSection>
               <InputListHeader style={{ marginBottom: '32px' }}>정산자명</InputListHeader>
               <InputList>
-                {localPayers.map((payer, _) => (
+                {payers.map((payer) => (
                   <InputListItem key={payer.id}>{payer.name}</InputListItem>
                 ))}
               </InputList>
@@ -108,27 +106,27 @@ export default function MultiQ3() {
               </InputListLongHeader>
               <div style={{ display: "flex" }}>
                 <InputList style={{ width: '251px' }}>
-                  {localPayers.map((payer, _) => (
-                    <InputListItem key={payer.id} style={{ width: '218px' }}>
-                      <input
+                  {payers.map((payer) => (
+                    <InputListItem key={payer.seettlementId} style={{ width: '218px' }}>
+                      <ItemInput
                         type="text"
                         value={payer.bankName || ''}
                         onChange={(e) => handleBankNameChange(e, payer.id)}
                         placeholder="은행명 입력"
-                        style={{ width: '100%', border: "none" }}
+                        style={{ width: '100%' }}
                       />
                     </InputListItem>
                   ))}
                 </InputList>
                 <LongInputList>
-                  {localPayers.map((payer, _) => (
-                    <LongInputListItem key={payer.id}>
-                      <input
+                  {payers.map((payer) => (
+                    <LongInputListItem key={payer.seettlementId}>
+                      <ItemInput
                         type="text"
                         value={payer.accountNumber || ''}
                         onChange={(e) => handleAccountNumberChange(e, payer.id)}
                         placeholder="계좌번호 입력"
-                        style={{ width: '100%', border: "none" }}
+                        style={{ width: '100%' }}
                       />
                     </LongInputListItem>
                   ))}

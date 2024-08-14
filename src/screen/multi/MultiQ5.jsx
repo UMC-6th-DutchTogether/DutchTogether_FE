@@ -27,14 +27,16 @@ import {
   DropdownContainer,
   PayerContainer
 } from '../../styles/styledComponents';
-import { updatePayer } from '../../store/multiPaySlice';
+//import {  } from '../../store/multiPaySlice';
+//'https://umc.dutchtogether.com/api/payers/info/{settlerId}' get 정산자 정보 받기
+
 
 export default function MultiQ5() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { payers } = useSelector((state) => state.multiPay);
 
-  // State to manage dropdown open/close and selected payer
+  /*
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPayer, setSelectedPayer] = useState('');
 
@@ -155,4 +157,6 @@ export default function MultiQ5() {
       </MultiPayContainerLeft>
     </MainBackground>
   );
+  */
+  return;
 }

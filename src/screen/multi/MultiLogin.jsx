@@ -3,19 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setMeetingNum } from '../../store/multiPaySlice';
-import { SyncLoader } from "react-spinners";
 import {
-  SinglePageContainer,
-  LoginConatiner,
-  SinglePageTitle,
-  TextContainer,
+  DecorationBarLeft,
+  DecorationBarLeftText,
+  MultiPayContainerLeft,
+  TitleText,
+  NormalText,
+  TransparentBox,
+  MainBackground,
   LoginInput,
-  NextButton,
-  ErrorMessage,
-  SingleText1,
-  SingleText2,
+  LoginInputContainer,
+  IDText,
   ErrorConatiner,
-  LoadingConatiner
+  ErrorMessage,
+  LoginButton
 } from '../../styles/styledComponents';
 
 export default function MultiLogin() {
@@ -89,34 +90,38 @@ export default function MultiLogin() {
   };
 
   return (
-    <SinglePageContainer>
-      {loading && (
-        <LoadingConatiner>
-          <SyncLoader />
-        </LoadingConatiner>
-      )}
-      <SinglePageTitle>여러명 정산하기</SinglePageTitle>
-      <LoginConatiner>
-        <TextContainer>
-          <SingleText1>정산 현황을 확인하고 싶다면 ID, PW를 입력해주세요.</SingleText1>
-          <SingleText2>(추후 ID, PW 찾기는 불가능하기때문에 정보를 기억해주세요.)</SingleText2>
-        </TextContainer>
+    <MainBackground>
+      <DecorationBarLeft>
+        <DecorationBarLeftText>같이 계산해요! </DecorationBarLeftText>
+      </DecorationBarLeft>
 
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
-          <LoginInput type="text" placeholder="ID" value={id} onChange={idChange}></LoginInput>
-          <ErrorConatiner>
-            {id && <ErrorMessage>{validateId(id)}</ErrorMessage>}
-          </ErrorConatiner>
+      <TransparentBox />
 
-          <LoginInput type="password" placeholder="PW" value={password} onChange={passwordChange}></LoginInput>
-          <ErrorConatiner>
-            {password && <ErrorMessage>{validatePassword(password)}</ErrorMessage>}
-          </ErrorConatiner>
+      <MultiPayContainerLeft style={{ alignItems: "center", gap: '35px' }}>
+        <TitleText style={{ marginTop: "98px" }}>Sign-up</TitleText>
 
-          <NextButton onClick={handleSubmit} disabled={validateId(id) || validatePassword(password)}> 여러명 정산하기 페이지 만들기</NextButton>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-        </div>
-      </LoginConatiner>
-    </SinglePageContainer>
-  );
+        <NormalText style={{ color: "#FFF" }}>(추후 ID, PW 찾기는 불가능하기때문에 정보를 기억해주세요.)</NormalText>
+
+        <LoginInputContainer>
+          <IDText>ID</IDText>
+          <LoginInput type="text" placeholder="ID를 입력해주세요" value={id} onChange={idChange} />
+        </LoginInputContainer>
+        <ErrorConatiner>
+          {id && <ErrorMessage>{validateId(id)}</ErrorMessage>}
+        </ErrorConatiner>
+
+        <LoginInputContainer>
+          <IDText>PW</IDText>
+          <LoginInput type="password" placeholder="PW를 입력해주세요" value={password} onChange={passwordChange} />
+        </LoginInputContainer>
+        <ErrorConatiner>
+          {password && <ErrorMessage>{validatePassword(password)}</ErrorMessage>}
+        </ErrorConatiner>
+
+        <LoginButton onClick={handleSubmit} disabled={validateId(id) || validatePassword(password)}>정산 페이지 만들기</LoginButton>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </MultiPayContainerLeft>
+
+    </MainBackground >
+  )
 }
