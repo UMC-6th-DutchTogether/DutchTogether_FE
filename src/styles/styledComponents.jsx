@@ -10,7 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 1920px;
+  width: 100vw;
   min-height: 1080px;
   padding-top: 229px;
   box-sizing: border-box;
@@ -19,7 +19,7 @@ export const Container = styled.div`
 export const ButtonCon = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 1920px;
+  width: 100vw;
   background-size: cover;
   background-repeat: no-repeat;
   align-items: center;
@@ -27,8 +27,8 @@ export const ButtonCon = styled.div`
 `;
 
 export const LargeButton = styled.button`
-  width: 960px;
-  height: 435px;
+  width: 50vw;
+  height: 45vh;
   background: none;
   border: none;
   cursor: pointer;
@@ -44,6 +44,7 @@ export const Logo = styled.img`
 `;
 
 export const FooterCon = styled.div`
+  width: 95vw;
   display: flex;
   align-items: center;
   margin-top: 200px;
@@ -51,13 +52,13 @@ export const FooterCon = styled.div`
 
 export const FooterImage = styled.img`
   margin-right: 20px;
-  width: auto;
+  width: 100vw;
   height: auto;
 `;
 
 export const FooterButtonImage = styled.img`
   cursor: pointer;
-  width: auto;
+  width: 30vw;
   height: auto;
 `;
 
