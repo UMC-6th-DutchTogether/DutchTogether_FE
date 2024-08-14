@@ -2,8 +2,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
-    SinglePageContainer, SingleDetailText, CheckMeetingContainer,
-    CompleteButton, SingleNameInput
+    SingleDetailContainer, SingleDetailText, CheckMeetingContainer,
+    CompleteButton, SingleNameInput, MeetingNameText, MeetingNameText2,
+    MeetingDetailInfo, ReceiplBox, CompleteNameButton, SingleNameInputWrapper
 } from '../../styles/styledComponents';
 
 function MeetingCheck() {
@@ -80,27 +81,51 @@ function MeetingCheck() {
     }
 
     return (
-        <SinglePageContainer>
-            <SingleDetailText>{meetingData.meetingName}의 정산을 완료하셨나요?</SingleDetailText>
+        <SingleDetailContainer>
+            <MeetingNameText>
+                <h1>{`${meetingData.meetingName}`}</h1>
+                <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
+            </MeetingNameText>
+            <div style={{ display: 'flex' }}>
+                <MeetingDetailInfo>
+                    <SingleDetailText>{meetingData.meetingName}의 정산을 완료하셨나요?</SingleDetailText>
 
-            <CheckMeetingContainer>
-                <CompleteButton onClick={handleIncompleteClick}>아직 정산하지 못했어요</CompleteButton>
-                <CompleteButton onClick={handleCompleteClick}>정산을 완료했어요</CompleteButton>
-            </CheckMeetingContainer>
+                    <CheckMeetingContainer>
+                        <CompleteButton onClick={handleIncompleteClick}>아직 정산하지 못했어요</CompleteButton>
+                        <CompleteButton onClick={handleCompleteClick}>정산을 완료했어요</CompleteButton>
+                    </CheckMeetingContainer>
 
-            <div style={{ padding: "30px" }}>
-                <SingleNameInput
-                    type="text"
-                    value={name}
-                    onChange={handleNameChange}
-                    disabled={!isCompleted}
-                    placeholder="내 이름을 입력하면 정산이 완료됩니다." />
+
+                    <SingleNameInputWrapper>
+                        <SingleNameInput
+                            type="text"
+                            value={name}
+                            onChange={handleNameChange}
+                            disabled={!isCompleted}
+                            placeholder="내 이름을 입력하면 정산 완료"
+                        />
+                        <CompleteNameButton onClick={handleCompleteSubmit} disabled={!isCompleted}>
+                            정산 완료하기
+                        </CompleteNameButton>
+                    </SingleNameInputWrapper>
+
+
+
+
+                </MeetingDetailInfo>
+
+                <ReceiplBox>
+                    영수증
+                    <div style={{ backgroundColor: 'white', marginTop: '10px' }}>
+                        {meetingData.receiptUrl ? (
+                            <img src={meetingData.receiptUrl} alt="영수증 이미지" style={{ width: '100%', height: 'auto' }} />
+                        ) : (
+                            <p>영수증을 업로드하지 않았습니다.</p>
+                        )}
+                    </div>
+                </ReceiplBox>
             </div>
-
-            <CompleteButton onClick={handleCompleteSubmit} disabled={!isCompleted}>
-                정산 완료하기
-            </CompleteButton>
-        </SinglePageContainer>
+        </SingleDetailContainer>
     );
 }
 

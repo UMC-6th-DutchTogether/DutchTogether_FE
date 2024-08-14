@@ -397,9 +397,9 @@ margin:0 0 0 45px;
 
 export const SingleDetailContainer = styled.div`
   background: linear-gradient(180deg, #C4C7EC 0%, #747FD3 100%);
-  height: 90vh;
-  width: 100%;
-  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const MeetingDetailInfo = styled.div`
@@ -410,7 +410,7 @@ export const MeetingDetailInfo = styled.div`
     background: #FFE1E1 url("../assets/noisy-background.png");
     background-size: cover;
     background-blend-mode: multiply; /* 또는 다른 blend mode */
-  padding: 150px;
+  padding: 30px 130px 30px 120px;
   border-radius: 15px;
   box-shadow: 0px 4px 30px 0px;
   width: 50%;
@@ -418,6 +418,15 @@ export const MeetingDetailInfo = styled.div`
   margin: 0 0 0 100px;
   
 `;
+
+export const FinalAmountText = styled.p`
+  font-size: 70px;
+  font-weight: 600;
+  color: ${INDIGO};
+  margin-bottom: 20px;
+  padding: 30px;
+`;
+
 
 export const BankSelect = styled.select`
   font-size: 15px;
@@ -434,13 +443,17 @@ export const BankOption = styled.option`
 export const TransferSection = styled.div`
   display: flex;
   gap: 10px;
-  margin-top: 30px;
+  
 `;
 
 export const MeetingNameText = styled.div`
   display: flex;
   gap: 10px;
-  padding: 100px;
+  padding: 40px;
+`;
+
+export const MeetingNameText2 = styled.p`
+  margin-top:10px
 `;
 
 export const SingleDetailText = styled.p`
@@ -455,7 +468,7 @@ export const Transferbutton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 100px;
+  padding: 10px 70px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -483,31 +496,89 @@ export const ReceiplBox = styled.button`
   margin: 0 100px 0 100px;
 `;
 
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #C4C7EC 0%, #747FD3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  z-index: 9999;
+`;
 
+import LetterImage from '../assets/Letter.png';
+
+export const Letter = styled.div`
+  background: url(${LetterImage}) no-repeat center center;
+  background-size: contain;
+  padding: 150px;
+  border-radius: 10px;
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 300px;
+`;
 
 //----------------MeetingCheck--------------
 
+import completedButtonImg from '../assets/completedButton.png';
+
 export const CompleteButton = styled.button`
   display: flex;
-  justify-content: space-around;
-  width: 100%
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 100%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
-  padding: 10px 50px 10px 50px;
+  padding: 90px;
   background-color: white;
+  background-image: url(${completedButtonImg}); /* 이미지 추가 */
+  background-size: cover; /* 이미지 크기를 버튼에 맞게 조정 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 텍스트에 약간의 그림자 추가 */
+`;
+
+
+export const CompleteNameButton = styled.button`
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  disabled: ${props => props.disabled ? 'true' : 'false'};
 `;
 
 export const CheckMeetingContainer = styled.div`
-  margin-top: 70px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   gap: 30px;
 `;
 
+export const SingleNameInputWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+
+`;
+
 export const SingleNameInput = styled.input`
-  padding: 10px 100px 10px 100px;
+  flex: 1;
+  padding: 10px 150px 10px 10px;
+  width: calc(100% - 40px);
+  
 `;
 
 
