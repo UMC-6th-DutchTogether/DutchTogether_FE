@@ -2,17 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { setMeetingName } from '../../store/multiPaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  DecorationBarLeft,
-  DecorationBarLeftText,
-  MultiPayContainerLeft,
-  TitleText,
-  TransparentBox,
-  MainBackground,
-  TextInputContainer,
-  InputSubmitButton,
-  TextInput
-} from '../../styles/styledComponents';
+import { SinglePageContainer, QuestionContainer, LeftArrowButton, RightArrowButton, Input, SingleQ1Box, SinglePageTitle, SingleText1, ErrorMessage } from '../../styles/styledComponents';
 import axios from 'axios';
 
 
@@ -41,10 +31,10 @@ export default function MultiQ1() {
         navigate('/MultiQ2');
         console.log(response);
       } else {
-        setError('업데이트에 실패했습니다.'); // 실패 시 에러 메시지 설정
+        console.error('업데이트에 실패했습니다.'); // 실패 시 에러 메시지 설정
       }
     } catch (err) {
-      setError('요청 중 오류가 발생했습니다.'); // 요청 중 오류 시 에러 메시지 설정
+      console.error('요청 중 오류가 발생했습니다.'); // 요청 중 오류 시 에러 메시지 설정
       console.error(err);
     }
   };
@@ -55,22 +45,30 @@ export default function MultiQ1() {
   };
 
   return (
-    <MainBackground>
-      <DecorationBarLeft>
-        <DecorationBarLeftText>같이 계산해요! </DecorationBarLeftText>
-      </DecorationBarLeft>
+    <SinglePageContainer>
+      <SinglePageTitle>여러명 전산하기</SinglePageTitle>
 
-      <TransparentBox />
+      <QuestionContainer>
+        <LeftArrowButton onClick={handleBackClick} />
 
-      <MultiPayContainerLeft style={{ alignItems: "center", gap: '35px' }}>
-        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산 모임 이름이 무엇인가요?</TitleText>
+        <SingleQ1Box>
+          <SingleText1>Q.정산에 참여하는 인원의 이름을 모두 작성해주세요</SingleText1>
+          <Input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder="','으로 구분하니 유의해주시길 바랍니다."
+          />
+        </SingleQ1Box>
 
-        <TextInputContainer>
-          <TextInput type="text" value={meetingName || ''} onChange={handleInputChange} placeholder="정산 모임을 입력해주세요!" />
-          <InputSubmitButton type="button" disabled={!isInputValid()} onClick={handleSubmit} >제출하기</InputSubmitButton>
-        </TextInputContainer>
-      </MultiPayContainerLeft>
+        <RightArrowButton
+          type="button"
+          disabled={!isInputValid()} // 로딩 중일 때 버튼 비활성화
+          onClick={handleNextClick}
+        />
 
-    </MainBackground >
+
+      </QuestionContainer>
+    </SinglePageContainer>
   );
 }
