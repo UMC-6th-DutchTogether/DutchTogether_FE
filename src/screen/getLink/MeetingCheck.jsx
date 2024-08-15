@@ -4,8 +4,11 @@ import axios from 'axios';
 import {
     SingleDetailContainer, SingleDetailText, CheckMeetingContainer,
     CompleteButton, SingleNameInput, MeetingNameText, MeetingNameText2,
-    MeetingDetailInfo, ReceiplBox, CompleteNameButton, SingleNameInputWrapper
+    MeetingDetailInfo, ReceiplBox, CompleteNameButton, SingleNameInputWrapper,
+    UnCompletedButton
 } from '../../styles/styledComponents';
+import unCompletedButtonImg from '../../assets/완료x 1.png';
+import completedButtonImg from '../../assets/완료 O 1.png';
 
 function MeetingCheck() {
     const { link } = useParams();
@@ -91,8 +94,8 @@ function MeetingCheck() {
                     <SingleDetailText>{meetingData.meetingName}의 정산을 완료하셨나요?</SingleDetailText>
 
                     <CheckMeetingContainer>
-                        <CompleteButton onClick={handleIncompleteClick}>아직 정산하지 못했어요</CompleteButton>
-                        <CompleteButton onClick={handleCompleteClick}>정산을 완료했어요</CompleteButton>
+                        <CompleteButton src={completedButtonImg} onClick={handleCompleteClick}></CompleteButton>
+                        <UnCompletedButton src={unCompletedButtonImg} onClick={handleIncompleteClick} />
                     </CheckMeetingContainer>
 
 

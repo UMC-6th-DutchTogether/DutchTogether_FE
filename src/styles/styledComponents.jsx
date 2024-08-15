@@ -520,29 +520,28 @@ export const Letter = styled.div`
 
 //----------------MeetingCheck--------------
 
-import completedButtonImg from '../assets/completedButton.png';
-
-export const CompleteButton = styled.button`
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  width: 100%;
-  border: none;
-  border-radius: 5px;
+export const CompleteButton = styled.img`
   cursor: pointer;
   font-size: 15px;
-  padding: 90px;
-  background-color: white;
-  background-image: url(${completedButtonImg}); /* 이미지 추가 */
-  background-size: cover; /* 이미지 크기를 버튼에 맞게 조정 */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 텍스트에 약간의 그림자 추가 */
+  padding: 30px;
+  background-color: #FFE1E1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+`;
+
+export const UnCompletedButton = styled.img`
+  cursor: pointer;
+  font-size: 15px;
+  padding: 30px;
+  background-color: #FFE1E1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 `;
 
 
 export const CompleteNameButton = styled.button`
   padding: 10px 10px;
+  margin: 0px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
@@ -550,7 +549,6 @@ export const CompleteNameButton = styled.button`
 `;
 
 export const CheckMeetingContainer = styled.div`
-  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   gap: 30px;
@@ -560,13 +558,17 @@ export const SingleNameInputWrapper = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-  padding: 10px;
-
+  padding: 0px;
+  background-color: #EDEEFF;
+  border-radius: 50px;
 `;
 
 export const SingleNameInput = styled.input`
   flex: 1;
-  padding: 10px 150px 10px 10px;
+  border: none;
+  border-radius: 20px;
+  padding: 20px 180px 20px 10px;
+  background-color: #EDEEFF;
   width: calc(100% - 40px);
   
 `;
