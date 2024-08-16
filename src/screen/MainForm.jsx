@@ -8,6 +8,7 @@ import footerButtonImage from '../assets/정산 확인하기.png';
 import styled, { keyframes } from 'styled-components';
 import SettlementStatusSelect from './status/SettlementStatusSelect';
 
+
 // Slide animation
 const slideUp = keyframes`
   from {
@@ -25,7 +26,7 @@ const SlideUpContainer = styled.div`
   bottom: 0;
   width: auto;
   height: 92%;
-  background-color: white;
+  background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
   border-radius: 50px 50px 0 0;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
@@ -40,7 +41,7 @@ export default function MainForm() {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleSingleLogin = () => {
-    navigate('/SingleLogin');
+    setIsVisible(true);
   };
 
   const handleMultipleLogin = () => {
@@ -48,7 +49,7 @@ export default function MainForm() {
   };
 
   const handleStatus = () => {
-    setIsVisible(true);
+    navigate('/SettlerCheckLogin');
   };
 
   return (

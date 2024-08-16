@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { setAccountHolder } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleText1, Input } from '../../styles/styledComponents'
+import { SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleQText, Input } from '../../styles/styledComponents'
 
 //예금주
 export default function SingleQ3() {
@@ -19,14 +19,17 @@ export default function SingleQ3() {
   };
   return (
     <SinglePageContainer>
-      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+      </DecorationBarRight>
+
       <QuestionContainer>
         <Link to="/SingleQ2">
           <LeftArrowButton />
         </Link>
 
         <SingleQ1Box>
-          <SingleText1>Q.예금주를 입력해주세요.</SingleText1>
+          <SingleQText>Q.예금주를 입력해주세요.</SingleQText>
           <Input type="text" value={accountHolder} onChange={handleInputChange} />
         </SingleQ1Box>
 

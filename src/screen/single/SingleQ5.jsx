@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { setNumberOfPeople } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleText1, Input } from '../../styles/styledComponents';
+import { SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleQText, Input } from '../../styles/styledComponents';
 
 export default function SingleQ5() {
   //store 동기화
@@ -32,14 +32,17 @@ export default function SingleQ5() {
 
   return (
     <SinglePageContainer>
-      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요! </DecorationBarRightText>
+      </DecorationBarRight>
+
       <QuestionContainer>
         <Link to="/SingleQ4">
           <LeftArrowButton />
         </Link>
 
         <SingleQ1Box>
-          <SingleText1>Q.몇 명이 정산하나요?</SingleText1>
+          <SingleQText>Q.몇 명이 정산하나요?</SingleQText>
           <Input type="text" value={numberOfPeople} onChange={handleInputChange} />
         </SingleQ1Box>
 

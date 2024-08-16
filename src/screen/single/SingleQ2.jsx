@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBankName, setAccountNumber } from '../../store/singlePaySlice';
-import { SinglePageContainer, QuestionContainer, SingleQ1Box, LeftArrowButton, RightArrowButton, Input, SinglePageTitle, SingleText1 } from '../../styles/styledComponents';
+import { SinglePageContainer, QuestionContainer, SingleQ1Box, LeftArrowButton, RightArrowButton, Input, DecorationBarRight, DecorationBarRightText, SingleQText } from '../../styles/styledComponents';
 
 export default function SingleQ2() {
   const dispatch = useDispatch();
@@ -37,14 +37,17 @@ export default function SingleQ2() {
 
   return (
     <SinglePageContainer>
-      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+      </DecorationBarRight>
+
       <QuestionContainer>
         <Link to="/SingleQ1">
           <LeftArrowButton type="button" />
         </Link>
 
         <SingleQ1Box>
-          <SingleText1>Q.정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleText1>
+          <SingleQText>Q.정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQText>
           <Input type="text" value={inputValue} onChange={handleInputChange} />
         </SingleQ1Box>
 

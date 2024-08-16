@@ -2,7 +2,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { setMeetingName } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SinglePageContainer, QuestionContainer, LeftArrowButton, RightArrowButton, Input, SingleQ1Box, SinglePageTitle, SingleText1 } from '../../styles/styledComponents'
+import {
+  SinglePageContainer, QuestionContainer, LeftArrowButton,
+  RightArrowButton, Input, SingleQ1Box, DecorationBarRight,
+  DecorationBarRightText, SingleQText
+} from '../../styles/styledComponents'
 import axios from 'axios';
 
 
@@ -45,7 +49,10 @@ export default function SingleQ1() {
 
   return (
     <SinglePageContainer>
-      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+      </DecorationBarRight>
 
       <QuestionContainer>
         <Link to="/SingleLogin">
@@ -53,7 +60,7 @@ export default function SingleQ1() {
         </Link>
 
         <SingleQ1Box>
-          <SingleText1>Q.정산 모임 이름이 무엇인가요?</SingleText1>
+          <SingleQText>Q.정산 모임 이름이 무엇인가요?</SingleQText>
           <Input type="text" value={meetingName} onChange={handleInputChange} />
         </SingleQ1Box>
 
@@ -61,6 +68,7 @@ export default function SingleQ1() {
         <RightArrowButton type="summit" disabled={!isInputValid()} onClick={handleSubmit} />
         {/* </Link> */}
       </QuestionContainer>
+
     </SinglePageContainer>
   );
 }

@@ -7,7 +7,6 @@ import { SyncLoader } from "react-spinners";
 import {
   SinglePageContainer,
   LoginConatiner,
-  SinglePageTitle,
   TextContainer,
   LoginInput,
   NextButton,
@@ -15,7 +14,11 @@ import {
   SingleText1,
   SingleText2,
   ErrorConatiner,
-  LoadingConatiner
+  LoadingConatiner,
+  DecorationBarRight,
+  DecorationBarRightText,
+  IDText,
+  SingleLoginInputContainer
 } from '../../styles/styledComponents';
 
 export default function SingleLogin() {
@@ -95,20 +98,34 @@ export default function SingleLogin() {
           <SyncLoader />
         </LoadingConatiner>
       )}
-      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+      </DecorationBarRight>
+
+
       <LoginConatiner>
         <TextContainer>
-          <SingleText1>정산 현황을 확인하고 싶다면 ID, PW를 입력해주세요.</SingleText1>
+          <SingleText1>Log-In</SingleText1>
           <SingleText2>(추후 ID, PW 찾기는 불가능하기때문에 정보를 기억해주세요.)</SingleText2>
         </TextContainer>
 
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
-          <LoginInput type="text" placeholder="ID" value={id} onChange={idChange}></LoginInput>
+
+          <SingleLoginInputContainer>
+            <IDText>ID</IDText>
+            <LoginInput type="text" placeholder="ID" value={id} onChange={idChange}></LoginInput>
+          </SingleLoginInputContainer>
+
           <ErrorConatiner>
             {id && <ErrorMessage>{validateId(id)}</ErrorMessage>}
           </ErrorConatiner>
 
-          <LoginInput type="password" placeholder="PW" value={password} onChange={passwordChange}></LoginInput>
+          <SingleLoginInputContainer>
+            <IDText>PW</IDText>
+            <LoginInput type="password" placeholder="PW" value={password} onChange={passwordChange}></LoginInput>
+          </SingleLoginInputContainer>
+
           <ErrorConatiner>
             {password && <ErrorMessage>{validatePassword(password)}</ErrorMessage>}
           </ErrorConatiner>

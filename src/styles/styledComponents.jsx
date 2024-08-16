@@ -67,10 +67,10 @@ export const FooterButtonImage = styled.img`
 export const SinglePageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  padding-top:100px;
-  height: calc(100vh - 230px);
+  align-items: left;
+  padding-top: 70px;
+  height: calc(100vh - 300px);
+  width: calc(100vw - 500px);
 `;
 
 
@@ -128,20 +128,32 @@ export const LoadingConatiner = styled.div`
 
 
 export const LoginConatiner = styled.div`
-  display: flex;
-  flex-direction: column;
-   width: 70%;
-   min-width:1000px;
-  height: 50vh;
-  min-height: 650px;
-  background-color: #E2F0FF;
-  padding-top: 20px; 
-    z-index: 10;
+flex-grow: 1;
+display:flex;
+align-items:center;
+flex-direction:column;
+height: 957px;
+border-radius: 0px 100px 100px 0px;
+box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
+z-index: 10;
+min-width:1400px;
+`;
 
+export const SingleLoginInputContainer = styled.div`
+display: flex;
+width: 700px;
+height: 40px;
+padding: 28px 36px;
+align-items: center;
+gap: 45px;
+flex-shrink: 0;
+border-radius: 15px;
+background: #FFF;
 `;
 
 export const TextContainer = styled.div`
-  margin-top:50px;
+  margin-top:90px;
   text-align: center;
 `;
 
@@ -152,20 +164,33 @@ export const ErrorConatiner = styled.div`
 
 `;
 
+export const SingleText1 = styled.h2`
+  font-size: 100px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 70px;
+`;
+export const SingleText2 = styled.h2`
+  font-size: 20px;
+  font-weight: 400;
+  color:${INDIGO};
+  margin-bottom: 8px;
+`;
+
 export const NextButton = styled.button`
   margin-top: 50px;
-  padding: 10px;
-  width: 300px;
+  padding: 20px 50px;
+  width: 700px;
   height:60px;
-  max-width: 500px;
+  max-width: 700px;
   border-radius: 20px;
-  background-color: white;
-  color: ${INDIGO};
+  background-color: #5562CA;
+  color: white;
   font-weight: bold;
   cursor: pointer;
   box-sizing: border-box;
-border: 2px solid #062C53;
- font-size:20px;
+  border: 2px solid #062C53;
+  font-size:20px;
    &:hover {
     background-color: rgba(0,0,0,0.1);
   }
@@ -192,27 +217,37 @@ export const SingleLoginContainer = styled.div`
   align-items: center;
 `;
 export const Input = styled.input`
-  margin-top: 10px;
-  padding: 10px 10px;
-  width: 500px;
+  margin-top: 50px;
+  padding: 20px 30px;
+  width: 1200px;
   height:70px;
-  max-width: 500px;
+  max-width: 1400px;
   box-sizing: border-box;
   border:none;
-  font-size:20px;
+  border-radius: 50px;
+  font-size: 30px;
   font-weight:bold;
 `;
+
+export const SingleQText = styled.h2`
+  font-size: 60px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 70px;
+
+`;
+
 export const QuestionContainer = styled(LoginConatiner)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  height: 50vh;
-  padding-top: 20px;
-  position: relative;
-  z-index:1;
-    min-height: 550px;
-    min-width: 1000px;
+  flex-grow: 1;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  height: 957px;
+  border-radius: 0px 100px 100px 0px;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+  background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
+  z-index: 10;
+  min-width:1400px;
 `;
 
 
@@ -221,7 +256,7 @@ export const SingleQ1Box = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  margin-top: 180px;
+  margin-top: 250px;
 
 `;
 
@@ -247,7 +282,7 @@ export const LeftArrowButton = styled(ArrowButton)`
 `;
 
 export const RightArrowButton = styled(ArrowButton)`
-  right: 10px;
+  right: 520px;
 
   &::before {
     content: ">";
@@ -278,18 +313,31 @@ display: flex;
 
 //--------------ChekSingleQ------------------
 
-
-
+export const CheckQuestionContainer = styled(LoginConatiner)`
+  flex-grow: 1;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  height: 957px;
+  border-radius: 0px 100px 100px 0px;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+  background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
+  z-index: 10;
+  min-width:1400px;
+`;
 
 export const CheckContainer = styled.div`
-  margin-top:50px;
+  margin-bottom: 80px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
   width: 70%;
   min-width:800px;
   height: 530px;
-  padding: 20px;
+  padding: 100px;
+  border-radius: 50px;
+  background-color: #C4C7EC;
 `;
 
 export const SinglePageTitle = styled.h2`
@@ -304,32 +352,16 @@ export const SinglePageTitle = styled.h2`
 
 `;
 export const CheckSinglePageTitle = styled(SinglePageTitle)`
-margin-bottom: 0px;
-
-min-width:800px;
+  margin: 50px 0 0 0px;
+  min-width:800px;
+  text-align: center;
 `;
-
-
-export const SingleText1 = styled.h2`
-  font-size: 30px;
-  font-weight: 600;
-  color: ${INDIGO};
-  margin-bottom: 70px;
-
-`;
-export const SingleText2 = styled.h2`
-  font-size: 20px;
-  font-weight: 400;
-  color:${INDIGO};
-  margin-bottom: 8px;
-`;
-
 
 export const SingleQ = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: ${INDIGO};
-  margin-bottom: 8px;
+  margin: 8px;
 
 `;
 
@@ -353,16 +385,13 @@ export const ButtonContainer = styled.div`
 `;
 
 export const BackButton = styled(NextButton)`
-width:200px;
+width: 250px;
 height:60px;
 font-size:20px;
-
-
-
 `;
 
 export const LinkButton = styled(NextButton)`
-width:200px;
+width: 250px;
 height:60px;
 font-size:20px;
 `;

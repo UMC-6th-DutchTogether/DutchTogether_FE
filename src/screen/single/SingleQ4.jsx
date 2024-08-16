@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAmount, setReceipt } from '../../store/singlePaySlice';
-import { SinglePageContainer, QuestionContainer, SinglePageTitle, SingleQ1Box, LeftArrowButton, RightArrowButton, ReceiptButton, SingleText1, Input, StyledImage } from '../../styles/styledComponents';
+import { SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText, SingleQ1Box, LeftArrowButton, RightArrowButton, ReceiptButton, SingleQText, Input, StyledImage } from '../../styles/styledComponents';
 
 export default function SingleQ4() {
   const dispatch = useDispatch();
@@ -59,14 +59,17 @@ export default function SingleQ4() {
 
   return (
     <SinglePageContainer>
-      <SinglePageTitle>나만 정산하기</SinglePageTitle>
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+      </DecorationBarRight>
+
       <QuestionContainer>
         <Link to="/SingleQ3">
           <LeftArrowButton />
         </Link>
 
         <SingleQ1Box>
-          <SingleText1>Q.정산하고자하는 금액이 얼마인가요?</SingleText1>
+          <SingleQText>Q.정산하고자하는 금액이 얼마인가요?</SingleQText>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex" }}>
               <ReceiptButton onClick={handleReceiptButtonClick}>영수증 첨부하기</ReceiptButton>
