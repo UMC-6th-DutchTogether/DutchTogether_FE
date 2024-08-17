@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setAccountHolder } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +9,17 @@ export default function SingleQ3() {
   //store 동기화
   const dispatch = useDispatch();
   const { accountHolder } = useSelector((state) => state.singlePay);
+
+  useEffect(() => {
+    const storedAccountHolder = localStorage.getItem('accountHolder');
+    if (storedAccountHolder) {
+      dispatch(setAccountHolder(storedAccountHolder));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('accountHolder', accountHolder);
+  }, [accountHolder]);
 
   //입력시 호출 함수
   const handleInputChange = (e) => {

@@ -10,8 +10,10 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
 export default function SingleCreateLink() {
     const dispatch = useDispatch();
-    const { meetingNum, meetingLink } = useSelector((state) => state.singlePay);
+    const { meetingLink } = useSelector((state) => state.singlePay);
     const [loading, setLoading] = useState(false);
+    const storedMeetingNum = localStorage.getItem('meetingNum');
+    const meetingNum = storedMeetingNum;
 
     useEffect(() => {
         setLoading(true);

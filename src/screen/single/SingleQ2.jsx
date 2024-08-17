@@ -9,6 +9,22 @@ export default function SingleQ2() {
   const { bankName, accountNumber } = useSelector((state) => state.singlePay);
   const [inputValue, setInputValue] = useState(bankName + accountNumber);
 
+  // 로컬 스토리지에서 값 불러오기
+  useEffect(() => {
+    const storedBankName = localStorage.getItem('bankName');
+    const storedAccountNumber = localStorage.getItem('accountNumber');
+
+    if (storedBankName) {
+      dispatch(setBankName(storedBankName));
+    }
+    if (storedAccountNumber) {
+      dispatch(setAccountNumber(storedAccountNumber));
+    }
+
+    // 초기값 설정
+    setInputValue((storedBankName || '') + (storedAccountNumber || ''));
+  }, [dispatch]);
+
   useEffect(() => {
     // 문자열과 숫자 분리
     const bankNameMatch = inputValue.match(/^\D+/); // 문자
@@ -21,6 +37,11 @@ export default function SingleQ2() {
     // store에 저장
     dispatch(setBankName(newBankName));
     dispatch(setAccountNumber(newAccountNumber));
+
+    // 로컬 스토리지에 저장
+    localStorage.setItem('bankName', newBankName);
+    localStorage.setItem('accountNumber', newAccountNumber);
+
   }, [inputValue, dispatch]);
 
   // 입력시 호출 함수

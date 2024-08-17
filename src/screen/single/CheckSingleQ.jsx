@@ -12,7 +12,11 @@ import {
 export default function CheckSingleQ() {
   const navigate = useNavigate();
   const [meetingDetails, setMeetingDetails] = useState(null); // 초기값을 null로 설정
-  const { meetingNum, receiptUrl } = useSelector((state) => state.singlePay);
+  const { receiptUrl } = useSelector((state) => state.singlePay);
+
+  const storedMeetingNum = localStorage.getItem('meetingNum');
+
+  const meetingNum = storedMeetingNum;
 
   useEffect(() => {
     const fetchMeetingDetails = async () => {

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { setMeetingName } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -17,9 +17,19 @@ export default function SingleQ1() {
   const { meetingName, meetingNum } = useSelector((state) => state.singlePay);
   const [setError] = useState('');
 
+  useEffect(() => {
+    // 로컬 스토리지에서 meetingName 가져오기
+    const storedMeetingName = localStorage.getItem('meetingName');
+    if (storedMeetingName) {
+      dispatch(setMeetingName(storedMeetingName));
+    }
+  }, [dispatch]);
+
   //입력시 호출 함수
   const handleInputChange = (e) => {
-    dispatch(setMeetingName(e.target.value))
+    dispatch(setMeetingName(e.target.value));
+
+    localStorage.setItem('meetingName', name);
   };
 
   //공백 확인 함수
