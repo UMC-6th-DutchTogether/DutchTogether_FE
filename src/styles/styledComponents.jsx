@@ -231,6 +231,7 @@ export const SingleText1 = styled.h2`
   font-weight: 600;
   color: white;
   margin-bottom: 70px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
 `;
 export const SingleText2 = styled.h2`
   font-size: 20px;
@@ -1106,4 +1107,182 @@ export const DropdownListItem = styled.li`
   &:hover {
     background: #F0F0F0;
   }
+`;
+
+
+//------------------StatusPage-----------------
+
+export const SlideUpContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: auto;
+  height: 85%;
+  background: linear-gradient(90deg, rgba(166, 171, 217, 0.97) 0%, #747FD3 153.61%);
+  border-radius: 50px 50px 0 0;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+  display: block;
+  background-color: #A6C1FF;
+  z-index: 10;
+  left: 0;
+  right: 0;
+`;
+
+export const ContentCon = styled.div`
+  padding: 60px;
+`;
+
+export const StatusContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const MeetingName = styled.h1`
+  font-size: 58px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+`;
+
+export const StatsContainer = styled.div`
+  width: 18vw;
+  height: 54vh;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: var(--light, #EDEEFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 50px;
+  padding: 30px;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+`;
+
+export const StatsTopBox = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+`;
+
+export const StatsBottomBox = styled.div`
+  text-align: center;
+  margin: 80px;
+`;
+
+export const StatBox = styled.div`
+  display: flex;
+  width: 10vw;
+  padding: 10px 0 0 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  border-radius: 15px;
+  background: #FFF;
+  margin: 10px;
+`;
+
+export const StatTitle = styled.p`
+  font-size: 34px;
+  margin: 0;
+`;
+
+export const StatNumber = styled.p`
+  color: var(--light-text, #5F6073);
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke-width: 8;
+  -webkit-text-stroke-color: #000;
+  font-family: "SEBANG Gothic";
+
+  font-size: 120px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const SettlerContainer = styled.div`
+  width: 67vw;
+  height: 54vh;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: var(--light, #EDEEFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 50px;
+  padding: 30px;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;b
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
+export const SearchInput = styled.input`
+  width: 65vw;
+  border-radius: 10px 0 0 10px ;
+  border: none;
+  font-size: 27px;
+  padding: 15px;
+`;
+
+export const SearchButtonCon = styled.button`
+  padding: 8px 30px;
+  border: none;
+  background-color: #fff; 
+  border-radius: 0 10px 10px 0;
+`;
+
+export const SearchButton = styled.button`
+  padding: 8px 15px;
+  width: 8vw;
+  font-size: 21px;
+  background-color: #5a67d8; 
+  color: white; 
+  border: none;
+  border-radius: 10px; 
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const TableContainer = styled.div`
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: left;
+  width: 65vw;
+  height: 40vh;
+  margin: 0 auto;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+export const TableHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  font-size: 25px;
+`;
+
+export const TableRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 20px;
+`;
+
+export const NameColumn = styled.p`
+  width: 50%;
+  margin: 0;
+`;
+
+export const TimeColumn = styled.p`
+  width: 50%;
+  margin: 0;
+  text-align: right;
 `;

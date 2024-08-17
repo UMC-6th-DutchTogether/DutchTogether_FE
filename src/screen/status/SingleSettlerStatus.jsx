@@ -1,14 +1,34 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-
-const StatusContainer = styled.div`
-  padding: 50px;
-`;
+import {
+    SlideUpContainer,
+    ContentCon,
+    StatusContainer,
+    MeetingName,
+    StatsContainer,
+    StatsTopBox,
+    StatsBottomBox,
+    StatBox,
+    StatTitle,
+    StatNumber,
+    SettlerContainer,
+    SearchContainer,
+    SearchInput,
+    SearchButtonCon,
+    SearchButton,
+    TableContainer,
+    TableHeader,
+    TableRow,
+    NameColumn,
+    TimeColumn
+} from '../../styles/styledComponents'
 
 export default function SingleSettlerStatus() {
+    const [meetingName, setmeetingName] = useState('');
     const [settlements, setSettlements] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredSettlements, setFilteredSettlements] = useState([]);
     const [error, setError] = useState(null);
     const [numPeople, setNumPeople] = useState(0); // 전체 인원 상태 추가
     const meetingNum = useSelector((state) => state.singlePay.meetingNum);
@@ -23,10 +43,8 @@ export default function SingleSettlerStatus() {
                     }
                 });
 
-                console.log('Fetched Settlement Status Response:', response);
-
                 if (response.data.isSuccess) {
-                    // Extract numPeople from the first item in settlementListDTO
+                    setmeetingName(response.data.data.meetingName);
                     const settlementData = response.data.data.settlementListDTO[0];
                     setNumPeople(settlementData.numPeople);
 
@@ -37,15 +55,11 @@ export default function SingleSettlerStatus() {
                     }));
 
                     setSettlements(settlementsData);
-                    console.log('Settlements:', settlementsData);
-                    console.log('Number of People:', settlementData.numPeople);
-
+                    setFilteredSettlements(settlementsData);
                 } else {
-                    console.error('Failed to fetch settlement status:', response.data.message);
                     setError('Failed to fetch settlement status.');
                 }
             } catch (error) {
-                console.error('Error occurred during GET request:', error);
                 setError('An error occurred during GET request.');
             }
         };
@@ -61,58 +75,122 @@ export default function SingleSettlerStatus() {
         return <div>{error}</div>;
     }
 
-    if (!settlements.length) {
-        return <div>Loading...</div>;
-    }
+    const handleSearch = async () => {
+        if (searchTerm.trim() === '') {
+            setFilteredSettlements(settlements);
+            return;
+        }
+
+        if (settlements.length === 0 || !settlements[0].settlementId) {
+            setError('No settlement data available.');
+            return;
+        }
+
+        try {
+            console.log('Starting search with term:', searchTerm);
+            const response = await axios.get(`https://umc.dutchtogether.com/api/settlementStatus/settlers`, {
+                params: {
+                    settlementId: settlements[0].settlementId, // 첫 번째 정산 아이디 사용
+                    settlerName: searchTerm
+                },
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            console.log('Search response:', response);
+            console.log('response.data.data:', response.data.data);
+
+            if (response.data.isSuccess) {
+                const settler = response.data.data;
+
+                const filteredData = [{
+                    settlementId: settlements[0].settlementId,
+                    name: settler.name,
+                    settlementTime: settler.settlementTime
+                }];
+
+                setFilteredSettlements(filteredData);
+            } else {
+                setFilteredSettlements([]);
+                setError('정산자를 찾을 수 없습니다.');
+            }
+        } catch (error) {
+            console.error('Search error:', error);
+            setError('검색 중 예외가 발생했습니다.');
+        }
+    };
+
+    // if (!settlements.length) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
-        <StatusContainer>
-            <div style={{ display: 'flex', minHeight: '100vh', paddingLeft: '200px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', gap: '30px' }}>
-                    <h1 style={{ margin: 0 }}>더치투게더 팀</h1>
-                    <div style={{ display: 'flex', gap: '15px' }}>
-                        <div style={{ textAlign: 'center' }}>
-                            <p style={{ fontSize: '30px', margin: 0 }}>정산 인원</p>
-                            <p style={{ fontSize: '60px', margin: 0 }}>{settlements.length}</p>
-                        </div>
-                        <div style={{ textAlign: 'center' }}>
-                            <p style={{ fontSize: '30px', margin: 0 }}>전체 인원</p>
-                            <p style={{ fontSize: '60px', margin: 0 }}>{numPeople}</p>
-                        </div>
-                    </div>
-                    <div style={{ textAlign: 'center' }}>
-                        <p style={{ fontSize: '30px', margin: 0 }}>미정산 인원</p>
-                        <p style={{ fontSize: '60px', margin: 0 }}>{numPeople - settlements.length}명 남았습니다.</p>
-                    </div>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f0f0f0', padding: '100px', borderRadius: '15px', marginLeft: '200px' }}>
-                    <h2 style={{ marginBottom: '20px' }}>정산 현황</h2>
-                    <input type="text" placeholder="정산자를 검색해보세요." style={{ marginBottom: '20px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #ddd' }}>
-                        <p style={{ width: '50%', margin: 0 }}>정산자명</p>
-                        <p style={{ width: '50%', margin: 0 }}>정산 시각</p>
-                    </div>
-                    <div style={{ width: '100%', overflowY: 'auto', maxHeight: '200px' }}>
-                        {settlements.map(settlement => (
-                            <div key={settlement.settlementId} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #ddd' }}>
-                                <p style={{ width: '50%', margin: 0 }}>{settlement.name}</p>
-                                <p style={{ width: '50%', margin: 0 }}>
-                                    {new Date(settlement.settlementTime).toLocaleString('ko-KR', {
-                                        year: 'numeric',
-                                        month: '2-digit',
-                                        day: '2-digit',
-                                        hour: '2-digit',
-                                        minute: '2-digit',
-                                        second: '2-digit',
-                                        hour12: false, // 24시간 형식 사용
-                                        timeZone: 'Asia/Seoul' // 한국 표준시
-                                    })}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </StatusContainer>
+        <SlideUpContainer>
+            <ContentCon>
+                <MeetingName>{meetingName}의 정산현황</MeetingName>
+                <StatusContainer>
+                    <StatsContainer>
+                        <StatsTopBox>
+                            <StatBox>
+                                <StatTitle>정산 인원</StatTitle>
+                                <StatNumber>{settlements.length}</StatNumber>
+                            </StatBox>
+                            <StatBox>
+                                <StatTitle>전체 인원</StatTitle>
+                                <StatNumber>{numPeople}</StatNumber>
+                            </StatBox>
+                        </StatsTopBox>
+                        <StatsBottomBox>
+                            <StatTitle>미정산 인원</StatTitle>
+                            <StatTitle>{numPeople - settlements.length}명</StatTitle>
+                            <StatTitle>남았습니다.</StatTitle>
+                        </StatsBottomBox>
+                    </StatsContainer>
+                    <SettlerContainer>
+                        <SearchContainer>
+                            <SearchInput
+                                type="text"
+                                placeholder="정산자를 검색해주세요."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <SearchButtonCon>
+                                <SearchButton onClick={handleSearch}>검색하기</SearchButton>
+                            </SearchButtonCon>
+                        </SearchContainer>
+                        <TableContainer>
+                            <TableHeader>
+                                <NameColumn>정산자명</NameColumn>
+                                <TimeColumn>정산 시각</TimeColumn>
+                            </TableHeader>
+                            {filteredSettlements.length > 0 ? (
+                                filteredSettlements.map((settlement, index) => (
+                                    <TableRow key={`${settlement.settlementId}-${index}`}>
+                                        <NameColumn>{settlement.name}</NameColumn>
+                                        <TimeColumn>
+                                            {new Date(settlement.settlementTime).toLocaleString('ko-KR', {
+                                                year: 'numeric',
+                                                month: '2-digit',
+                                                day: '2-digit',
+                                                hour: '2-digit',
+                                                minute: '2-digit',
+                                                hour12: false,
+                                                timeZone: 'Asia/Seoul'
+                                            })}
+                                        </TimeColumn>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <NameColumn colSpan="2">No settlers found.</NameColumn>
+                                </TableRow>
+                            )}
+                        </TableContainer>
+                    </SettlerContainer>
+                </StatusContainer>
+            </ContentCon>
+        </SlideUpContainer>
     );
+
 }
