@@ -1,13 +1,11 @@
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAmount, setReceipt } from '../../store/singlePaySlice';
-import { SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText, SingleQ1Box, LeftArrowButton, RightArrowButton, ReceiptButton, SingleQText, Input, StyledImage } from '../../styles/styledComponents';
+import { setAmount } from '../../store/singlePaySlice';
+import { SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText, SingleQ1Box, LeftArrowButton, RightArrowButton, SingleQText, Input } from '../../styles/styledComponents';
 
 export default function SingleQ4() {
   const dispatch = useDispatch();
-  const { amount, receiptUrl } = useSelector((state) => state.singlePay);
-  const fileInputRef = useRef(null);
+  const { amount } = useSelector((state) => state.singlePay);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -23,32 +21,6 @@ export default function SingleQ4() {
       } else {
         dispatch(setAmount(0)); // NaN인 경우  0으로 설정
       }
-    }
-  };
-
-  // 파일->문자열
-  const convertFileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
-  // 버튼 클릭->파일 인풋 함수
-  const handleReceiptButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  // 파일 인풋 함수
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const base64 = await convertFileToBase64(file);
-      dispatch(setReceipt(base64));
     }
   };
 
@@ -70,23 +42,7 @@ export default function SingleQ4() {
 
         <SingleQ1Box>
           <SingleQText>Q.정산하고자하는 금액이 얼마인가요?</SingleQText>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex" }}>
-              <ReceiptButton onClick={handleReceiptButtonClick}>영수증 첨부하기</ReceiptButton>
-              {receiptUrl && (
-                <StyledImage src={receiptUrl} alt="Receipt Preview" style={{ width: '300px', height: '100px' }} />
-              )}
-            </div>
-            <Input type="text" value={amount} onChange={handleInputChange} inputMode="numeric" />
-
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-          </div>
+          <Input type="text" value={amount} onChange={handleInputChange} inputMode="numeric" />
         </SingleQ1Box>
 
         <Link to="/SingleQ5">

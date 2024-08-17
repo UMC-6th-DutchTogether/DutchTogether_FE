@@ -64,6 +64,21 @@ export const FooterButtonImage = styled.img`
 
 //----------SingleCreateLink--------------
 
+export const SingleNewLinkContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  padding: 50px;
+  align-items:center;
+  flex-direction: column;
+  gap: 50px;
+  height: 957px;
+  border-radius: 0px 100px 100px 0px;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+  background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
+  z-index: 10;
+  min-width: 1400px;
+`;
+
 export const SinglePageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,11 +109,37 @@ export const LinkButtonContainer = styled.div`
   
 `;
 
+export const SingleLinkTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  
+`;
+
+export const SingleLinkText = styled.p`
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+`;
+
+export const SingleLinkTitle = styled.h2`
+  font-size: 50px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 30px;
+`;
+
 export const NewSingleLink = styled.div`
   display:flex;
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bold;
-
+  background-color: white;
+  padding: 50px;
+  border-radius: 50px;
 `;
 
 export const StyledCopyIcon = styled(FontAwesomeIcon)`
@@ -111,6 +152,9 @@ color: rgba(0,0,0,0.6);
     transform: scale(1.1);
   }
 `;
+
+
+
 
 //----------SingleLogin--------------
 export const LoadingConatiner = styled.div`
@@ -239,15 +283,17 @@ export const SingleQText = styled.h2`
 
 export const QuestionContainer = styled(LoginConatiner)`
   flex-grow: 1;
-  display:flex;
+  display: flex;
+  padding: 50px;
   align-items:center;
-  flex-direction:column;
+  flex-direction: row;
+  gap: 50px;
   height: 957px;
   border-radius: 0px 100px 100px 0px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
   z-index: 10;
-  min-width:1400px;
+  min-width: 80%;
 `;
 
 
@@ -256,22 +302,21 @@ export const SingleQ1Box = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  margin-top: 250px;
-
+  margin-top: 400px;
+  padding: 50px;
 `;
 
 export const ArrowButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  position: absolute;
   top: 50%;
   transform: translateY(-50%);
 
 `;
 
 export const LeftArrowButton = styled(ArrowButton)`
-  left: 10px;
+  left: 20px;
 
   &::before {
     content: "<";
@@ -308,7 +353,18 @@ display: flex;
  flexDirection: column
 `;
 
-
+export const ReceiptImage = styled.img`
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain;
+  padding: 20px 0px;
+  width: 400px;
+  height: 300px;
+  marginLeft: 16px;
+  background-color: white;
+  border-radius: 50px;
+  margin-left: 80px;
+`;
 
 
 //--------------ChekSingleQ------------------

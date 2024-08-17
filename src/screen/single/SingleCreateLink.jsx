@@ -4,7 +4,7 @@ import axios from 'axios';
 import { setMeetingLink } from '../../store/singlePaySlice';
 import { SyncLoader } from "react-spinners";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { SinglePageContainer, SinglePageTitle, LinkButtonContainer, LinkButton, NewSingleLink, SingleText1, SingleQ1Box, QuestionContainer, StyledCopyIcon, LoadingConatiner } from '../../styles/styledComponents';
+import { SinglePageContainer, SingleNewLinkContainer, LinkButtonContainer, LinkButton, NewSingleLink, SingleLinkText, SingleLinkTextBox, StyledCopyIcon, LoadingConatiner, DecorationBarRight, DecorationBarRightText, SingleLinkTitle } from '../../styles/styledComponents';
 
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
@@ -63,12 +63,17 @@ export default function SingleCreateLink() {
                     <SyncLoader />
                 </LoadingConatiner>
             )}
-            <SinglePageTitle>나만 정산하기</SinglePageTitle>
-            <QuestionContainer>
-                <SingleQ1Box>
-                    <SingleText1>링크가 생성되었습니다.</SingleText1>
+            <DecorationBarRight>
+                <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+            </DecorationBarRight>
 
-                </SingleQ1Box>
+            <SingleNewLinkContainer>
+                <SingleLinkTitle >링크 생성</SingleLinkTitle >
+
+                <SingleLinkTextBox>
+                    <SingleLinkText>링크가 생성되었습니다.</SingleLinkText>
+                    <SingleLinkText>아래 링크를 공유하여 정산을 진행해주세요!</SingleLinkText>
+                </SingleLinkTextBox>
 
                 <NewSingleLink>
                     {meetingLink}
@@ -83,7 +88,9 @@ export default function SingleCreateLink() {
                     </CopyToClipboard>
                     <LinkButton onClick={handleShare}>링크 공유하기</LinkButton>
                 </LinkButtonContainer>
-            </QuestionContainer>
-        </SinglePageContainer>
+
+            </SingleNewLinkContainer>
+
+        </SinglePageContainer >
     );
 }
