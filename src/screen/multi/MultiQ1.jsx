@@ -14,7 +14,7 @@ import {
   TextInput
 } from '../../styles/styledComponents';
 import axios from 'axios';
-
+import { setMeetingLink } from '../../store/multiPaySlice';
 
 export default function MultiQ1() {
   const navigate = useNavigate();
@@ -29,9 +29,26 @@ export default function MultiQ1() {
     dispatch(setMeetingName(e.target.value));
   };
 
+  const getLink = async () => {
+    try {
+      const response = await axios.get(`https://umc.dutchtogether.com/api/meetings/${meetingNum}/link`)
+      if (response.status == 200) {
+        const Link = response.data.data.link;
+        console.log('링크', response);
+        dispatch(setMeetingLink(Link));
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   // api 호출
   const handleSubmit = async () => {
-    console.log(meetingNum, meetingName)
+    console.log(meetingNum, meetingName);
+    getLink();
     try {
       const response = await axios.put('https://umc.dutchtogether.com/api/meetings/meetingName', {
         meetingNum: meetingNum,
@@ -39,7 +56,7 @@ export default function MultiQ1() {
       });
       if (response.status === 200) {
         navigate('/MultiQ2');
-        console.log(response);
+        console.log("로그인", response);
       } else {
         setError('업데이트에 실패했습니다.'); // 실패 시 에러 메시지 설정
       }
