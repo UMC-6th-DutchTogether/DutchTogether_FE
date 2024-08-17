@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAmount } from '../../store/singlePaySlice';
@@ -6,6 +7,19 @@ import { SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationB
 export default function SingleQ4() {
   const dispatch = useDispatch();
   const { amount } = useSelector((state) => state.singlePay);
+
+  useEffect(() => {
+    const storedAmount = localStorage.getItem('amount');
+    if (storedAmount) {
+      dispatch(setAmount(parseFloat(storedAmount)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isNaN(amount)) {
+      localStorage.setItem('amount', amount.toString());
+    }
+  }, [amount]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;

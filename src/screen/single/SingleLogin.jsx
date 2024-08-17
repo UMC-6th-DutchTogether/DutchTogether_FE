@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -28,6 +28,14 @@ export default function SingleLogin() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // 로컬 스토리지에서 meetingNum을 가져와 리덕스에 설정
+    const storedMeetingNum = localStorage.getItem('meetingNum');
+    if (storedMeetingNum) {
+      dispatch(setMeetingNum(storedMeetingNum));
+    }
+  }, [dispatch]);
 
   const idChange = (event) => {
     setId(event.target.value);
@@ -75,7 +83,12 @@ export default function SingleLogin() {
       });
 
       if (response.status === 200) {
-        dispatch(setMeetingNum(response.data.data.meetingNum));
+        const meetingNum = response.data.data.meetingNum;
+        dispatch(setMeetingNum(meetingNum));
+
+        // 로컬 스토리지에 meetingNum 저장
+        localStorage.setItem('meetingNum', meetingNum);
+
         navigate('/SingleQ1');
         console.log('응답:', response);
       } else {

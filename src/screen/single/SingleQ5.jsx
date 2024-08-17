@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { setNumberOfPeople } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,20 @@ export default function SingleQ5() {
   const fileInputRef = useRef(null);
   const { bankName, accountNumber, accountHolder, amount, numberOfPeople, meetingNum } = useSelector((state) => state.singlePay);
 
+  // 로컬 스토리지에서 값 불러오기
+  useEffect(() => {
+    const storedNumberOfPeople = localStorage.getItem('numberOfPeople');
+    if (storedNumberOfPeople) {
+      dispatch(setNumberOfPeople(parseInt(storedNumberOfPeople)));
+    }
+  }, [dispatch]);
+
+  // 입력값 변경 시 로컬 스토리지에 저장
+  useEffect(() => {
+    if (!isNaN(numberOfPeople)) {
+      localStorage.setItem('numberOfPeople', numberOfPeople.toString());
+    }
+  }, [numberOfPeople]);
 
   // 입력시 호출 함수
   const handleInputChange = (e) => {
