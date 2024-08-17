@@ -12,7 +12,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 100vw;
   min-height: 1080px;
-  padding-top: 229px;
+  padding-top: 352px;
   box-sizing: border-box;
 `;
 
@@ -26,28 +26,46 @@ export const ButtonCon = styled.div`
   position: relative;
 `;
 
-export const LargeButton = styled.button`
-  width: 50vw;
-  height: 45vh;
-  background: none;
-  border: none;
+export const LargeButtonLeft = styled.button`
+  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+  width: 100%;
+  height: 375px;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 0px 100px 100px 0px;
+  background: conic-gradient(from -90deg at 0% 56.43%, rgba(116, 127, 211, 0.60) 0deg, rgba(196, 199, 236, 0.60) 360deg);
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 50%;
+  transform: ${({ isClicked }) => (isClicked ? 'translate(0%, -50%)' : 'translate(-74%, -50%)')};
+  transition: transform 0.6s ease-in-out;
+  z-index: 5;
+  border: none; 
   cursor: pointer;
 `;
 
+export const LargeButtonRight = styled(LargeButtonLeft)`
+ border-radius: 100px 0px 0px 100px;
+  justify-content: flex-start;
+  transform: ${({ isClicked }) => (isClicked ? 'translate(0%, -50%)' : 'translate(74%, -50%)')};
+`;
+
+
 export const Logo = styled.img`
-  width: 662px;
-  height: 659px;
+  min-width: 662px;
   object-fit: contain;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 `;
 
 export const FooterCon = styled.div`
   width: 95vw;
   display: flex;
   align-items: center;
-  margin-top: 200px;
+  margin-top: 370px;
 `;
 
 export const FooterImage = styled.img`

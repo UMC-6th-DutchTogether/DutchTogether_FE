@@ -1,13 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Container, Logo, ButtonCon, LargeButton, FooterImage, FooterButtonImage, FooterCon } from '../styles/styledComponents';
+import { Container, Logo, ButtonCon, DecorationBarLeftText, TransparentBox, DecorationBarRightText, LargeButtonLeft, LargeButtonRight, FooterImage, FooterButtonImage, FooterCon } from '../styles/styledComponents';
 import logo1 from '../assets/LOGO 1.png';
-import buttonsImage from '../assets/혼자+같이.png';
 import footerTextImage from '../assets/정산을 편리하게 (1).png';
 import footerButtonImage from '../assets/정산 확인하기.png';
 import styled, { keyframes } from 'styled-components';
 import SettlementStatusSelect from './status/SettlementStatusSelect';
-
 
 // Slide animation
 const slideUp = keyframes`
@@ -38,7 +36,26 @@ const SlideUpContainer = styled.div`
 
 export default function MainForm() {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isLeftClicked, setIsLeftClicked] = useState(false);
+  const [isRightClicked, setIsRightClicked] = useState(false);
+
+  const handleLeftClick = () => {
+    setIsLeftClicked(true);
+
+    setTimeout(() => {
+      navigate('/SingleLogin');
+    }, 600);
+  };
+
+  const handleRightClick = () => {
+    setIsRightClicked(true);
+
+    setTimeout(() => {
+      navigate('/MultiLogin');
+    }, 600);
+  };
 
   const handleSingleLogin = () => {
     setIsVisible(true);
@@ -54,22 +71,24 @@ export default function MainForm() {
 
   return (
     <Container>
-      <ButtonCon style={{ backgroundImage: `url(${buttonsImage})` }}>
-        <LargeButton onClick={handleSingleLogin} />
-        <Logo src={logo1} alt="Logo" />
-        <LargeButton onClick={handleMultipleLogin} />
+      <ButtonCon isVisible={isVisible}>
+        <LargeButtonLeft isClicked={isLeftClicked} onClick={handleLeftClick} isVisible={!isRightClicked}><DecorationBarRightText>혼자 계산해요!</DecorationBarRightText></LargeButtonLeft>
+        <Logo src={logo1} isVisible={!isLeftClicked && !isRightClicked} alt="Logo" />
+        <LargeButtonRight isClicked={isRightClicked} onClick={handleRightClick} isVisible={!isLeftClicked}><DecorationBarLeftText>같이 계산해요! </DecorationBarLeftText></LargeButtonRight>
       </ButtonCon>
+      <TransparentBox />
+
       <FooterCon>
         <FooterImage src={footerTextImage} alt="정산을 편리하게" />
         <FooterButtonImage src={footerButtonImage} alt="정산 확인하기" onClick={handleStatus} />
       </FooterCon>
 
       {/* Slide-up container */}
-      <SlideUpContainer isVisible={isVisible}>
+      {/* <SlideUpContainer isVisible={isVisible}>
 
         <SettlementStatusSelect />
 
-      </SlideUpContainer>
+      </SlideUpContainer> */}
 
 
     </Container>
