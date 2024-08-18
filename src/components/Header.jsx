@@ -1,5 +1,6 @@
 import { HeaderBar, HeaderContentContainer, HeaderMenu, HeaderTitle, HeaderMenuText, HeaderLogo } from '../styles/styledComponents';
 import img from '../assets/LOGO 2.png';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -10,8 +11,9 @@ export default function Header() {
           <HeaderTitle>더치투게더</HeaderTitle>
         </HeaderLogo>
         <HeaderMenu>
-          <HeaderMenuText>Home</HeaderMenuText>
-          <HeaderMenuText>About</HeaderMenuText>
+          <Link to="/">
+            <HeaderMenuText>Home</HeaderMenuText>
+          </Link>
           <HeaderMenuText>Log-in</HeaderMenuText>
         </HeaderMenu>
       </HeaderContentContainer>

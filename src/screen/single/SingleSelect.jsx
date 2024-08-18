@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import {
-    SinglePageContainer,
-    DecorationBarRight,
-    DecorationBarRightText,
-    LoginConatiner
+  SinglePageContainer,
+  DecorationBarRight,
+  DecorationBarRightText,
+  LoginConatiner
 
 } from '../../styles/styledComponents';
 import styled from 'styled-components';
-import AmountOnly from '../../assets/금액만.png'
+//import AmountOnly from '../../assets/금액만.png'
 import SellterCheck from '../../assets/입금자만.png'
 
 const SelectionButtonContainer = styled.div`
@@ -23,12 +23,12 @@ const ButtonContainer = styled.div`
 `;
 
 
-const AmountOnlyButton = styled.button`
+/*const AmountOnlyButton = styled.button`
   padding: 300px;
    background-image: url(${AmountOnly});
-  background-size: cover; /* 버튼 크기에 맞게 이미지 크기를 조정 */
-  background-position: center; /* 이미지를 버튼 중앙에 배치 */
-  background-repeat: no-repeat; /* 이미지 반복을 방지 */
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat; 
   cursor: pointer;
   border: none;
   border-radius: 10px;
@@ -43,7 +43,7 @@ const AmountOnlyButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
-`;
+`;*/
 
 const SellterCheckButton = styled.button`
   padding-top: 450px;
@@ -70,37 +70,37 @@ const SellterCheckButton = styled.button`
 `;
 
 export default function SingleSelect() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    //제출함수
-    const handleLeftSubmit = async () => {
-        navigate('/SingleQ1')
-    };
+  //제출함수
+  const handleLeftSubmit = async () => {
+    navigate('/AmountOnlyQ1')
+  };
 
-    const handleRightSubmit = async () => {
-        navigate('/SingleLogin')
-    };
+  const handleRightSubmit = async () => {
+    navigate('/SingleLogin')
+  };
 
-    return (
-        <SinglePageContainer>
+  return (
+    <SinglePageContainer>
 
-            <DecorationBarRight>
-                <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
-            </DecorationBarRight>
-            <LoginConatiner>
+      <DecorationBarRight>
+        <DecorationBarRightText>혼자 계산해요!</DecorationBarRightText>
+      </DecorationBarRight>
+      <LoginConatiner>
 
-                <SelectionButtonContainer>
-                    <ButtonContainer>
-                        <SellterCheckButton onClick={handleLeftSubmit}>
-                            금액만 확인하기
-                        </SellterCheckButton>
-                        <SellterCheckButton onClick={handleRightSubmit}>
-                            입금자 확인하기
-                        </SellterCheckButton>
-                    </ButtonContainer>
-                </SelectionButtonContainer>
-            </LoginConatiner>
+        <SelectionButtonContainer>
+          <ButtonContainer>
+            <SellterCheckButton onClick={handleLeftSubmit}>
+              금액만 확인하기
+            </SellterCheckButton>
+            <SellterCheckButton onClick={handleRightSubmit}>
+              입금자 확인하기
+            </SellterCheckButton>
+          </ButtonContainer>
+        </SelectionButtonContainer>
+      </LoginConatiner>
 
-        </SinglePageContainer>
-    );
+    </SinglePageContainer>
+  );
 }

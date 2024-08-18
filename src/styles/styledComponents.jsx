@@ -312,7 +312,7 @@ export const QuestionContainer = styled(LoginConatiner)`
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
   z-index: 10;
-  min-width: 80%;
+  min-width: 1400px;
 `;
 
 
@@ -501,23 +501,24 @@ export const MeetingDetailInfo = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-    background: #FFE1E1 url("../assets/noisy-background.png");
-    background-size: cover;
-    background-blend-mode: multiply; /* 또는 다른 blend mode */
-  padding: 30px 130px 30px 120px;
+  background: #FFE1E1 url("../assets/noisy-background.png");
+  background-size: cover;
+  background-blend-mode: multiply; /* 또는 다른 blend mode */
+  padding: 70px 200px 80px 200px;
   border-radius: 15px;
   box-shadow: 0px 4px 30px 0px;
   width: 50%;
-  max-width: 800px;
+  
+  max-width: 1000px;
   margin: 0 0 0 100px;
   
 `;
 
 export const FinalAmountText = styled.p`
-  font-size: 70px;
+  font-size: 100px;
   font-weight: 600;
   color: ${INDIGO};
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   padding: 30px;
 `;
 
@@ -543,18 +544,18 @@ export const TransferSection = styled.div`
 export const MeetingNameText = styled.div`
   display: flex;
   gap: 10px;
-  padding: 40px;
+  padding: 50px 0px 50px 100px;
 `;
 
 export const MeetingNameText2 = styled.p`
-  margin-top:10px
+  margin-top: 15px;
 `;
 
 export const SingleDetailText = styled.p`
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   color: ${INDIGO};
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 `;
 
 
@@ -562,7 +563,7 @@ export const Transferbutton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 70px;
+  padding: 20px 100px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -662,7 +663,8 @@ export const SingleNameInputWrapper = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-  padding: 0px;
+  padding: 20px 30px;
+  margin: 35px;
   background-color: #EDEEFF;
   border-radius: 50px;
 `;

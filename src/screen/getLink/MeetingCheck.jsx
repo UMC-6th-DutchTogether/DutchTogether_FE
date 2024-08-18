@@ -112,9 +112,6 @@ function MeetingCheck() {
                         </CompleteNameButton>
                     </SingleNameInputWrapper>
 
-
-
-
                 </MeetingDetailInfo>
 
                 <ReceiplBox>

@@ -118,7 +118,7 @@ function MeetingDetails() {
               </div>
             </Overlay>
           )}
-          <div style={{ display: "flex", gap: "150px" }}>
+          <div style={{ display: "flex", gap: "200px" }}>
 
             <div style={{ textAlign: 'center' }}>
               <p>정산금액</p>
@@ -132,7 +132,7 @@ function MeetingDetails() {
 
           </div>
 
-          <p style={{ fontSize: "30px" }}>최종금액</p>
+          <p style={{ fontSize: "50px" }}>최종금액</p>
           <FinalAmountText>{`${finalAmount}원`}</FinalAmountText>
           <SingleDetailText>
             {`${meetingData.bank} ${meetingData.account_num}`}

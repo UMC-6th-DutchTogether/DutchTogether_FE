@@ -26,6 +26,7 @@ import MultiQ5 from './screen/multi/MultiQ5';
 import SettlementStatusSelect from './screen/status/SettlementStatusSelect';
 import SettlerCheckLogin from './screen/status/SettlerCheckLogin';
 import SingleSettlerStatus from './screen/status/SingleSettlerStatus';
+import AmountOnlyQ1 from './screen/single/AmountOnlyQ1';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainFrom />} />
+        <Route path="/AmountOnlyQ1" element={<AmountOnlyQ1 />} />
         <Route path="/SingleSelect" element={<SingleSelect />} />
         <Route path="/SingleLogin" element={<SingleLogin />} />
         <Route path="/SingleQ1" element={<SingleQ1 />} />
