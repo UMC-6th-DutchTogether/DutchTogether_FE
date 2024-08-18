@@ -301,18 +301,7 @@ export const SingleQText = styled.h2`
 `;
 
 export const QuestionContainer = styled(LoginConatiner)`
-  flex-grow: 1;
-  display: flex;
-  padding: 50px;
-  align-items:center;
-  flex-direction: row;
-  gap: 50px;
-  height: 957px;
-  border-radius: 0px 100px 100px 0px;
-  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
-  background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
-  z-index: 10;
-  min-width: 1400px;
+  min-height: 775px;
 `;
 
 
@@ -944,14 +933,15 @@ align-items: center;
 gap: 5.217px;
 flex-shrink: 0;
 border-radius: 15px;
+border: none;
 background: var(--400, #5562CA);
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 color: var(--Purple-Light, var(--light, #EDEEFF));
-font-family: "SEBANG Gothic";
 font-size: 25px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+cursor: pointer;
 `;
 
 

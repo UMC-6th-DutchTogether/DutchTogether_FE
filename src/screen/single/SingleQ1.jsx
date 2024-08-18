@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { setMeetingName } from '../../store/singlePaySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  SinglePageContainer, QuestionContainer, LeftArrowButton,
-  RightArrowButton, Input, SingleQ1Box, DecorationBarRight,
-  DecorationBarRightText, SingleQText
+  SinglePageContainer, QuestionContainer,
+  DecorationBarRight, DecorationBarRightText,
+  TitleText, TextInputContainer, TextInput, InputSubmitButton
+
 } from '../../styles/styledComponents'
 import axios from 'axios';
 
@@ -65,18 +66,12 @@ export default function SingleQ1() {
       </DecorationBarRight>
 
       <QuestionContainer>
-        <Link to="/SingleLogin">
-          <LeftArrowButton />
-        </Link>
+        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산 모임 이름이 무엇인가요?</TitleText>
 
-        <SingleQ1Box>
-          <SingleQText>Q.정산 모임 이름이 무엇인가요?</SingleQText>
-          <Input type="text" value={meetingName} onChange={handleInputChange} />
-        </SingleQ1Box>
-
-        {/* <Link to="/SingleQ2"> */}
-        <RightArrowButton type="summit" disabled={!isInputValid()} onClick={handleSubmit} />
-        {/* </Link> */}
+        <TextInputContainer>
+          <TextInput type="text" value={meetingName || ''} onChange={handleInputChange} placeholder="정산 모임을 입력해주세요!" />
+          <InputSubmitButton type="button" disabled={!isInputValid()} onClick={handleSubmit} >제출하기</InputSubmitButton>
+        </TextInputContainer>
       </QuestionContainer>
 
     </SinglePageContainer>
