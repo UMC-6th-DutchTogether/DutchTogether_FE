@@ -38,37 +38,74 @@ export default function MultiQ4() {
   // settlementID 받아오기 함수
   const getSettlementId = async (payerId) => {
     console.log({
-      meetingNum: meetingNum,
-      payerId: payerId
+      payerId: payerId,
+      meetingNum: meetingNum
     });
+
     try {
       const response = await axios.post(`https://umc.dutchtogether.com/api/settlement/multi`, {
-        meetingNum: meetingNum,
-        payerId: payerId
+        payerId: payerId,
+        meetingNum: meetingNum
       })
+
       if (response.status === 200) {
-        console.log("SettlementId 받기", response);
-        return ('001');
+        console.log("SettlementId 받기", response.data.data.settlementId);
+        return (response.data.data.settlementId);
       }
     } catch (err) {
       console.log('오류 발생', err);
+      return false;
     }
   };
 
+  // put settler API 함수
+  const postSettler = async () => {
+    const settlerArray = settlements.flatMap((settlement) => {
+      return settlement.settlers.map((name) => {
+        return {
+          name: name,
+          settlementId: settlement.settlementId
+        };
+      });
+    });
+
+    console.log("Prepared Settler Array: ", settlerArray);
+
+    try {
+      const response = await axios.post(`https://umc.dutchtogether.com/api/settler/`, {
+        requests: settlerArray,
+        meetingNum: meetingNum
+      });
+
+      if (response.status === 200) {
+        console.log("Settlement 전달하기", response);
+      }
+    } catch (err) {
+      console.error('오류 발생', err);
+    }
+  };
+
+
+
   // 값 입력시 호출 함수(리덕스에 값 저장)
-  const handleChange = (index, field, value) => {
+  const handleChange = async (index, field, value) => {
     let updatedSettlements = settlements.map((settlement, idx) =>
       idx === index ? { ...settlement, [field]: value } : settlement
     );
 
-    // 결제자(payer)를 변경한 경우, 매핑된 settlementId를 설정
+    // 결제자 선택시 settlementId지정
     if (field === 'payer') {
       const selectedPayer = payers.find(payer => payer.name === value);
-      const newSettlementId = getSettlementId(selectedPayer.payerId);
       if (selectedPayer) {
-        updatedSettlements = updatedSettlements.map((settlement, idx) =>
-          idx === index ? { ...settlement, settlementId: selectedPayer.settlementId } : settlement
-        );
+        const newSettlementId = await getSettlementId(selectedPayer.payerId);
+        if (!newSettlementId) {
+          console.error("Failed to fetch Settlement ID");
+        } else {
+          // settlementId지정
+          updatedSettlements = updatedSettlements.map((settlement, idx) =>
+            idx === index ? { ...settlement, settlementId: newSettlementId } : settlement
+          );
+        }
       }
     }
 
@@ -101,6 +138,8 @@ export default function MultiQ4() {
   // 제출하기 함수
   const handleSubmit = async () => {
 
+    await postSettler(); //settler 
+
     const validSettlements = settlements.filter(
       settlement =>
         settlement.payer.trim() !== '' &&
@@ -128,14 +167,14 @@ export default function MultiQ4() {
 
       if (response.status === 200) {
         console.log("결제품목 정보 put", response.data);
-        navigate('/MultiQ5');
+        navigate('/MultiCreateLink');
       } else {
         console.error('오류:', response);
       }
     } catch (error) {
       console.error('정산 제출 중 오류 발생:', error);
     } finally {
-      navigate('/MultiQ5');
+      navigate('/MultiCreateLink');
     }
   };
 
