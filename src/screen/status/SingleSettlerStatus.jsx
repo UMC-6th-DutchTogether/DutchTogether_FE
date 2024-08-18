@@ -81,45 +81,57 @@ export default function SingleSettlerStatus() {
             return;
         }
 
-        if (settlements.length === 0 || !settlements[0].settlementId) {
-            setError('No settlement data available.');
-            return;
-        }
+        // 클라이언트 측 필터링: 부분 문자열 검색
+        const filteredData = settlements.filter(settlement =>
+            settlement.name.includes(searchTerm)
+        );
 
-        try {
-            console.log('Starting search with term:', searchTerm);
-            const response = await axios.get(`https://umc.dutchtogether.com/api/settlementStatus/settlers`, {
-                params: {
-                    settlementId: settlements[0].settlementId, // 첫 번째 정산 아이디 사용
-                    settlerName: searchTerm
-                },
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            console.log('Search response:', response);
-            console.log('response.data.data:', response.data.data);
-
-            if (response.data.isSuccess) {
-                const settler = response.data.data;
-
-                const filteredData = [{
-                    settlementId: settlements[0].settlementId,
-                    name: settler.name,
-                    settlementTime: settler.settlementTime
-                }];
-
-                setFilteredSettlements(filteredData);
-            } else {
-                setFilteredSettlements([]);
-                setError('정산자를 찾을 수 없습니다.');
+        if (filteredData.length > 0) {
+            // 클라이언트에서 부분 일치 검색 결과가 있으면 표시
+            setFilteredSettlements(filteredData);
+        } else {
+            // 클라이언트에서 부분 일치 결과가 없을 때 서버로 검색 요청
+            if (settlements.length === 0 || !settlements[0].settlementId) {
+                setError('No settlement data available.');
+                return;
             }
-        } catch (error) {
-            console.error('Search error:', error);
-            setError('검색 중 예외가 발생했습니다.');
+
+            try {
+                console.log('Starting search with term:', searchTerm);
+                const response = await axios.get(`https://umc.dutchtogether.com/api/settlementStatus/settlers`, {
+                    params: {
+                        settlementId: settlements[0].settlementId, // 첫 번째 정산 아이디 사용
+                        settlerName: searchTerm
+                    },
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                console.log('Search response:', response);
+                console.log('response.data.data:', response.data.data);
+
+                if (response.data.isSuccess) {
+                    const settler = response.data.data;
+
+                    const filteredData = [{
+                        settlementId: settlements[0].settlementId,
+                        name: settler.name,
+                        settlementTime: settler.settlementTime
+                    }];
+
+                    setFilteredSettlements(filteredData);
+                } else {
+                    setFilteredSettlements([]);
+                    setError('정산자를 찾을 수 없습니다.');
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                setError('검색 중 예외가 발생했습니다.');
+            }
         }
     };
+
 
     // if (!settlements.length) {
     //     return <div>Loading...</div>;
