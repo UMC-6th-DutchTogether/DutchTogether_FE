@@ -21,7 +21,7 @@ import MultiQ1 from './screen/multi/MultiQ1';
 import MultiQ2 from './screen/multi/MultiQ2';
 import MultiQ3 from './screen/multi/MultiQ3';
 import MultiQ4 from './screen/multi/MultiQ4';
-import MultiQ5 from './screen/multi/MultiQ5';
+import MultiCreateLink from './screen/multi/MultiCreateLink';
 
 import SettlementStatusSelect from './screen/status/SettlementStatusSelect';
 import SettlerCheckLogin from './screen/status/SettlerCheckLogin';
@@ -50,10 +50,9 @@ function App() {
         <Route path="/MultiLogin" element={<MultiLogin />} />
         <Route path="/MultiQ1" element={<MultiQ1 />} />
         <Route path="/MultiQ2" element={<MultiQ2 />} />
-
         <Route path="/MultiQ3" element={<MultiQ3 />} />
         <Route path="/MultiQ4" element={<MultiQ4 />} />
-        <Route path="/MultiQ5" element={<MultiQ5 />} />
+        <Route path="/MultiCreateLink" element={<MultiCreateLink />} />
 
         <Route path="/SettlementStatus" element={<SettlementStatusSelect />} />
         <Route path="/SettlerCheckLogin" element={<SettlerCheckLogin />} />
