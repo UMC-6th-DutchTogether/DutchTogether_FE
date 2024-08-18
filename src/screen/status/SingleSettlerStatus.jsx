@@ -125,6 +125,20 @@ export default function SingleSettlerStatus() {
     //     return <div>Loading...</div>;
     // }
 
+    const formatTime = (timeString) => {
+        // `Z`를 추가하여 UTC로 간주하고, KST로 변환합니다.
+        const utcDate = new Date(timeString + 'Z');
+        return utcDate.toLocaleString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+            timeZone: 'Asia/Seoul'
+        });
+    };
+
     return (
         <SlideUpContainer>
             <ContentCon>
@@ -169,15 +183,7 @@ export default function SingleSettlerStatus() {
                                     <TableRow key={`${settlement.settlementId}-${index}`}>
                                         <NameColumn>{settlement.name}</NameColumn>
                                         <TimeColumn>
-                                            {new Date(settlement.settlementTime).toLocaleString('ko-KR', {
-                                                year: 'numeric',
-                                                month: '2-digit',
-                                                day: '2-digit',
-                                                hour: '2-digit',
-                                                minute: '2-digit',
-                                                hour12: false,
-                                                timeZone: 'Asia/Seoul'
-                                            })}
+                                            {formatTime(settlement.settlementTime)}
                                         </TimeColumn>
                                     </TableRow>
                                 ))
