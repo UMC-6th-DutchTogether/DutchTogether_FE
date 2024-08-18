@@ -93,42 +93,44 @@ export default function SingleSettlerStatus() {
             // 클라이언트에서 부분 일치 결과가 없을 때 서버로 검색 요청
             if (settlements.length === 0 || !settlements[0].settlementId) {
                 setError('No settlement data available.');
+                setFilteredSettlements([]);
                 return;
             }
 
-            try {
-                console.log('Starting search with term:', searchTerm);
-                const response = await axios.get(`https://umc.dutchtogether.com/api/settlementStatus/settlers`, {
-                    params: {
-                        settlementId: settlements[0].settlementId, // 첫 번째 정산 아이디 사용
-                        settlerName: searchTerm
-                    },
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+            // try {
+            //     console.log('Starting search with term:', searchTerm);
+            //     const response = await axios.get(`https://umc.dutchtogether.com/api/settlementStatus/settlers`, {
+            //         params: {
+            //             settlementId: settlements[0].settlementId, // 첫 번째 정산 아이디 사용
+            //             settlerName: searchTerm
+            //         },
+            //         headers: {
+            //             'Authorization': `Bearer ${token}`
+            //         }
+            //     });
 
-                console.log('Search response:', response);
-                console.log('response.data.data:', response.data.data);
+            //     console.log('Search response:', response);
+            //     console.log('response.data.data:', response.data.data);
 
-                if (response.data.isSuccess) {
-                    const settler = response.data.data;
+            //     if (response.data.isSuccess) {
+            //         const settler = response.data.data;
 
-                    const filteredData = [{
-                        settlementId: settlements[0].settlementId,
-                        name: settler.name,
-                        settlementTime: settler.settlementTime
-                    }];
+            //         const filteredData = [{
+            //             settlementId: settlements[0].settlementId,
+            //             name: settler.name,
+            //             settlementTime: settler.settlementTime
+            //         }];
 
-                    setFilteredSettlements(filteredData);
-                } else {
-                    setFilteredSettlements([]);
-                    setError('정산자를 찾을 수 없습니다.');
-                }
-            } catch (error) {
-                console.error('Search error:', error);
-                setError('검색 중 예외가 발생했습니다.');
-            }
+            //         setFilteredSettlements(filteredData);
+            //     } else {
+            //         setFilteredSettlements([]);
+            //         setError('정산자를 찾을 수 없습니다.');
+            //     }
+            // } catch (error) {
+            //     console.error('Search error:', error);
+            //     setError('검색 중 예외가 발생했습니다.');
+            //     setFilteredSettlements([]);
+            // }
         }
     };
 
@@ -201,7 +203,7 @@ export default function SingleSettlerStatus() {
                                 ))
                             ) : (
                                 <TableRow>
-                                    <NameColumn colSpan="2">No settlers found.</NameColumn>
+                                    <NameColumn colSpan="2">정산자를 찾을 수 없습니다.</NameColumn>
                                 </TableRow>
                             )}
                         </TableContainer>
