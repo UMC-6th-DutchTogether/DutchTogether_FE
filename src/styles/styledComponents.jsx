@@ -194,7 +194,6 @@ flex-grow: 1;
 display:flex;
 align-items:center;
 flex-direction:column;
-height: 957px;
 border-radius: 0px 100px 100px 0px;
 box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
 background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
@@ -241,22 +240,23 @@ export const SingleText2 = styled.h2`
 `;
 
 export const NextButton = styled.button`
-  margin-top: 50px;
-  padding: 20px 50px;
-  width: 700px;
-  height:60px;
-  max-width: 700px;
+  margin: 40px 0;
+  padding: 30px 60px;
+  width: 775px;
+  height: 80px;
+  max-width: 900px;
   border-radius: 20px;
-  background-color: #5562CA;
   color: white;
   font-weight: bold;
   cursor: pointer;
   box-sizing: border-box;
-  border: 2px solid #062C53;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
   font-size:20px;
    &:hover {
     background-color: rgba(0,0,0,0.1);
   }
+  background: var(--400, #5562CA);
 `;
 
 export const ErrorMessage = styled.span`

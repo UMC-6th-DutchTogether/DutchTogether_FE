@@ -48,10 +48,10 @@ export default function SingleLogin() {
   // PW 유효성 검사 함수
   const validatePassword = (password) => {
     if (password.length === 0) return '비밀번호를 입력해주세요!';
-    if (password.length < 8) return '비밀번호는 8자리 이상이어야 합니다!';
-    if (password.length > 16) return '비밀번호는 16자리 이하이어야 합니다!'; // 이 부분은 제거해도 됨
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$!%*?&]*$/;
-    if (!passwordPattern.test(password)) return '비밀번호는 영어와 숫자를 모두 포함해야 합니다!';
+    // if (password.length < 8) return '비밀번호는 8자리 이상이어야 합니다!';
+    // if (password.length > 16) return '비밀번호는 16자리 이하이어야 합니다!'; // 이 부분은 제거해도 됨
+    // const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$!%*?&]*$/;
+    // if (!passwordPattern.test(password)) return '비밀번호는 영어와 숫자를 모두 포함해야 합니다!';
     return '';
   };
 
@@ -66,13 +66,9 @@ export default function SingleLogin() {
   const handleSubmit = async () => {
     setLoading(true);
 
-    // 유효성 검사
-    const idError = validateId(id);
-    const passwordError = validatePassword(password);
-
-    if (idError || passwordError) {
-      setError(idError || passwordError);
+    if (id.trim() === '' || password.trim() === '') {
       setLoading(false);
+      alert('아이디와 비밀번호를 모두 입력해주세요!');
       return;
     }
 
@@ -143,7 +139,7 @@ export default function SingleLogin() {
             {password && <ErrorMessage>{validatePassword(password)}</ErrorMessage>}
           </ErrorConatiner>
 
-          <NextButton onClick={handleSubmit} disabled={validateId(id) || validatePassword(password)}> 나만 정산하기 페이지 만들기</NextButton>
+          <NextButton onClick={handleSubmit} > 나만 정산하기 페이지 만들기</NextButton>
           {error && <ErrorMessage>{error}</ErrorMessage>}
         </div>
       </LoginConatiner>
