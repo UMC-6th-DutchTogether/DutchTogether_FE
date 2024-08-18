@@ -10,7 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  max-width: 100vw;
   min-height: 1080px;
   padding-top: 352px;
   box-sizing: border-box;
@@ -28,7 +28,7 @@ export const ButtonCon = styled.div`
 
 export const LargeButtonLeft = styled.button`
   display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
-  width: 100%;
+  width: ${({ isClicked }) => (isClicked ? '100vw' : '26vw')};
   height: 375px;
   justify-content: flex-end;
   align-items: center;
@@ -38,17 +38,17 @@ export const LargeButtonLeft = styled.button`
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
   top: 50%;
-  transform: ${({ isClicked }) => (isClicked ? 'translate(0%, -50%)' : 'translate(-74%, -50%)')};
-  transition: transform 0.6s ease-in-out;
+  transform: translate(0%, -50%);
+  transition: width 0.6s ease-in-out;  /* 너비 변화에 애니메이션 추가 */
   z-index: 5;
   border: none; 
   cursor: pointer;
 `;
 
 export const LargeButtonRight = styled(LargeButtonLeft)`
- border-radius: 100px 0px 0px 100px;
+  border-radius: 100px 0px 0px 100px;
   justify-content: flex-start;
-  transform: ${({ isClicked }) => (isClicked ? 'translate(0%, -50%)' : 'translate(74%, -50%)')};
+  right: 0; 
 `;
 
 
@@ -742,10 +742,7 @@ export const DecorationBarRight = styled.div`
   background: conic-gradient(from -90deg at 0% 56.43%, rgba(116, 127, 211, 0.60) 0deg, rgba(196, 199, 236, 0.60) 360deg);
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: 80px;
-  transform: translate(-50%, -50%);
+  top: 30%;
 z-index: 5;
 `;
 

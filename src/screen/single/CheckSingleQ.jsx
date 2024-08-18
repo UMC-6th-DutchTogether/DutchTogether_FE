@@ -89,7 +89,7 @@ export default function CheckSingleQ() {
               <SingleA>{meetingDetails.num_people}</SingleA>
             </div>
 
-            {receiptUrl && (
+            {meetingDetails.receiptUrl && (
               <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '20px' }}>
                 <h2>영수증</h2>
                 <ReceiptImage src={receiptUrl} alt="Receipt" />
