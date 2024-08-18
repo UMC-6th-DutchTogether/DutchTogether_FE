@@ -14,7 +14,7 @@ export default function MainForm() {
     setIsLeftClicked(true);
 
     setTimeout(() => {
-      navigate('/SingleLogin');
+      navigate('/SingleSelect');
     }, 600);
   };
 

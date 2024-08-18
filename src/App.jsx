@@ -4,6 +4,7 @@ import './styles/App.css'
 import MainFrom from './screen/MainForm';
 import Header from './components/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SingleSelect from './screen/single/SingleSelect';
 import SingleLogin from './screen/single/SingleLogin';
 import SingleQ1 from './screen/single/SingleQ1';
 import SingleQ2 from './screen/single/SingleQ2';
@@ -32,6 +33,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainFrom />} />
+        <Route path="/SingleSelect" element={<SingleSelect />} />
         <Route path="/SingleLogin" element={<SingleLogin />} />
         <Route path="/SingleQ1" element={<SingleQ1 />} />
         <Route path="/SingleQ2" element={<SingleQ2 />} />
