@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBankName, setAccountNumber } from '../../store/singlePaySlice';
-import { SinglePageContainer, QuestionContainer, SingleQ1Box, LeftArrowButton, RightArrowButton, Input, DecorationBarRight, DecorationBarRightText, SingleQText } from '../../styles/styledComponents';
+import {
+  SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText,
+  TitleText, TextInputContainer, TextInput, InputSubmitButton
+} from '../../styles/styledComponents';
 
 export default function SingleQ2() {
   const dispatch = useDispatch();
@@ -63,18 +66,16 @@ export default function SingleQ2() {
       </DecorationBarRight>
 
       <QuestionContainer>
-        <Link to="/SingleQ1">
-          <LeftArrowButton type="button" />
-        </Link>
+        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산 금액을 받는 은행과 계좌번호를 입력해주세요.</TitleText>
 
-        <SingleQ1Box>
-          <SingleQText>Q.정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQText>
-          <Input type="text" value={inputValue} onChange={handleInputChange} />
-        </SingleQ1Box>
+        <TextInputContainer>
+          <TextInput type="text" value={inputValue} onChange={handleInputChange} placeholder="정산 금액을 받는 은행과 계좌번호를 입력해주세요!" />
+          <Link to="/SingleQ3">
+            <InputSubmitButton type="button" disabled={!isInputValid()} >제출하기</InputSubmitButton>
+          </Link>
 
-        <Link to="/SingleQ3">
-          <RightArrowButton type="button" disabled={!isInputValid()} />
-        </Link>
+        </TextInputContainer>
+
       </QuestionContainer>
     </SinglePageContainer>
   );

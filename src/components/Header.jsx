@@ -8,11 +8,13 @@ export default function Header() {
       <HeaderContentContainer>
         <HeaderLogo>
           <img src={img} alt="로고" style={{ height: '60px', width: '60px' }} />
-          <HeaderTitle>더치투게더</HeaderTitle>
+          <Link to="/">
+            <HeaderTitle style={{ cursor: 'pointer' }}>더치투게더</HeaderTitle>
+          </Link>
         </HeaderLogo>
         <HeaderMenu>
           <Link to="/">
-            <HeaderMenuText>Home</HeaderMenuText>
+            <HeaderMenuText style={{ cursor: 'pointer' }}>Home</HeaderMenuText>
           </Link>
           <HeaderMenuText>Log-in</HeaderMenuText>
         </HeaderMenu>

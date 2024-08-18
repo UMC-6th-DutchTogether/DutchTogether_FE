@@ -9,7 +9,7 @@ const initialState = {
   accountHolder: "",
   amount: "",
   numberOfPeople: "",
-  receiptUrl: null,
+  receiptId: null,
   meetingLink: null
 };
 
@@ -39,8 +39,8 @@ const singlePaySlice = createSlice({
     setNumberOfPeople: (state, action) => {
       state.numberOfPeople = parseFloat(action.payload);
     },
-    setReceipt: (state, action) => {
-      state.receiptUrl = action.payload;
+    setReceiptId: (state, action) => {
+      state.receiptId = parseFloat(action.payload);
     },
     setMeetingLink: (state, action) => {
       state.meetingLink = action.payload;
@@ -57,7 +57,7 @@ export const {
   setAccountHolder,
   setAmount,
   setNumberOfPeople,
-  setReceipt,
+  setReceiptId,
   setMeetingNum,
   setMeetingLink
 } = singlePaySlice.actions;
