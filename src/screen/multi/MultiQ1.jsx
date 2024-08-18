@@ -33,7 +33,7 @@ export default function MultiQ1() {
     try {
       const response = await axios.get(`https://umc.dutchtogether.com/api/meetings/${meetingNum}/link`)
       if (response.status == 200) {
-        const Link = response.data.data.link;
+        const Link = response.data.data.meetingLink;
         console.log('링크', response);
         dispatch(setMeetingLink(Link));
       } else {

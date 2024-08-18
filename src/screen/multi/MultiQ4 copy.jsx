@@ -25,10 +25,13 @@ export default function MultiQ4() {
   const dispatch = useDispatch();
   const { payers, settlements, meetingNum } = useSelector((state) => state.multiPay);
 
-
+  useEffect(() => {
+    getPayers();
+  }, []);
 
   useEffect(() => {
     if (settlements.length === 0) {
+      getPayers();
       dispatch(setSettlements([
         { payer: '', item: '', amount: '', settlers: '', settlementId: Date.now() + Math.random() * 1000 }
       ]));
@@ -36,24 +39,54 @@ export default function MultiQ4() {
   }, [dispatch, settlements]);
 
   // settlementID 받아오기 함수
-  const getSettlementId = async (payerId) => {
-    console.log({
-      meetingNum: meetingNum,
-      payerId: payerId
-    });
+  const getPayers = async () => {
     try {
-      const response = await axios.post(`https://umc.dutchtogether.com/api/settlement/multi`, {
-        meetingNum: meetingNum,
-        payerId: payerId
-      })
+      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/${meetingNum}`)
       if (response.status === 200) {
         console.log("SettlementId 받기", response);
-        return ('001');
+        const received = response.data.data.names;
+        const newPayers = payers.map((e, index) => {
+          return { ...e, settlementId: received[index].settlementId };
+        });
+        dispatch(setPayers(newPayers));
       }
     } catch (err) {
       console.log('오류 발생', err);
     }
   };
+
+  // post settler 함수
+  const postSettler = async () => {
+    // Ensure that settlers is always an array before mapping
+    const settlerArray = settlements.flatMap((e) => {
+      return Array.isArray(e.settlers) ? e.settlers.map((name) => {
+        return {
+          name: name,
+          settlementId: e.settlementId
+        };
+      }) : [];
+    });
+    console.log("현재 세틀러객체", settlerArray);
+
+    try {
+      console.log({
+        requests: settlerArray,
+        meetingNum: meetingNum
+      });
+      const response = await axios.post(`https://umc.dutchtogether.com/api/settler/`,
+        {
+          requests: settlerArray,
+          meetingNum: meetingNum
+        })
+      if (response.status === 200) {
+        console.log("Settlement 전달하기", response);
+      }
+    } catch (err) {
+      console.error('오류 발생', err);
+    }
+  };
+
+
 
   // 값 입력시 호출 함수(리덕스에 값 저장)
   const handleChange = (index, field, value) => {
@@ -61,15 +94,19 @@ export default function MultiQ4() {
       idx === index ? { ...settlement, [field]: value } : settlement
     );
 
-    // 결제자(payer)를 변경한 경우, 매핑된 settlementId를 설정
     if (field === 'payer') {
       const selectedPayer = payers.find(payer => payer.name === value);
-      const newSettlementId = getSettlementId(selectedPayer.payerId);
       if (selectedPayer) {
         updatedSettlements = updatedSettlements.map((settlement, idx) =>
           idx === index ? { ...settlement, settlementId: selectedPayer.settlementId } : settlement
         );
       }
+    } else if (field === 'settlers') {
+      // Ensure settlers is an array by splitting the string by commas and trimming each name
+      const settlersArray = value.split(',').map(name => name.trim());
+      updatedSettlements = updatedSettlements.map((settlement, idx) =>
+        idx === index ? { ...settlement, settlers: settlersArray } : settlement
+      );
     }
 
     const currentRow = updatedSettlements[index];
@@ -77,14 +114,14 @@ export default function MultiQ4() {
       currentRow.payer.trim() !== '' &&
       currentRow.item.trim() !== '' &&
       currentRow.amount.trim() !== '' &&
-      currentRow.settlers.trim() !== ''
+      currentRow.settlers.length > 0
     ) {
       if (index === settlements.length - 1) {
         updatedSettlements.push({
           payer: '',
           item: '',
           amount: '',
-          settlers: '',
+          settlers: [],
           settlementId: Date.now() + Math.random() * 1000
         });
       }
@@ -98,15 +135,18 @@ export default function MultiQ4() {
 
 
 
+
   // 제출하기 함수
   const handleSubmit = async () => {
+    postSettler();
 
+    // Filter out any settlements that have empty fields
     const validSettlements = settlements.filter(
       settlement =>
         settlement.payer.trim() !== '' &&
         settlement.item.trim() !== '' &&
         settlement.amount.trim() !== '' &&
-        settlement.settlers.trim() !== ''
+        settlement.settlers.length > 0
     );
 
     if (validSettlements.length === 0) {
@@ -120,7 +160,7 @@ export default function MultiQ4() {
       totalAmount: parseFloat(settlement.amount),
       receiptId: 0
     }));
-
+    console.log(settlementInfoList);
     try {
       const response = await axios.put('https://umc.dutchtogether.com/api/settlement/', {
         settlementInfoList
@@ -128,14 +168,13 @@ export default function MultiQ4() {
 
       if (response.status === 200) {
         console.log("결제품목 정보 put", response.data);
-        navigate('/MultiQ5');
       } else {
         console.error('오류:', response);
       }
     } catch (error) {
       console.error('정산 제출 중 오류 발생:', error);
     } finally {
-      navigate('/MultiQ5');
+      navigate('/MultiCreateLink');
     }
   };
 

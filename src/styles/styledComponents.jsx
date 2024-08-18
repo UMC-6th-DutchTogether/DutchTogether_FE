@@ -823,7 +823,7 @@ export const ContentContainer = styled.div`
 display:flex
 width: 1300px;
 height: 743px;
-flex-shrink: 0;
+
 border-radius: 30px;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 background: var(--light, #EDEEFF);
@@ -1063,6 +1063,37 @@ border-radius: 15px;
 background: var(--light, #EDEEFF);
 `;
 
+//CreateLink
+export const LinkTextContainer = styled.div`
+color: var(--light-text, #5F6073);
+text-align: center;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: 180%; 
+margin-top:130px;
+`;
+
+export const LinkContainer = styled.div`
+display: flex;
+
+width:970px;
+padding: 32.5px 39.5px 31.5px 41px;
+justify-content: space-between;
+align-items: center;
+border-radius: 15px;
+background: #FFF;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+margin:70px 164px 0px 164px;
+`;
+export const LinkText = styled.div`
+color: #000;
+text-align: center;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+`;
 
 
 //드롭다운
