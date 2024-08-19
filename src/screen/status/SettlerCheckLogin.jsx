@@ -85,7 +85,7 @@ export default function SettlerCheckLogin() {
                 console.log('Meeting Number:', response.data.data.meetingNum);
 
                 // SinglePayerStatus로 리다이렉트
-                navigate('/SettlementStatusSelect');
+                navigate('/SingleSettlerStatus');
             } else {
                 setErrorMessage('로그인 실패: ' + response.data.message);
                 window.alert('로그인 실패: ' + response.data.message);

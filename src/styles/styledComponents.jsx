@@ -678,6 +678,27 @@ export const SingleNameInput = styled.input`
   
 `;
 
+//----------------SingleSettlementStatus--------------
+
+export const PayerButtonContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping if there are too many buttons */
+    gap: 10px; /* Spacing between buttons */
+    margin-bottom: 20px;
+`;
+
+export const PayerButton = styled.div`
+    cursor: pointer;
+    padding: 10px 20px;
+    background: var(---light, #EDEEFF);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+`;
 
 
 //---------여기서 부터 새로운 디자인---------

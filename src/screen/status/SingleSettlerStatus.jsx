@@ -21,18 +21,23 @@ import {
     TableHeader,
     TableRow,
     NameColumn,
-    TimeColumn
+    TimeColumn,
+    PayerButtonContainer,  // Add this import
+    PayerButton // Add this import
 } from '../../styles/styledComponents'
 
 export default function SingleSettlerStatus() {
-    const [meetingName, setmeetingName] = useState('');
+    const [meetingName, setMeetingName] = useState('');
     const [settlements, setSettlements] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredSettlements, setFilteredSettlements] = useState([]);
     const [error, setError] = useState(null);
-    const [numPeople, setNumPeople] = useState(0); // 전체 인원 상태 추가
+    const [numPeople, setNumPeople] = useState(0);
+    const [payers, setPayers] = useState([]);
+    const [selectedPayer, setSelectedPayer] = useState(null);
+
     const meetingNum = useSelector((state) => state.singlePay.meetingNum);
-    const token = localStorage.getItem('token'); // Token 가져오기
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchSettlementStatus = async () => {
@@ -44,18 +49,25 @@ export default function SingleSettlerStatus() {
                 });
 
                 if (response.data.isSuccess) {
-                    setmeetingName(response.data.data.meetingName);
-                    const settlementData = response.data.data.settlementListDTO[0];
-                    setNumPeople(settlementData.numPeople);
+                    setMeetingName(response.data.data.meetingName);
+                    const settlementData = response.data.data.settlementListDTO;
 
-                    const settlementsData = settlementData.completedSettler.map(settler => ({
-                        settlementId: settlementData.settlementId,
-                        name: settler.name,
-                        settlementTime: settler.settlementTime
-                    }));
-
-                    setSettlements(settlementsData);
-                    setFilteredSettlements(settlementsData);
+                    setPayers(settlementData);
+                    setSettlements(settlementData.flatMap(settlement =>
+                        settlement.completedSettler.map(settler => ({
+                            ...settler,
+                            settlementId: settlement.settlementId,
+                            payer: settlement.payer
+                        }))
+                    ));
+                    setFilteredSettlements(settlementData.flatMap(settlement =>
+                        settlement.completedSettler.map(settler => ({
+                            ...settler,
+                            settlementId: settlement.settlementId,
+                            payer: settlement.payer
+                        }))
+                    ));
+                    setNumPeople(settlementData.reduce((acc, settlement) => acc + settlement.numPeople, 0));
                 } else {
                     setError('Failed to fetch settlement status.');
                 }
@@ -71,76 +83,33 @@ export default function SingleSettlerStatus() {
         }
     }, [meetingNum, token]);
 
-    if (error) {
-        return <div>{error}</div>;
-    }
+    useEffect(() => {
+        if (selectedPayer) {
+            const filteredByPayer = settlements.filter(settlement => settlement.settlementId === selectedPayer);
+            setFilteredSettlements(filteredByPayer);
+        } else {
+            setFilteredSettlements(settlements);
+        }
+    }, [selectedPayer, settlements]);
 
-    const handleSearch = async () => {
+    const handleSearch = () => {
         if (searchTerm.trim() === '') {
             setFilteredSettlements(settlements);
             return;
         }
 
-        // 클라이언트 측 필터링: 부분 문자열 검색
-        const filteredData = settlements.filter(settlement =>
+        const searchResults = filteredSettlements.filter(settlement =>
             settlement.name.includes(searchTerm)
         );
 
-        if (filteredData.length > 0) {
-            // 클라이언트에서 부분 일치 검색 결과가 있으면 표시
-            setFilteredSettlements(filteredData);
-        } else {
-            // 클라이언트에서 부분 일치 결과가 없을 때 서버로 검색 요청
-            if (settlements.length === 0 || !settlements[0].settlementId) {
-                setError('No settlement data available.');
-                setFilteredSettlements([]);
-                return;
-            }
-
-            // try {
-            //     console.log('Starting search with term:', searchTerm);
-            //     const response = await axios.get(`https://umc.dutchtogether.com/api/settlementStatus/settlers`, {
-            //         params: {
-            //             settlementId: settlements[0].settlementId, // 첫 번째 정산 아이디 사용
-            //             settlerName: searchTerm
-            //         },
-            //         headers: {
-            //             'Authorization': `Bearer ${token}`
-            //         }
-            //     });
-
-            //     console.log('Search response:', response);
-            //     console.log('response.data.data:', response.data.data);
-
-            //     if (response.data.isSuccess) {
-            //         const settler = response.data.data;
-
-            //         const filteredData = [{
-            //             settlementId: settlements[0].settlementId,
-            //             name: settler.name,
-            //             settlementTime: settler.settlementTime
-            //         }];
-
-            //         setFilteredSettlements(filteredData);
-            //     } else {
-            //         setFilteredSettlements([]);
-            //         setError('정산자를 찾을 수 없습니다.');
-            //     }
-            // } catch (error) {
-            //     console.error('Search error:', error);
-            //     setError('검색 중 예외가 발생했습니다.');
-            //     setFilteredSettlements([]);
-            // }
-        }
+        setFilteredSettlements(searchResults);
     };
 
-
-    // if (!settlements.length) {
-    //     return <div>Loading...</div>;
-    // }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     const formatTime = (timeString) => {
-        // `Z`를 추가하여 UTC로 간주하고, KST로 변환합니다.
         const utcDate = new Date(timeString + 'Z');
         return utcDate.toLocaleString('ko-KR', {
             year: 'numeric',
@@ -162,7 +131,7 @@ export default function SingleSettlerStatus() {
                         <StatsTopBox>
                             <StatBox>
                                 <StatTitle>정산 인원</StatTitle>
-                                <StatNumber>{settlements.length}</StatNumber>
+                                <StatNumber>{filteredSettlements.length}</StatNumber>
                             </StatBox>
                             <StatBox>
                                 <StatTitle>전체 인원</StatTitle>
@@ -171,11 +140,21 @@ export default function SingleSettlerStatus() {
                         </StatsTopBox>
                         <StatsBottomBox>
                             <StatTitle>미정산 인원</StatTitle>
-                            <StatTitle>{numPeople - settlements.length}명</StatTitle>
+                            <StatTitle>{numPeople - filteredSettlements.length}명</StatTitle>
                             <StatTitle>남았습니다.</StatTitle>
                         </StatsBottomBox>
                     </StatsContainer>
                     <SettlerContainer>
+                        <PayerButtonContainer> {/* Use new container for payers */}
+                            {payers.map((payer) => (
+                                <PayerButton
+                                    key={payer.settlementId}
+                                    onClick={() => setSelectedPayer(payer.settlementId)}
+                                >
+                                    {payer.payer}
+                                </PayerButton>
+                            ))}
+                        </PayerButtonContainer>
                         <SearchContainer>
                             <SearchInput
                                 type="text"
@@ -187,6 +166,7 @@ export default function SingleSettlerStatus() {
                                 <SearchButton onClick={handleSearch}>검색하기</SearchButton>
                             </SearchButtonCon>
                         </SearchContainer>
+
                         <TableContainer>
                             <TableHeader>
                                 <NameColumn>정산자명</NameColumn>
@@ -212,5 +192,4 @@ export default function SingleSettlerStatus() {
             </ContentCon>
         </SlideUpContainer>
     );
-
 }
