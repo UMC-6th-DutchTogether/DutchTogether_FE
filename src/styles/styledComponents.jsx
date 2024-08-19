@@ -534,10 +534,20 @@ export const MeetingNameText = styled.div`
   display: flex;
   gap: 10px;
   padding: 50px 0px 50px 100px;
+  color: var(--text, #323232);
+  font-size: 35px;
+  font-weight: 700;
 `;
 
 export const MeetingNameText2 = styled.p`
-  margin-top: 15px;
+color: #FFF;
+
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+font-size: 45px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-top: 20px;
 `;
 
 export const SingleDetailText = styled.p`
@@ -609,7 +619,7 @@ export const Letter = styled.div`
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: 300px;
+  width: 1000px;
 `;
 
 //----------------MeetingCheck--------------
