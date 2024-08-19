@@ -774,7 +774,7 @@ export const DecorationBarRight = styled.div`
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
   z-index: 5;
-  top: 39%;
+  top: 38%;
 
 `;
 
