@@ -27,6 +27,7 @@ import SettlementStatusSelect from './screen/status/SettlementStatusSelect';
 import SettlerCheckLogin from './screen/status/SettlerCheckLogin';
 import SingleSettlerStatus from './screen/status/SingleSettlerStatus';
 import AmountOnlyQ1 from './screen/single/AmountOnlyQ1';
+import MultiSettlerStatus from './screen/status/MultiSettlementStatus';
 
 function App() {
   return (
@@ -54,9 +55,11 @@ function App() {
         <Route path="/MultiQ4" element={<MultiQ4 />} />
         <Route path="/MultiCreateLink" element={<MultiCreateLink />} />
 
-        <Route path="/SettlementStatus" element={<SettlementStatusSelect />} />
+        <Route path="/SettlementStatusSelect" element={<SettlementStatusSelect />} />
         <Route path="/SettlerCheckLogin" element={<SettlerCheckLogin />} />
         <Route path="/SingleSettlerStatus" element={<SingleSettlerStatus />} />
+        <Route path="/MultiSettlerStatus" element={<MultiSettlerStatus />} />
+
       </Routes>
     </BrowserRouter>
   );

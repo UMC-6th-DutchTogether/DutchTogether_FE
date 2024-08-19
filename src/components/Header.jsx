@@ -2,6 +2,11 @@ import { HeaderBar, HeaderContentContainer, HeaderMenu, HeaderTitle, HeaderMenuT
 import img from '../assets/LOGO 2.png';
 import { Link } from 'react-router-dom';
 
+const handleLogoClick = () => {
+  // localStorage 초기화
+  localStorage.clear();
+};
+
 export default function Header() {
   return (
     <HeaderBar>
@@ -9,7 +14,7 @@ export default function Header() {
         <HeaderLogo>
           <img src={img} alt="로고" style={{ height: '60px', width: '60px' }} />
           <Link to="/">
-            <HeaderTitle style={{ cursor: 'pointer' }}>더치투게더</HeaderTitle>
+            <HeaderTitle style={{ cursor: 'pointer' }} onClick={handleLogoClick}>더치투게더</HeaderTitle>
           </Link>
         </HeaderLogo>
         <HeaderMenu>
