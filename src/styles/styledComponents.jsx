@@ -1064,6 +1064,18 @@ border-bottom: 1.5px solid black;
 widht:240px;
 `;
 
+export const Itemselect = styled.select`
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+height:99%;
+border: 0px;
+border-bottom: 1.5px solid black;
+widht:240px;
+`;
+
 export const LongInputListItem = styled(InputListItem)`
 
 width:505px;

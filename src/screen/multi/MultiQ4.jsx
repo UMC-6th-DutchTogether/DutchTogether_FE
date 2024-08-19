@@ -16,7 +16,9 @@ import {
   InputListSmallSection,
   InputListHeader,
   InputList,
-  InputListItem
+  InputListItem,
+  ItemInput,
+  Itemselect
 } from '../../styles/styledComponents';
 import { setPayers, setSettlements, setMeetingLink } from '../../store/multiPaySlice';
 
@@ -204,7 +206,7 @@ export default function MultiQ4() {
               <InputList>
                 {settlements.map((settlement, index) => (
                   <InputListItem key={settlement.settlementId || index}>
-                    <select
+                    <Itemselect
                       value={settlement.payer}
                       onChange={(e) => handleChange(index, 'payer', e.target.value)}
                       style={{ width: '100%', border: "none" }}
@@ -215,7 +217,7 @@ export default function MultiQ4() {
                           {payer.name}
                         </option>
                       ))}
-                    </select>
+                    </Itemselect>
                   </InputListItem>
                 ))}
               </InputList>
@@ -229,7 +231,7 @@ export default function MultiQ4() {
               <InputList>
                 {settlements.map((settlement, index) => (
                   <InputListItem key={index}> {/* 고유한 key 속성 */}
-                    <input
+                    <ItemInput
                       type="text"
                       placeholder="결제품목 입력"
                       value={settlement.item}
@@ -248,7 +250,7 @@ export default function MultiQ4() {
               <InputList>
                 {settlements.map((settlement, index) => (
                   <InputListItem key={index}> {/* 고유한 key 속성 */}
-                    <input
+                    <ItemInput
                       type="text"
                       placeholder="금액 입력"
                       value={settlement.amount}
@@ -267,7 +269,7 @@ export default function MultiQ4() {
               <InputList>
                 {settlements.map((settlement, index) => (
                   <InputListItem key={index}> {/* 고유한 key 속성 */}
-                    <input
+                    <ItemInput
                       type="text"
                       placeholder="정산인원 입력"
                       value={settlement.settlers}

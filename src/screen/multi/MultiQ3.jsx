@@ -20,7 +20,8 @@ import {
   InputListLongHeader,
   LongInputList,
   InputListItem,
-  LongInputListItem
+  LongInputListItem,
+  ItemInput
 } from '../../styles/styledComponents';
 import { updatePayer } from '../../store/multiPaySlice';
 
@@ -108,7 +109,7 @@ export default function MultiQ3() {
                 <InputList style={{ width: '251px' }}>
                   {localPayers.map((payer, _) => (
                     <InputListItem key={payer.payerId} style={{ width: '218px' }}>
-                      <input
+                      <ItemInput
                         type="text"
                         value={payer.bankName || ''}
                         onChange={(e) => handleBankNameChange(e, payer.payerId)}
@@ -121,7 +122,7 @@ export default function MultiQ3() {
                 <LongInputList>
                   {localPayers.map((payer, _) => (
                     <LongInputListItem key={payer.payerId}>
-                      <input
+                      <ItemInput
                         type="text"
                         value={payer.account || ''}
                         onChange={(e) => handleAccountNumberChange(e, payer.payerId)}
