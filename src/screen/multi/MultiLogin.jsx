@@ -16,7 +16,8 @@ import {
   IDText,
   ErrorConatiner,
   ErrorMessage,
-  LoginButton
+  NextButton,
+  SingleLoginInputContainer
 } from '../../styles/styledComponents';
 
 export default function MultiLogin() {
@@ -37,11 +38,11 @@ export default function MultiLogin() {
 
   // PW 유효성 검사 함수
   const validatePassword = (password) => {
-    if (password.length === 0) return '비밀번호를 입력해주세요!';
-    if (password.length < 8) return '비밀번호는 8자리 이상이어야 합니다!';
-    if (password.length > 16) return '비밀번호는 16자리 이하이어야 합니다!'; // 이 부분은 제거해도 됨
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$!%*?&]*$/;
-    if (!passwordPattern.test(password)) return '비밀번호는 영어와 숫자를 모두 포함해야 합니다!';
+    // if (password.length === 0) return '비밀번호를 입력해주세요!';
+    // if (password.length < 8) return '비밀번호는 8자리 이상이어야 합니다!';
+    // if (password.length > 16) return '비밀번호는 16자리 이하이어야 합니다!'; // 이 부분은 제거해도 됨
+    // const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$!%*?&]*$/;
+    // if (!passwordPattern.test(password)) return '비밀번호는 영어와 숫자를 모두 포함해야 합니다!';
     return '';
   };
 
@@ -59,8 +60,9 @@ export default function MultiLogin() {
     const idError = validateId(id);
     const passwordError = validatePassword(password);
 
-    if (idError || passwordError) {
-      setError(idError || passwordError);
+    if (id.trim() === '' || password.trim() === '') {
+      setLoading(false);
+      alert('아이디와 비밀번호를 모두 입력해주세요!');
       return;
     }
 
@@ -102,24 +104,29 @@ export default function MultiLogin() {
 
         <NormalText style={{ color: "#FFF" }}>(추후 ID, PW 찾기는 불가능하기때문에 정보를 기억해주세요.)</NormalText>
 
-        <LoginInputContainer>
-          <IDText>ID</IDText>
-          <LoginInput type="text" placeholder="ID를 입력해주세요" value={id} onChange={idChange} />
-        </LoginInputContainer>
-        <ErrorConatiner>
-          {id && <ErrorMessage>{validateId(id)}</ErrorMessage>}
-        </ErrorConatiner>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
 
-        <LoginInputContainer>
-          <IDText>PW</IDText>
-          <LoginInput type="password" placeholder="PW를 입력해주세요" value={password} onChange={passwordChange} />
-        </LoginInputContainer>
-        <ErrorConatiner>
-          {password && <ErrorMessage>{validatePassword(password)}</ErrorMessage>}
-        </ErrorConatiner>
+          <SingleLoginInputContainer>
+            <IDText>ID</IDText>
+            <LoginInput type="text" placeholder="ID" value={id} onChange={idChange}></LoginInput>
+          </SingleLoginInputContainer>
 
-        <LoginButton onClick={handleSubmit} disabled={validateId(id) || validatePassword(password)}>정산 페이지 만들기</LoginButton>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+          <ErrorConatiner>
+            {id && <ErrorMessage>{validateId(id)}</ErrorMessage>}
+          </ErrorConatiner>
+
+          <SingleLoginInputContainer>
+            <IDText>PW</IDText>
+            <LoginInput type="password" placeholder="PW" value={password} onChange={passwordChange}></LoginInput>
+          </SingleLoginInputContainer>
+
+          <ErrorConatiner>
+            {password && <ErrorMessage>{validatePassword(password)}</ErrorMessage>}
+          </ErrorConatiner>
+
+          <NextButton onClick={handleSubmit} > 정산 페이지 만들기</NextButton>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </div>
       </MultiPayContainerLeft>
 
     </MainBackground >

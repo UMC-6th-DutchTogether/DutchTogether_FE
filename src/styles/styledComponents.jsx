@@ -252,7 +252,7 @@ export const NextButton = styled.button`
   box-sizing: border-box;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: none;
-  font-size:20px;
+  font-size:25px;
    &:hover {
     background-color: rgba(0,0,0,0.1);
   }
@@ -534,10 +534,20 @@ export const MeetingNameText = styled.div`
   display: flex;
   gap: 10px;
   padding: 50px 0px 50px 100px;
+  color: var(--text, #323232);
+  font-size: 35px;
+  font-weight: 700;
 `;
 
 export const MeetingNameText2 = styled.p`
-  margin-top: 15px;
+color: #FFF;
+
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+font-size: 45px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-top: 20px;
 `;
 
 export const SingleDetailText = styled.p`
@@ -609,7 +619,7 @@ export const Letter = styled.div`
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: 300px;
+  width: 1000px;
 `;
 
 //----------------MeetingCheck--------------
@@ -742,8 +752,9 @@ export const DecorationBarRight = styled.div`
   background: conic-gradient(from -90deg at 0% 56.43%, rgba(116, 127, 211, 0.60) 0deg, rgba(196, 199, 236, 0.60) 360deg);
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
-  top: 30%;
-z-index: 5;
+  z-index: 5;
+  top: 39%;
+
 `;
 
 
@@ -820,7 +831,7 @@ export const MultiPayContainerRight = styled.div`
 display:flex;
 align-items:center;
 flex-direction:column;
-height: 957px;
+min-height: 910px;
 border-radius: 0px 100px 100px 0px;
 box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
 background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
