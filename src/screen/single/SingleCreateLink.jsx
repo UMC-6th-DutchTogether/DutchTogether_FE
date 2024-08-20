@@ -4,7 +4,7 @@ import axios from 'axios';
 import { setMeetingLink } from '../../store/singlePaySlice';
 import { SyncLoader } from "react-spinners";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { SinglePageContainer, SingleNewLinkContainer, LinkButtonContainer, LinkButton, NewSingleLink, SingleLinkText, SingleLinkTextBox, StyledCopyIcon, LoadingConatiner, DecorationBarRight, DecorationBarRightText, SingleLinkTitle } from '../../styles/styledComponents';
+import { CreateLinkContainer, SinglePageContainer, SingleNewLinkContainer, LinkButtonContainer, LinkButton, NewSingleLink, SingleLinkText, SingleLinkTextBox, StyledCopyIcon, LoadingConatiner, DecorationBarRight, DecorationBarRightText, CheckSinglePageTitle } from '../../styles/styledComponents';
 
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
@@ -70,26 +70,28 @@ export default function SingleCreateLink() {
             </DecorationBarRight>
 
             <SingleNewLinkContainer>
-                <SingleLinkTitle >링크 생성</SingleLinkTitle >
+                <CheckSinglePageTitle>링크 생성</CheckSinglePageTitle>
+                <CreateLinkContainer>
 
-                <SingleLinkTextBox>
-                    <SingleLinkText>링크가 생성되었습니다.</SingleLinkText>
-                    <SingleLinkText>아래 링크를 공유하여 정산을 진행해주세요!</SingleLinkText>
-                </SingleLinkTextBox>
+                    <SingleLinkTextBox>
+                        <SingleLinkText>링크가 생성되었습니다.</SingleLinkText>
+                        <SingleLinkText>아래 링크를 공유하여 정산을 진행해주세요!</SingleLinkText>
+                    </SingleLinkTextBox>
 
-                <NewSingleLink>
-                    {meetingLink}
-                    <CopyToClipboard text={meetingLink} onCopy={handleCopy}>
-                        <StyledCopyIcon icon={faCopy} />
-                    </CopyToClipboard>
-                </NewSingleLink>
+                    <NewSingleLink>
+                        {meetingLink}
+                        <CopyToClipboard text={meetingLink} onCopy={handleCopy}>
+                            <StyledCopyIcon icon={faCopy} />
+                        </CopyToClipboard>
+                    </NewSingleLink>
 
-                <LinkButtonContainer>
-                    <CopyToClipboard text={meetingLink} onCopy={handleCopy}>
-                        <LinkButton>링크 복사하기</LinkButton>
-                    </CopyToClipboard>
-                    <LinkButton onClick={handleShare}>링크 공유하기</LinkButton>
-                </LinkButtonContainer>
+                    <LinkButtonContainer>
+                        <CopyToClipboard text={meetingLink} onCopy={handleCopy}>
+                            <LinkButton>링크 복사하기</LinkButton>
+                        </CopyToClipboard>
+                        <LinkButton onClick={handleShare}>링크 공유하기</LinkButton>
+                    </LinkButtonContainer>
+                </CreateLinkContainer>
 
             </SingleNewLinkContainer>
 

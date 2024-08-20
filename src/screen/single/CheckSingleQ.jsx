@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import {
   SinglePageContainer, CheckContainer, CheckSinglePageTitle,
-  SingleQ, SingleA, ButtonContainer, BackButton, LinkButton, SingleCost,
-  LongSingleA, CheckQuestionContainer,
+  SingleQ, SingleA, ButtonContainer, BackButton, LinkButton,
+  CheckQuestionContainer, SingleQA,
   DecorationBarRight, DecorationBarRightText, ReceiptImage
 } from '../../styles/styledComponents';
 
@@ -47,9 +47,9 @@ export default function CheckSingleQ() {
     }
   }, [meetingNum]);
 
-  const handleBack = () => {
-    navigate('/SingleQ5'); // 이전 페이지로 이동
-  };
+  // const handleBack = () => {
+  //   navigate('/SingleQ5'); // 이전 페이지로 이동
+  // };
 
   const handleCreateLink = () => {
     navigate('/SingleCreateLink'); // 이전 페이지로 이동
@@ -71,22 +71,23 @@ export default function CheckSingleQ() {
         <CheckContainer>
           <div style={{ display: 'flex' }}>
             <div>
-              <SingleQ>Q. 정산 모임 이름이 무엇인가요?</SingleQ>
-              <SingleA>{meetingDetails.meetingName}</SingleA>
+              <SingleQA>
+                <SingleQ>Q. 정산 모임 이름이 무엇인가요?</SingleQ>
+                <SingleA>{meetingDetails.meetingName}</SingleA>
 
-              <SingleQ>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
-              <LongSingleA>{meetingDetails.bank + " " + meetingDetails.account_num}</LongSingleA>
+                <SingleQ>Q. 정산 금액을 받는 은행과 계좌번호를 입력해주세요.</SingleQ>
+                <SingleA>{meetingDetails.bank + " " + meetingDetails.account_num}</SingleA>
 
-              <SingleQ>Q. 예금주를 입력해주세요.</SingleQ>
-              <SingleA>{meetingDetails.payerName}</SingleA>
+                <SingleQ>Q. 예금주를 입력해주세요.</SingleQ>
+                <SingleA>{meetingDetails.payerName}</SingleA>
 
-              <SingleQ>Q. 정산하고자 하는 금액이 얼마인가요?</SingleQ>
-              <SingleCost>
-                <SingleA>{meetingDetails.total_amount}</SingleA>
-              </SingleCost>
+                <SingleQ>Q. 정산하고자 하는 금액이 얼마인가요?</SingleQ>
+                <SingleA>{meetingDetails.total_amount}원</SingleA>
 
-              <SingleQ>Q. 몇 명이 정산하나요?</SingleQ>
-              <SingleA>{meetingDetails.num_people}</SingleA>
+                <SingleQ>Q. 몇 명이 정산하나요?</SingleQ>
+                <SingleA>{meetingDetails.num_people}</SingleA>
+              </SingleQA>
+
             </div>
 
             {meetingDetails.receiptUrl && (
@@ -98,7 +99,7 @@ export default function CheckSingleQ() {
           </div>
 
           <ButtonContainer>
-            <BackButton onClick={handleBack}>뒤로가기</BackButton>
+            {/* <BackButton onClick={handleBack}>뒤로가기</BackButton> */}
             <LinkButton onClick={handleCreateLink}>링크 생성하기</LinkButton>
           </ButtonContainer>
         </CheckContainer>

@@ -6,6 +6,7 @@ import axios from 'axios';
 import {
   SingleDetailContainer,
   SingleDetailText,
+  SingleDetailText1,
   Transferbutton,
   StyledCopyIcon,
   MeetingDetailInfo,
@@ -13,12 +14,14 @@ import {
   BankOption,
   TransferSection,
   MeetingNameText,
-  ReceiplBox,
+  ReceiptBox,
   FinalAmountText,
+  MeetingNameText1,
   MeetingNameText2,
   Overlay,
-  Letter
+  Letter,
 } from '../../styles/styledComponents';
+
 
 const bankUrlSchemes = {
   '토스': 'supertoss://send',
@@ -101,23 +104,23 @@ function MeetingDetails() {
   return (
     <SingleDetailContainer>
       <MeetingNameText>
-        <h1>{`${meetingData.meetingName}`}</h1>
+        <MeetingNameText1>{`${meetingData.meetingName}`}</MeetingNameText1>
         <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
       </MeetingNameText>
 
       <div style={{ display: 'flex' }}>
         <MeetingDetailInfo>
-          {isOverlayVisible && (
-            <Overlay onClick={handleOverlayClick}>
-              <div>
-                <MeetingNameText>
-                  <h1>{`${meetingData.meetingName}`}</h1>
-                  <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
-                </MeetingNameText>
-                <Letter> </Letter>
-              </div>
-            </Overlay>
-          )}
+
+          <Overlay isVisible={isOverlayVisible} onClick={handleOverlayClick}>
+            <div>
+              <MeetingNameText>
+                <MeetingNameText1>{`${meetingData.meetingName}`}</MeetingNameText1>
+                <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
+              </MeetingNameText>
+              <Letter> </Letter>
+            </div>
+          </Overlay>
+
           <div style={{ display: "flex", gap: "200px" }}>
 
             <div style={{ textAlign: 'center' }}>
@@ -134,13 +137,13 @@ function MeetingDetails() {
 
           <p style={{ fontSize: "50px" }}>최종금액</p>
           <FinalAmountText>{`${finalAmount}원`}</FinalAmountText>
-          <SingleDetailText>
+          <SingleDetailText1>
             {`${meetingData.bank} ${meetingData.account_num}`}
             <CopyToClipboard text={meetingData.account_num} onCopy={handleCopy}>
               <StyledCopyIcon icon={faCopy} />
             </CopyToClipboard>
-          </SingleDetailText>
-          <SingleDetailText>[{meetingData.payer}]에게 최종금액을 송금하세요.</SingleDetailText>
+          </SingleDetailText1>
+          <SingleDetailText1>[{meetingData.payer}]에게 최종금액을 송금하세요.</SingleDetailText1>
 
           <TransferSection>
             <BankSelect id="bank-select" value={selectedBank} onChange={handleBankChange}>
@@ -153,20 +156,20 @@ function MeetingDetails() {
           </TransferSection>
         </MeetingDetailInfo>
 
-        <ReceiplBox>
-          영수증
+        <ReceiptBox>
+          <SingleDetailText1 style={{ fontSize: '35px' }}>영수증</SingleDetailText1>
           <div style={{ backgroundColor: 'white', marginTop: '10px' }}>
             {meetingData.receiptUrl ? (
               <img src={meetingData.receiptUrl} alt="영수증 이미지" style={{ width: '100%', height: 'auto' }} />
             ) : (
-              <p>영수증을 업로드하지 않았습니다.</p>
+              <p style={{ fontSize: '20px' }}>영수증을 업로드하지 않았습니다.</p>
             )}
           </div>
-        </ReceiplBox>
-      </div>
+        </ReceiptBox>
+      </div >
 
 
-    </SingleDetailContainer>
+    </SingleDetailContainer >
   );
 }
 

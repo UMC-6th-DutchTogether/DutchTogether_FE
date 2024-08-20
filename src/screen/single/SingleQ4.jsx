@@ -5,7 +5,7 @@ import { setAmount, setReceiptId } from '../../store/singlePaySlice';
 import {
   SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText,
   TitleText, TextInputContainer, TextInput, InputSubmitButton,
-  ReceiptButton, StyledImage
+  ReceiptButton, StyledImage, ReceiptContainer
 } from '../../styles/styledComponents';
 import axios from 'axios';
 import { SyncLoader } from "react-spinners";
@@ -122,25 +122,24 @@ export default function SingleQ4() {
 
       <QuestionContainer>
         <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산하고자하는 금액이 얼마인가요?</TitleText>
-        <div style={{ display: "flex", flexDirection: "column", margin: "20px" }}>
 
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <ReceiptButton onClick={handleReceiptButtonClick} disabled={loading}>
-              {loading ? "인식 중..." : "영수증 첨부하기"}
-            </ReceiptButton>
-            {loading && <SyncLoader size={8} color={"#123abc"} />}
-            {receiptPreview && !loading && (
-              <StyledImage src={receiptPreview} alt="Receipt Preview" style={{ width: '300px', height: '100px', marginLeft: '20px' }} />
-            )}
-          </div>
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-        </div>
+        <ReceiptContainer style={{ display: "flex", alignItems: "center" }}>
+          <ReceiptButton onClick={handleReceiptButtonClick} disabled={loading}>
+            {loading ? "인식 중..." : "영수증 첨부하기"}
+          </ReceiptButton>
+          {loading && <SyncLoader size={8} color={"#123abc"} />}
+          {receiptPreview && !loading && (
+            <StyledImage src={receiptPreview} alt="Receipt Preview" style={{ width: '200px', height: '100px', marginLeft: '20px' }} />
+          )}
+        </ReceiptContainer>
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          accept="image/*"
+          onChange={handleFileChange}
+        />
+
         <TextInputContainer>
 
           <TextInput type="text" value={amount} onChange={handleInputChange} placeholder="정산하고자하는 금액을 입력해주세요." />

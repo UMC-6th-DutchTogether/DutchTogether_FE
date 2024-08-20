@@ -4,13 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setBankName, setAccountNumber } from '../../store/singlePaySlice';
 import {
   SinglePageContainer, QuestionContainer, DecorationBarRight, DecorationBarRightText,
-  TitleText, TextInputContainer, TextInput, InputSubmitButton
+  TitleText, TextInputContainer, TextInput, InputSubmitButton,
+  BankSelect, BankOption
 } from '../../styles/styledComponents';
 
 export default function SingleQ2() {
   const dispatch = useDispatch();
   const { bankName, accountNumber } = useSelector((state) => state.singlePay);
-  const [inputValue, setInputValue] = useState(bankName + accountNumber);
+  const [selectedBank, setSelectedBank] = useState(bankName || '토스');
+  const [accountNumberInput, setAccountNumberInput] = useState(accountNumber || '');
+
+  const bankUrlSchemes = {
+    '토스': 'supertoss://send',
+    '국민': 'kbbank://send',
+    '카카오뱅크': 'kakaobank://send',
+    '신한': 'shinhan-sr-ansimclick://send',
+    '농협': 'nhallonepayansimclick://send'
+  };
 
   // 로컬 스토리지에서 값 불러오기
   useEffect(() => {
@@ -18,45 +28,31 @@ export default function SingleQ2() {
     const storedAccountNumber = localStorage.getItem('accountNumber');
 
     if (storedBankName) {
+      setSelectedBank(storedBankName);
       dispatch(setBankName(storedBankName));
     }
     if (storedAccountNumber) {
+      setAccountNumberInput(storedAccountNumber);
       dispatch(setAccountNumber(storedAccountNumber));
     }
-
-    // 초기값 설정
-    setInputValue((storedBankName || '') + (storedAccountNumber || ''));
   }, [dispatch]);
 
   useEffect(() => {
-    // 문자열과 숫자 분리
-    const bankNameMatch = inputValue.match(/^\D+/); // 문자
-    const accountNumberMatch = inputValue.match(/\d+/); // 숫자
-
-    // 각각의 값을 추출
-    const newBankName = bankNameMatch ? bankNameMatch[0].trim() : '';
-    const newAccountNumber = accountNumberMatch ? accountNumberMatch[0] : '';
-
     // store에 저장
-    dispatch(setBankName(newBankName));
-    dispatch(setAccountNumber(newAccountNumber));
+    dispatch(setBankName(selectedBank));
+    dispatch(setAccountNumber(accountNumberInput));
 
     // 로컬 스토리지에 저장
-    localStorage.setItem('bankName', newBankName);
-    localStorage.setItem('accountNumber', newAccountNumber);
+    localStorage.setItem('bankName', selectedBank);
+    localStorage.setItem('accountNumber', accountNumberInput);
+  }, [selectedBank, accountNumberInput, dispatch]);
 
-  }, [inputValue, dispatch]);
-
-  // 입력시 호출 함수
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+  const handleBankChange = (event) => {
+    setSelectedBank(event.target.value);
   };
 
-  // 공백 확인 함수
   const isInputValid = () => {
-    // accountNumber가 문자열이 아니라면 toString()으로 변환
-    const accountNumberStr = accountNumber ? accountNumber.toString() : '';
-    return bankName.trim() !== '' && accountNumberStr.trim() !== '';
+    return selectedBank.trim() !== '' && accountNumberInput.trim() !== '';
   };
 
   return (
@@ -66,10 +62,24 @@ export default function SingleQ2() {
       </DecorationBarRight>
 
       <QuestionContainer>
-        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산 금액을 받는 은행과 계좌번호를 입력해주세요.</TitleText>
+        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산 금액 받는 은행과 계좌번호를 입력해주세요.</TitleText>
 
         <TextInputContainer>
-          <TextInput type="text" value={inputValue} onChange={handleInputChange} placeholder="정산 금액을 받는 은행과 계좌번호를 입력해주세요!" />
+          <BankSelect style={{ backgroundColor: '#FFF' }} id="bank-select" value={selectedBank} onChange={handleBankChange}>
+            <BankOption value="">--은행 선택--</BankOption>
+            {Object.keys(bankUrlSchemes).map((bank) => (
+              <BankOption key={bank} value={bank}>{bank}</BankOption>
+            ))}
+          </BankSelect>
+          <TextInput
+            type="tel"
+            value={accountNumberInput}
+            onChange={(e) => {
+              const onlyNumbers = e.target.value.replace(/\D/g, '');
+              setAccountNumberInput(onlyNumbers);
+            }}
+            placeholder="계좌번호를 입력해주세요!"
+          />
           <Link to="/SingleQ3">
             <InputSubmitButton type="button" disabled={!isInputValid()} >제출하기</InputSubmitButton>
           </Link>

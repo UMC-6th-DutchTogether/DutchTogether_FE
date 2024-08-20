@@ -2,9 +2,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
-    SingleDetailContainer, SingleDetailText, CheckMeetingContainer,
-    CompleteButton, SingleNameInput, MeetingNameText, MeetingNameText2,
-    MeetingDetailInfo, ReceiplBox, CompleteNameButton, SingleNameInputWrapper,
+    SingleDetailContainer, SingleDetailText1, CheckMeetingContainer,
+    CompleteButton, SingleNameInput, MeetingNameText, MeetingNameText1, MeetingNameText2,
+    MeetingDetailInfo, ReceiptBox, CompleteNameButton, SingleNameInputWrapper,
     UnCompletedButton
 } from '../../styles/styledComponents';
 import unCompletedButtonImg from '../../assets/완료x 1.png';
@@ -86,15 +86,15 @@ function MeetingCheck() {
     return (
         <SingleDetailContainer>
             <MeetingNameText>
-                <h1>{`${meetingData.meetingName}`}</h1>
+                <MeetingNameText1>{`${meetingData.meetingName}`}</MeetingNameText1>
                 <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
             </MeetingNameText>
             <div style={{ display: 'flex' }}>
                 <MeetingDetailInfo>
-                    <SingleDetailText>{meetingData.meetingName}의 정산을 완료하셨나요?</SingleDetailText>
+                    <SingleDetailText1 style={{ fontSize: '35px' }}>{meetingData.meetingName}의 정산을 완료하셨나요?</SingleDetailText1>
 
                     <CheckMeetingContainer>
-                        <CompleteButton src={completedButtonImg} onClick={handleCompleteClick}></CompleteButton>
+                        <CompleteButton src={completedButtonImg} onClick={handleCompleteClick} isCompleted={isCompleted}></CompleteButton>
                         <UnCompletedButton src={unCompletedButtonImg} onClick={handleIncompleteClick} />
                     </CheckMeetingContainer>
 
@@ -114,16 +114,16 @@ function MeetingCheck() {
 
                 </MeetingDetailInfo>
 
-                <ReceiplBox>
-                    영수증
+                <ReceiptBox>
+                    <SingleDetailText1 style={{ fontSize: '35px' }}>영수증</SingleDetailText1>
                     <div style={{ backgroundColor: 'white', marginTop: '10px' }}>
                         {meetingData.receiptUrl ? (
                             <img src={meetingData.receiptUrl} alt="영수증 이미지" style={{ width: '100%', height: 'auto' }} />
                         ) : (
-                            <p>영수증을 업로드하지 않았습니다.</p>
+                            <p style={{ fontSize: '20px' }}>영수증을 업로드하지 않았습니다.</p>
                         )}
                     </div>
-                </ReceiplBox>
+                </ReceiptBox>
             </div>
         </SingleDetailContainer>
     );

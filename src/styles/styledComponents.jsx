@@ -83,18 +83,16 @@ export const FooterButtonImage = styled.img`
 //----------SingleCreateLink--------------
 
 export const SingleNewLinkContainer = styled.div`
-  flex-grow: 1;
-  display: flex;
-  padding: 50px;
-  align-items:center;
-  flex-direction: column;
-  gap: 50px;
-  height: 957px;
-  border-radius: 0px 100px 100px 0px;
-  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
-  background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
-  z-index: 10;
-  min-width: 1400px;
+flex-grow: 1;
+display: flex;
+align-items:center;
+flex-direction: column;
+border-radius: 0px 100px 100px 0px;
+box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
+z-index: 10;
+min-width: 1400px;
+min-height: 775px;
 `;
 
 export const SinglePageContainer = styled.div`
@@ -122,26 +120,42 @@ export const LinkButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-  margin-bottom:50px;
+  margin-bottom:20px;
   width: 100%
   
 `;
+
+export const CreateLinkContainer = styled.div`
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  min-width:800px;
+  height: 400px;
+  padding: 100px;
+  border-radius: 50px;
+  background-color: var(--light, #EDEEFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  `;
 
 export const SingleLinkTextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
-  margin-top: 20px;
   padding: 10px;
-  
+  margin-bottom: 20px;
 `;
 
 export const SingleLinkText = styled.p`
-  font-size: 30px;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 20px;
+color: var(--light-text, #5F6073);
+text-align: center;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: 180%;
 `;
 
 export const SingleLinkTitle = styled.h2`
@@ -152,12 +166,17 @@ export const SingleLinkTitle = styled.h2`
 `;
 
 export const NewSingleLink = styled.div`
-  display:flex;
-  font-size: 40px;
-  font-weight: bold;
-  background-color: white;
-  padding: 50px;
-  border-radius: 50px;
+border-radius: 15px;
+background: #FFF;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+display: flex;
+width: 970px;
+padding: 32.5px 39.5px 31.5px 41px;
+justify-content: center;
+align-items: center;
+font-size: 36px;
+gap: 10px;
+margin-bottom: 40px;
 `;
 
 export const StyledCopyIcon = styled(FontAwesomeIcon)`
@@ -199,6 +218,7 @@ box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
 background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
 z-index: 10;
 min-width:1400px;
+min-height: 775px;
 `;
 
 export const SingleLoginInputContainer = styled.div`
@@ -392,16 +412,17 @@ export const CheckQuestionContainer = styled(LoginConatiner)`
 
 export const CheckContainer = styled.div`
   margin-bottom: 80px;
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 70%;
+  align-items: center;
+  width: 75%;
   min-width:800px;
   height: 530px;
   padding: 100px;
   border-radius: 50px;
-  background-color: #C4C7EC;
+  background-color: var(--light, #EDEEFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const SinglePageTitle = styled.h2`
@@ -416,34 +437,50 @@ export const SinglePageTitle = styled.h2`
 
 `;
 export const CheckSinglePageTitle = styled(SinglePageTitle)`
-  margin: 50px 0 0 0px;
+  margin: 50px;
   min-width:800px;
+  color: #FFF;
   text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+  font-size: 55px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const SingleQA = styled.div`
+  width: 1150px;
+  justify-content: flex-start;
+  padding-top: 30px;
 `;
 
 export const SingleQ = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  color: ${INDIGO};
-  margin: 8px;
-
+color: var(--text, #323232);
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-bottom: 10px;
 `;
 
 export const SingleA = styled.div`
-  margin-left: 28px;
-  border-bottom: 1px solid  ${INDIGO};
-  margin-bottom: 20px;
-  height:25px;
-  width: 280px;
-  color: ${INDIGO};
-  font-size: 18px;
+  display: flex;
+  height: 30px;
+  padding: 12px 22px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  font-size: 21px;
+  border-radius: 15px;
+  background: #FFF;
+  margin-bottom: 25px;
 `;
 export const LongSingleA = styled(SingleA)`
   width: 470px;
 `;
 
 export const ButtonContainer = styled.div`
-  margin-top: 70px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 `;
@@ -456,8 +493,10 @@ font-size:20px;
 
 export const LinkButton = styled(NextButton)`
 width: 250px;
-height:60px;
-font-size:20px;
+height:70px;
+font-size:28px;
+padding: 0;
+margin: 0;
 `;
 
 export const SingleCost = styled.div`
@@ -483,6 +522,7 @@ export const SingleDetailContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  border-radius: 30px 30px 0px 0px;
 `;
 
 export const MeetingDetailInfo = styled.div`
@@ -490,33 +530,40 @@ export const MeetingDetailInfo = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  background: #FFE1E1 url("../assets/noisy-background.png");
+  background: linear-gradient(0deg, rgba(250, 241, 249, 0.90) 0%, rgba(250, 241, 249, 0.90) 100%);
   background-size: cover;
   background-blend-mode: multiply; /* 또는 다른 blend mode */
   padding: 70px 200px 80px 200px;
   border-radius: 15px;
-  box-shadow: 0px 4px 30px 0px;
-  width: 50%;
-  
-  max-width: 1000px;
+  box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.40);
+  width: 1186px;
+  height: 564px;
   margin: 0 0 0 100px;
   
+  color: var(--light-text, #5F6073);
+  text-align: center;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
 `;
 
 export const FinalAmountText = styled.p`
   font-size: 100px;
   font-weight: 600;
-  color: ${INDIGO};
+  color: var(--text, #323232);
   margin-bottom: 50px;
   padding: 30px;
 `;
 
 
 export const BankSelect = styled.select`
-  font-size: 15px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid ${INDIGO};
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 15px;
+  background: var(--light, #EDEEFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  color: var(--light-text, #5F6073);
   margin-right: 10px;
 `;
 
@@ -539,6 +586,21 @@ export const MeetingNameText = styled.div`
   font-weight: 700;
 `;
 
+export const MeetingNameText1 = styled.div`
+display: flex;
+padding: 12px 60px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 15px;
+background: var(--light, #EDEEFF);
+color: var(--text, #323232);
+font-size: 45px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+
 export const MeetingNameText2 = styled.p`
 color: #FFF;
 
@@ -551,10 +613,19 @@ margin-top: 20px;
 `;
 
 export const SingleDetailText = styled.p`
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 600;
-  color: ${INDIGO};
+  color: var(--text, #323232);
   margin-bottom: 40px;
+`;
+
+export const SingleDetailText1 = styled.p`
+  color: var(--text, #323232);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 30px;
 `;
 
 
@@ -564,31 +635,34 @@ export const Transferbutton = styled.button`
   align-items: center;
   padding: 20px 100px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
-  font-size: 15px;
-  background-color: ${INDIGO};
-  color: white;
+  font-size: 20px;
+  background: var(--light, #EDEEFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--light-text, #5F6073);
   &:hover {
     background-color: darken(${INDIGO}, 10%);
   }
 `;
 
-export const ReceiplBox = styled.button`
+export const ReceiptBox = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-    background: #FFE1E1 url("../assets/noisy-background.png");
-    background-size: cover;
-    background-blend-mode: multiply; /* 또는 다른 blend mode */
-  padding: 20px;
+  background: linear-gradient(0deg, rgba(250, 241, 249, 0.90) 0%, rgba(250, 241, 249, 0.90) 100%);
+  background-size: cover;
+  background-blend-mode: multiply; /* 또는 다른 blend mode */
   border-radius: 15px;
-  box-shadow: 0px 4px 30px 0px;
+  border: none;
+  box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.40);
   width: 30%;
-  
+  padding: 50px;
   margin: 0 100px 0 100px;
 `;
+
+import MeetingDetailImage from '../assets/MeetingDetail.png';
 
 export const Overlay = styled.div`
   position: fixed;
@@ -596,13 +670,15 @@ export const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #C4C7EC 0%, #747FD3 100%);
+  background: url(${MeetingDetailImage}) no-repeat center center;
+  background-size: cover;
+  z-index: 1000;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: white;
-  font-size: 20px;
-  z-index: 9999;
+  justify-content: center;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
+  transition: opacity 0.7s ease, visibility 0.7s ease;
 `;
 
 import LetterImage from '../assets/Letter.png';
@@ -618,8 +694,15 @@ export const Letter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  height: 300px;
   width: 1000px;
+  cursor: pointer;
+  transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
+
+  &:hover {
+    height: 330px;
+    width: 1030px;
+  }
 `;
 
 //----------------MeetingCheck--------------
@@ -627,28 +710,42 @@ export const Letter = styled.div`
 export const CompleteButton = styled.img`
   cursor: pointer;
   font-size: 15px;
-  padding: 30px;
-  background-color: #FFE1E1;
+  margin: 40px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border: ${({ isCompleted }) => (isCompleted ? '3px solid #000' : 'none')};
+  border-radius: 13px;
+  transition: transform 0.2s ease; 
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const UnCompletedButton = styled.img`
   cursor: pointer;
   font-size: 15px;
-  padding: 30px;
-  background-color: #FFE1E1;
+  margin: 40px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 13px;
+  transition: transform 0.2s ease; 
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 
 export const CompleteNameButton = styled.button`
-  padding: 10px 10px;
+  padding: 15px 30px;
   margin: 0px 20px;
   border: none;
-  border-radius: 20px;
-  background-color: #007bff;
+  border-radius: 15px;
+  background: var(--400, #5562CA);
   color: white;
   cursor: pointer;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
   disabled: ${props => props.disabled ? 'true' : 'false'};
 `;
 
@@ -662,10 +759,11 @@ export const SingleNameInputWrapper = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-  padding: 20px 30px;
+  padding: 10px 30px;
   margin: 35px;
-  background-color: #EDEEFF;
-  border-radius: 50px;
+  background: var(--light, #EDEEFF);
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const SingleNameInput = styled.input`
@@ -675,7 +773,7 @@ export const SingleNameInput = styled.input`
   padding: 20px 180px 20px 10px;
   background-color: #EDEEFF;
   width: calc(100% - 40px);
-  
+  font-size: 20px;
 `;
 
 //----------------SingleSettlementStatus--------------
@@ -809,6 +907,18 @@ font-weight: 700;
 line-height: normal;
 margin-top:35px;
 `;
+
+export const ReceiptContainer = styled.div`
+color: #FFF;
+text-align: center;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+font-size: 55px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin:20px;
+`;
+
 
 export const NormalText = styled.div`
 margin-top:11px;
