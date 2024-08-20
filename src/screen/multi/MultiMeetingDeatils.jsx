@@ -59,9 +59,11 @@ function RowItem({ payerName, ammount, bankInfo, accountNum }) {
 
 //MultiMeetingDeatils
 export default function MultiMeetingDeatils() {
-  const { link } = useParams();
+  const { link, settlerId } = useParams();
   const navigate = useNavigate();
 
+  const [payerInfos, setPayerInfos] = useState(null);
+  const [meetingName, setMeetingName] = useState(null);
 
   const [meetingData, setMeetingData] = useState(null);
   const [selectedBank, setSelectedBank] = useState('토스');
@@ -79,12 +81,15 @@ export default function MultiMeetingDeatils() {
       console.log(error);
     }
   }
+
   //정산자정보 받는 api
   const getInfo = async () => {
     try {
       const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/101`)
-      const payerInfos = await response.data.data.payerInfos;
-      console.log('정산자 정보', payerInfos);
+      const responsePayerInfos = await response.data.data.payerInfos;
+
+      console.log('정산자 정보', responsePayerInfos);
+      setPayerInfos(responsePayerInfos);
 
     } catch (error) {
       console.log(error);
@@ -99,7 +104,7 @@ export default function MultiMeetingDeatils() {
         <MeetingNameText style={{ paddingLeft: "0px" }}>
           <MeetingDetailMeetingName>
             더치투게더팀
-            {/*<h1>{`${meetingData.meetingName}`}</h1>*/}
+
           </MeetingDetailMeetingName>
 
           <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>

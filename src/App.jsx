@@ -58,7 +58,7 @@ function App() {
         <Route path="/MultiQ4" element={<MultiQ4 />} />
         <Route path="/MultiCreateLink" element={<MultiCreateLink />} />
         <Route path="/multi/:link" element={<MultiMeetingSettler />} />
-        <Route path="/MultiMeetingDeatils" element={<MultiMeetingDeatils />} />
+        <Route path="/MultiMeetingDetails/:link/:settlerId" element={<MultiMeetingDeatils />} />
 
 
         <Route path="/SettlementStatusSelect" element={<SettlementStatusSelect />} />

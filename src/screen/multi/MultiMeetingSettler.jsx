@@ -37,41 +37,61 @@ export default function MultiMeetingSettler() {
   const navigate = useNavigate();
 
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
-  const [meetingData, setMeetingData] = useState(null);
+  const [settlers, setSettler] = useState('');
 
+  const [meetingName, setMeetingName] = useState('더치투게더팀');
+  const [input, setInput] = useState('');
 
   // 오버레이 닫기
   const handleOverlayClick = () => {
     setIsOverlayVisible(false);
   };
 
+  // 제출 함수
+  const handleSubmit = () => {
+    console.log(input);
+    console.log(settlers);
+    const result = settlers.find(e => {
+      console.log(e.name)
+      return e.name === input;
+    })
+    console.log(result);
+
+
+    // navigate로 이동할 때 인코딩된 meetingName 사용
+    navigate(`/MultiMeetingDeatils/${link}/${result.settlerId}`);
+  }
+
+
+  // 입력 함수
+  const handleInput = (e) => {
+    setInput(e.target.value.trim());
+
+  }
+
+
   //정산자 받는 api
   const getSettler = async (link) => {
     try {
       const response = await axios.get(`https://umc.dutchtogether.com/api/settler/${link}`)
-      const settlers = await response.data.data.settlers;
-      console.log('정산자', settlers);
-
+      const responseSettlers = await response.data.data.settlers;
+      const responseMeetingName = await response.data.data.meetingName;
+      console.log('정산자', responseSettlers, responseMeetingName);
+      setSettler(responseSettlers);
+      setMeetingName(responseMeetingName);
     } catch (error) {
       console.log(error);
     }
   }
-  //정산자정보 받는 api
-  const getInfo = async () => {
-    try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/101`)
-      const payerInfos = await response.data.data.payerInfos;
-      console.log('정산자 정보', payerInfos);
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   //초기 settler가져오기
   useEffect(() => {
     getSettler(link);
-  })
+  }, [])
+
+
+
   return (
     <SingleDetailContainer>
 
@@ -80,8 +100,7 @@ export default function MultiMeetingSettler() {
           <div>
             <MeetingNameText>
               <MeetingDetailMeetingName>
-                더치투게더팀
-                {/*<h1>{`${meetingData.meetingName}`}</h1>*/}
+                {meetingName}
               </MeetingDetailMeetingName>
               <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
             </MeetingNameText>
@@ -94,8 +113,7 @@ export default function MultiMeetingSettler() {
       <div style={{ margin: "76px", width: '90%', minWidth: '1400px' }}>
         <MeetingNameText style={{ paddingLeft: "0px" }}>
           <MeetingDetailMeetingName>
-            더치투게더팀
-            {/*<h1>{`${meetingData.meetingName}`}</h1>*/}
+            {meetingName}
           </MeetingDetailMeetingName>
 
           <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
@@ -106,8 +124,8 @@ export default function MultiMeetingSettler() {
             <MultiGetLinkHeader style={{ marginTop: '115px', marginBottom: "81px" }}>당신은 누구십니까?</MultiGetLinkHeader>
 
             <TextInputContainer style={{ boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', width: "70%", height: "60px" }}>
-              <TextInput type="text" placeholder="당신은 누구십니까?" />
-              <InputSubmitButton type="button" >제출하기</InputSubmitButton>
+              <TextInput type="text" placeholder="당신은 누구십니까?" onChange={handleInput} />
+              <InputSubmitButton type="button" onClick={handleSubmit}>제출하기</InputSubmitButton>
             </TextInputContainer>
 
           </MultiMeetingDetailInfo>
