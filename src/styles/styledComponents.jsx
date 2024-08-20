@@ -483,7 +483,11 @@ export const SingleDetailContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  border-radius: 30px 30px 0px 0px;
+box-shadow: 5px -15px 30px 0px rgba(0, 0, 0, 0.15);
 `;
+
+
 
 export const MeetingDetailInfo = styled.div`
   display: flex;
@@ -622,6 +626,11 @@ export const Letter = styled.div`
   width: 1000px;
 `;
 
+
+
+
+
+
 //----------------MeetingCheck--------------
 
 export const CompleteButton = styled.img`
@@ -678,6 +687,162 @@ export const SingleNameInput = styled.input`
   
 `;
 
+//----------------MultiGetLink-------------------
+export const MultiMeetingDetailInfo = styled.div`
+width: 100%;
+min-width: 1400px;
+height: 564px;
+flex-shrink: 0;
+border-radius: 15px;
+background: linear-gradient(0deg, rgba(250, 241, 249, 0.90) 0%, rgba(250, 241, 249, 0.90) 100%);
+
+box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.40);
+`;
+
+export const MultiMeetingDetailHeader = styled.div`
+color: #FFF;
+text-align: center;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+font-size: 55px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+export const PayersContainer = styled.div`
+display: flex;
+padding: 19px 50px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 15px;
+background: var(--light, #EDEEFF);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+color: var(--text, #323232);
+font-family: "SEBANG Gothic";
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+`;
+
+export const MeetingDetailMeetingName = styled.div`
+display: flex;
+padding: 12px 60px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 15px;
+background: var(--light, #EDEEFF);
+color: var(--text, #323232);
+font-size: 55px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+
+
+export const MultiGetLinkHeader = styled.div`
+color: #323232;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+font-size: 70px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+
+export const MultiMeetingDetailContainer = styled.div`
+width: 1200px;
+height: 579px;
+flex-shrink: 0;
+border-radius: 15px;
+background: linear-gradient(0deg, #FFFDFF 0%, #FFFDFF 100%);
+box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.40);
+padding:27px 20px 20px 20px;
+`;
+
+
+export const RowItemHeader = styled.div`
+display: inline-flex;
+flex:1;
+height:50px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 30px;
+background: linear-gradient(180deg, rgba(251, 224, 255, 0.60) 0%, rgba(241, 222, 255, 0.60) 30.5%, rgba(212, 217, 255, 0.60) 100%);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+color: var(--text, #323232);
+text-align: center;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin:10px;
+`;
+
+export const LongRowItemHeader = styled(RowItemHeader)`
+flex:2;
+`;
+
+
+export const SettlementRow = styled.div`
+color: var(--text, #323232);
+text-align: center;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+`;
+
+export const Column = styled.div`
+flex:1;
+color: var(--text, #323232);
+text-align: center;
+justify-content:center;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+display:flex;
+border: 1px solid black;
+margin:10px;
+`;
+
+export const LongColumn = styled.div`
+margin:10px;
+flex:2;
+color: var(--text, #323232);
+text-align: center;
+justify-content:space-between;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+display:flex;
+border: 1px solid black;
+`;
+
+export const TransferButton = styled.div`
+display: flex;
+height: 17px;
+width:58px;
+padding: 5px 20px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 15px;
+background: var(--400, #5562CA);
+color: var(--Purple-Light, var(--light, #EDEEFF));
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
+
+
+
+
 //----------------SingleSettlementStatus--------------
 
 export const PayerButtonContainer = styled.div`
@@ -702,7 +867,6 @@ export const PayerButton = styled.div`
 `;
 
 
-//---------여기서 부터 새로운 디자인---------
 
 //----------------Header--------------
 export const HeaderBar = styled.div`
@@ -775,7 +939,7 @@ export const DecorationBarRight = styled.div`
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
   z-index: 5;
-  top: 38%;
+  top: 39%;
 
 `;
 
@@ -939,7 +1103,7 @@ justify-content: space-between;
 align-items: center;
 gap: 10px;
 border-radius: 30px;
-background: var(--light, #EDEEFF);
+background: #EDEEFF;
 `;
 export const TextInput = styled.input`
 background-color:inherit;
@@ -950,6 +1114,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 width:900px;
+height:50px;
 `;
 
 

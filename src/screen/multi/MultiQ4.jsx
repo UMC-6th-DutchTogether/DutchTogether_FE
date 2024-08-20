@@ -20,7 +20,7 @@ import {
   ItemInput,
   Itemselect
 } from '../../styles/styledComponents';
-import { setPayers, setSettlements, setMeetingLink } from '../../store/multiPaySlice';
+import { setSettlements, setMeetingLink } from '../../store/multiPaySlice';
 
 export default function MultiQ4() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function MultiQ4() {
   const { payers, settlements, meetingNum } = useSelector((state) => state.multiPay);
 
 
-
+  //초기 빈 settlement 생성
   useEffect(() => {
     if (settlements.length === 0) {
       dispatch(setSettlements([
@@ -36,6 +36,7 @@ export default function MultiQ4() {
       ]));
     }
   }, [dispatch, settlements]);
+
 
   // settlementID 받아오기 함수
   const getSettlementId = async (payerId) => {
@@ -61,16 +62,13 @@ export default function MultiQ4() {
   };
 
 
-
-
-
   // 값 입력시 호출 함수(리덕스에 값 저장)
   const handleChange = async (index, field, value) => {
     let updatedSettlements = settlements.map((settlement, idx) =>
       idx === index ? { ...settlement, [field]: value } : settlement
     );
 
-    // Handle the 'payer' field selection and fetch the settlementId
+    // 결제자
     if (field === 'payer') {
       const selectedPayer = payers.find(payer => payer.name === value);
       if (selectedPayer) {
@@ -85,7 +83,7 @@ export default function MultiQ4() {
       }
     }
 
-    // Handle the 'settlers' field to store the value as an array
+    // 정산자
     if (field === 'settlers') {
       const settlersArray = value.split(',').map(name => name.trim());
       updatedSettlements = updatedSettlements.map((settlement, idx) =>
@@ -98,7 +96,7 @@ export default function MultiQ4() {
       currentRow.payer.trim() !== '' &&
       currentRow.item.trim() !== '' &&
       currentRow.amount.trim() !== '' &&
-      currentRow.settlers.length > 0 // Check if settlers array is not empty
+      currentRow.settlers.length > 0
     ) {
       if (index === settlements.length - 1) {
         updatedSettlements.push({
@@ -158,7 +156,7 @@ export default function MultiQ4() {
     if (validSettlements.length === 0) {
       console.error('유효한 정산 항목이 없습니다.');
       return;
-    } else await postSettler(validSettlements); //settler 
+    } else await postSettler(validSettlements); //put settler api
 
     const settlementInfoList = validSettlements.map(settlement => ({
       item: settlement.item,
@@ -230,7 +228,7 @@ export default function MultiQ4() {
               <InputListHeader style={{ marginBottom: '32px' }}>결제 품목</InputListHeader>
               <InputList>
                 {settlements.map((settlement, index) => (
-                  <InputListItem key={index}> {/* 고유한 key 속성 */}
+                  <InputListItem key={index}>
                     <ItemInput
                       type="text"
                       placeholder="결제품목 입력"
@@ -249,7 +247,7 @@ export default function MultiQ4() {
               <InputListHeader style={{ marginBottom: '32px' }}>금액</InputListHeader>
               <InputList>
                 {settlements.map((settlement, index) => (
-                  <InputListItem key={index}> {/* 고유한 key 속성 */}
+                  <InputListItem key={index}>
                     <ItemInput
                       type="text"
                       placeholder="금액 입력"
@@ -268,7 +266,7 @@ export default function MultiQ4() {
               <InputListHeader style={{ marginBottom: '32px' }}>정산인원</InputListHeader>
               <InputList>
                 {settlements.map((settlement, index) => (
-                  <InputListItem key={index}> {/* 고유한 key 속성 */}
+                  <InputListItem key={index}>
                     <ItemInput
                       type="text"
                       placeholder="정산인원 입력"

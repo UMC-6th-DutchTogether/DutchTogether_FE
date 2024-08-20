@@ -29,26 +29,12 @@ export default function MultiQ1() {
     dispatch(setMeetingName(e.target.value));
   };
 
-  const getLink = async () => {
-    try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/meetings/${meetingNum}/link`)
-      if (response.status == 200) {
-        const Link = response.data.data.meetingLink;
-        console.log('링크', response);
-        dispatch(setMeetingLink(Link));
-      } else {
-        console.log(response);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 
 
   // api 호출
   const handleSubmit = async () => {
     console.log(meetingNum, meetingName);
-    getLink();
     try {
       const response = await axios.put('https://umc.dutchtogether.com/api/meetings/meetingName', {
         meetingNum: meetingNum,

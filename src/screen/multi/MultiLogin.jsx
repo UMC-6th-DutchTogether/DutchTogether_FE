@@ -79,11 +79,11 @@ export default function MultiLogin() {
         dispatch(setMeetingNum(response.data.data.meetingNum));
 
       } else {
-        setError('회원가입에 실패했습니다.');
+        setError('중복된 아이디 입니다.');
         //console.log(response);
       }
     } catch (err) {
-      setError('회원가입 요청 중 오류가 발생했습니다.');
+      setError('중복된 아이디 입니다.');
       console.error(err);
       //console.log(response);
     } finally {
