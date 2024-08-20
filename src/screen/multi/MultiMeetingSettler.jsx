@@ -36,11 +36,11 @@ export default function MultiMeetingSettler() {
   const { link } = useParams();
   const navigate = useNavigate();
 
-  const [isOverlayVisible, setIsOverlayVisible] = useState(true);
-  const [settlers, setSettler] = useState('');
+  const [isOverlayVisible, setIsOverlayVisible] = useState(true); //오버레이
+  const [settlers, setSettler] = useState(''); //정산자 리스트
+  const [meetingName, setMeetingName] = useState(''); //정산 모임 이름
 
-  const [meetingName, setMeetingName] = useState('더치투게더팀');
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(''); // 입력
 
   // 오버레이 닫기
   const handleOverlayClick = () => {
@@ -57,9 +57,8 @@ export default function MultiMeetingSettler() {
     })
     console.log(result);
 
-
-    // navigate로 이동할 때 인코딩된 meetingName 사용
-    navigate(`/MultiMeetingDeatils/${link}/${result.settlerId}`);
+    //다음 페이지로 이동
+    navigate(`/MultiMeetingDetails/${link}/${result.settlerId}`);
   }
 
 

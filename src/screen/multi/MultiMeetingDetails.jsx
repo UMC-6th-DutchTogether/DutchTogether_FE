@@ -71,30 +71,39 @@ export default function MultiMeetingDeatils() {
 
 
   //정산자 받는 api
-  const getSettler = async () => {
+  const getSettler = async (link) => {
     try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/settler/da11d6eb`)
-      const settlers = await response.data.data.settlers;
-      console.log('정산자', settlers);
+      const response = await axios.get(`https://umc.dutchtogether.com/api/settler/${link}`)
+      const responseMeetingName = await response.data.data.meetingName;
 
+      console.log('팀 이름: ', responseMeetingName);
+      setMeetingName(responseMeetingName);
     } catch (error) {
       console.log(error);
     }
   }
 
   //정산자정보 받는 api
-  const getInfo = async () => {
+  const getInfo = async (settlerId) => {
     try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/101`)
+      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/${settlerId}`)
       const responsePayerInfos = await response.data.data.payerInfos;
 
-      console.log('정산자 정보', responsePayerInfos);
+      console.log('정산자 정보: ', responsePayerInfos);
       setPayerInfos(responsePayerInfos);
 
     } catch (error) {
       console.log(error);
     }
   }
+
+
+  useEffect(() => {
+    console.log(settlerId, link)
+    getSettler(link);
+    getInfo(settlerId);
+  }, [])
+
 
   return (
     <SingleDetailContainer>
@@ -103,8 +112,7 @@ export default function MultiMeetingDeatils() {
       <div style={{ margin: "76px", width: '90%', minWidth: '1400px' }}>
         <MeetingNameText style={{ paddingLeft: "0px" }}>
           <MeetingDetailMeetingName>
-            더치투게더팀
-
+            {meetingName}
           </MeetingDetailMeetingName>
 
           <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
@@ -124,7 +132,7 @@ export default function MultiMeetingDeatils() {
             <MultiMeetingDetailContainer style={{ overflow: 'auto' }}>
               <div style={{ width: '100%', display: 'flex' }}>
                 <RowItemHeader>
-                  정산자명
+                  결제자명
                 </RowItemHeader>
 
                 <RowItemHeader>
