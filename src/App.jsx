@@ -24,7 +24,7 @@ import MultiQ4 from './screen/multi/MultiQ4';
 import MultiCreateLink from './screen/multi/MultiCreateLink';
 import MultiMeetingSettler from './screen/multi/MultiMeetingSettler';
 import MultiMeetingDetails from './screen/multi/MultiMeetingDetails';
-
+import MultiMeetingCheck from './screen/multi/MultiMeetingCheck';
 
 import SettlementStatusSelect from './screen/status/SettlementStatusSelect';
 import SettlerCheckLogin from './screen/status/SettlerCheckLogin';
@@ -59,6 +59,7 @@ function App() {
         <Route path="/MultiCreateLink" element={<MultiCreateLink />} />
         <Route path="/multi/:link" element={<MultiMeetingSettler />} />
         <Route path="/MultiMeetingDetails/:link/:settlerId" element={<MultiMeetingDetails />} />
+        <Route path="/MultiMeetingCheck/:link" element={<MultiMeetingCheck />} />
 
 
         <Route path="/SettlementStatusSelect" element={<SettlementStatusSelect />} />

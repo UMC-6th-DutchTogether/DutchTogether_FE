@@ -1,25 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import copyIcon from '../../assets/복사아이콘.png';
 
-
 import {
   SingleDetailContainer,
-  SingleDetailText,
-  Transferbutton,
-  StyledCopyIcon,
-  MeetingDetailInfo,
-  BankSelect,
-  BankOption,
-  TransferSection,
   MeetingNameText,
-  ReceiplBox,
-  FinalAmountText,
   MeetingNameText2,
-  RowItemHeader,
   MultiMeetingDetailContainer,
   MultiMeetingDetailInfo,
   PayersContainer,
@@ -28,24 +16,22 @@ import {
   Column,
   LongColumn,
   TransferButton,
-  LongRowItemHeader
+  RowItemHeader,
+  LongRowItemHeader,
+  BigNextButton
 } from '../../styles/styledComponents';
-import { svgPathData } from '@fortawesome/free-brands-svg-icons/faAccusoft';
-//'https://umc.dutchtogether.com/api/payers/info/{settlerId}' get 정산자 정보 받기
-//'https://umc.dutchtogether.com/api/settler/{Link}' settlerId,이름 가져오기
 
-
-
-function RowItem({ payerName, ammount, bankInfo, accountNum }) {
+// RowItem 컴포넌트
+function RowItem({ payerName, amount, bankInfo, accountNum }) {
   return (
     <div style={{ width: "100%", display: 'flex' }}>
-      <Column>payerName</Column>
-      <Column>ammount</Column>
-      <Column>bankInfo</Column>
+      <Column>{payerName}</Column>
+      <Column>{amount} 원</Column>
+      <Column>{bankInfo}</Column>
       <LongColumn>
-        <div style={{ marginLeft: '10px' }}>accountNum</div>
+        <div style={{ marginLeft: '10px' }}>{accountNum}</div>
         <div style={{ display: 'flex', gap: '10px', marginLeft: '10px' }}>
-          <CopyToClipboard text={"복사성공"} onCopy={() => { }}>
+          <CopyToClipboard text={accountNum} onCopy={() => alert('복사 성공!')}>
             <img src={copyIcon} alt="Copy Icon" style={{ cursor: 'pointer', width: '25px', height: '25px' }} />
           </CopyToClipboard>
           <TransferButton>송금하기</TransferButton>
@@ -55,108 +41,84 @@ function RowItem({ payerName, ammount, bankInfo, accountNum }) {
   );
 }
 
-
-
-//MultiMeetingDeatils
-export default function MultiMeetingDeatils() {
+// MultiMeetingDetails 컴포넌트
+export default function MultiMeetingDetails() {
   const { link, settlerId } = useParams();
-  const navigate = useNavigate();
+  const [payerInfos, setPayerInfos] = useState([]);
+  const [meetingName, setMeetingName] = useState('');
 
-  const [payerInfos, setPayerInfos] = useState(null);
-  const [meetingName, setMeetingName] = useState(null);
-
-  const [meetingData, setMeetingData] = useState(null);
-  const [selectedBank, setSelectedBank] = useState('토스');
-  const [transferInitiated, setTransferInitiated] = useState(false);
-
-
-  //정산자 받는 api
-  const getSettler = async (link) => {
-    try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/settler/${link}`)
-      const responseMeetingName = await response.data.data.meetingName;
-
-      console.log('팀 이름: ', responseMeetingName);
-      setMeetingName(responseMeetingName);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  //정산자정보 받는 api
+  // 정산자 정보 받는 API 호출
   const getInfo = async (settlerId) => {
     try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/${settlerId}`)
-      const responsePayerInfos = await response.data.data.payerInfos;
-
-      console.log('정산자 정보: ', responsePayerInfos);
+      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/${settlerId}`);
+      const responsePayerInfos = response.data.data.payerInfos;
+      console.log('정산자 정보 받기:', responsePayerInfos);
       setPayerInfos(responsePayerInfos);
-
     } catch (error) {
-      console.log(error);
+      console.error('정산자 정보 가져오기 오류:', error);
     }
-  }
+  };
 
+  // 팀 이름 받는 API 호출
+  const getSettler = async (link) => {
+    try {
+      const response = await axios.get(`https://umc.dutchtogether.com/api/settler/${link}`);
+      const responseMeetingName = response.data.data.meetingName;
+      console.log('정산 모임 이름:', responseMeetingName);
+      setMeetingName(responseMeetingName);
+    } catch (error) {
+      console.error('팀 이름 가져오기 오류:', error);
+    }
+  };
 
   useEffect(() => {
-    console.log(settlerId, link)
     getSettler(link);
     getInfo(settlerId);
-  }, [])
-
+  }, [link, settlerId]);
 
   return (
     <SingleDetailContainer>
-
-
       <div style={{ margin: "76px", width: '90%', minWidth: '1400px' }}>
-        <MeetingNameText style={{ paddingLeft: "0px" }}>
-          <MeetingDetailMeetingName>
-            {meetingName}
-          </MeetingDetailMeetingName>
-
+        <MeetingNameText style={{ padding: "0px 0px 50px 0px" }}>
+          <MeetingDetailMeetingName>{meetingName}</MeetingDetailMeetingName>
           <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
         </MeetingNameText>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <MultiMeetingDetailInfo style={{ display: 'flex', flexDirection: "column", alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: '34px' }}>
+            <div style={{ display: 'flex', gap: '34px', margin: '30px 0px 30px 0px' }}>
               <MultiMeetingDetailHeader>
                 내가 정산해야할 사람은
               </MultiMeetingDetailHeader>
               <PayersContainer>
-                이름,이름이,이름이름,이름이름이
+                {payerInfos.map((info) => info.name).join(', ')}
               </PayersContainer>
             </div>
 
             <MultiMeetingDetailContainer style={{ overflow: 'auto' }}>
               <div style={{ width: '100%', display: 'flex' }}>
-                <RowItemHeader>
-                  결제자명
-                </RowItemHeader>
-
-                <RowItemHeader>
-                  금액
-                </RowItemHeader>
-
-                <RowItemHeader>
-                  은행정보
-                </RowItemHeader>
-
-                <LongRowItemHeader>
-                  계좌번호 및 송금하기
-                </LongRowItemHeader>
+                <RowItemHeader>결제자명</RowItemHeader>
+                <RowItemHeader>금액</RowItemHeader>
+                <RowItemHeader>은행정보</RowItemHeader>
+                <LongRowItemHeader>계좌번호 및 송금하기</LongRowItemHeader>
               </div>
 
-              <RowItem />
+              {payerInfos.map((info, index) => (
+                <RowItem
+                  key={index}
+                  payerName={info.name}
+                  amount={info.shareAmount}
+                  bankInfo={info.bank}
+                  accountNum={info.accountNum}
+                />
+              ))}
 
             </MultiMeetingDetailContainer>
-
+            <BigNextButton style={{ margin: '40px 0px ' }}>다음으로</BigNextButton>
           </MultiMeetingDetailInfo>
+
         </div>
-
       </div>
-
-    </SingleDetailContainer >
+    </SingleDetailContainer>
   );
 }

@@ -691,7 +691,7 @@ export const SingleNameInput = styled.input`
 export const MultiMeetingDetailInfo = styled.div`
 width: 100%;
 min-width: 1400px;
-height: 564px;
+height: 704px;
 flex-shrink: 0;
 border-radius: 15px;
 background: linear-gradient(0deg, rgba(250, 241, 249, 0.90) 0%, rgba(250, 241, 249, 0.90) 100%);
@@ -719,7 +719,6 @@ background: var(--light, #EDEEFF);
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
 color: var(--text, #323232);
-font-family: "SEBANG Gothic";
 font-size: 25px;
 font-style: normal;
 font-weight: 400;
@@ -754,7 +753,6 @@ line-height: normal;
 export const MultiMeetingDetailContainer = styled.div`
 width: 1200px;
 height: 579px;
-flex-shrink: 0;
 border-radius: 15px;
 background: linear-gradient(0deg, #FFFDFF 0%, #FFFDFF 100%);
 box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.40);
@@ -840,6 +838,23 @@ font-weight: 700;
 line-height: normal;
 `;
 
+export const BigNextButton = styled.button`
+display: flex;
+width: 1223px;
+height: 65px;
+padding: 15px 50px;
+justify-content: center;
+align-items: center;
+gap: 47px;
+flex-shrink: 0;
+border-radius: 15px;
+background: var(--400, #5562CA);
+color: var(--Purple-Light, var(--light, #EDEEFF));
+font-size: 35px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;
 
 
 
