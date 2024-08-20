@@ -13,7 +13,7 @@ import {
   BankOption,
   TransferSection,
   MeetingNameText,
-  ReceiplBox,
+  ReceiptBox,
   FinalAmountText,
   MeetingNameText2,
   Overlay,

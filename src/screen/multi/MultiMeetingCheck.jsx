@@ -4,7 +4,7 @@ import axios from 'axios';
 import {
   SingleDetailContainer, SingleDetailText, CheckMeetingContainer,
   CompleteButton, SingleNameInput, MeetingNameText, MeetingNameText2,
-  MeetingDetailInfo, ReceiplBox, CompleteNameButton, SingleNameInputWrapper,
+  MeetingDetailInfo, ReceiptBox, CompleteNameButton, SingleNameInputWrapper,
   UnCompletedButton
 } from '../../styles/styledComponents';
 import unCompletedButtonImg from '../../assets/완료x 1.png';
@@ -128,7 +128,7 @@ export default function MultiMeetingCheck() {
 
         </MeetingDetailInfo>
 
-        <ReceiplBox>
+        <ReceiptBox>
           영수증
           <div style={{ backgroundColor: 'white', marginTop: '10px' }}>
             {meetingData.receiptUrl ? (
@@ -137,7 +137,7 @@ export default function MultiMeetingCheck() {
               <p>영수증을 업로드하지 않았습니다.</p>
             )}
           </div>
-        </ReceiplBox>
+        </ReceiptBox>
       </div>
     </SingleDetailContainer>
   );
