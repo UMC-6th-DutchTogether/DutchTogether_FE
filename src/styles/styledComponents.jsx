@@ -912,7 +912,7 @@ display:flex;
 border: 1px solid black;
 `;
 
-export const TransferButton = styled.div`
+export const ToggleButton = styled.div`
 display: flex;
 height: 17px;
 width:58px;
@@ -1399,7 +1399,7 @@ align-items: center;
 border-radius: 15px;
 background: #FFF;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-margin:70px 164px 0px 164px;
+margin:70px 144px 0px 144px;
 `;
 export const LinkText = styled.div`
 color: #000;

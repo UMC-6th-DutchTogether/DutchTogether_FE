@@ -15,14 +15,43 @@ import {
   MeetingDetailMeetingName,
   Column,
   LongColumn,
-  TransferButton,
+  ToggleButton,
   RowItemHeader,
   LongRowItemHeader,
   BigNextButton
 } from '../../styles/styledComponents';
 
+
+// 정산자 정보 받는 API 호출
+const updateStatus = async (settlementId, settlerName) => {
+  console.log(settlementId, settlerName);
+  try {
+    const response = await axios.put(`https://umc.dutchtogether.com/api/settlementSettler/updateStatus`, {
+      settlementId: settlementId,
+      settlerName: settlerName,
+      status: "COMPLETED"
+    });
+
+    console.log('정산완료', response);
+
+  } catch (error) {
+    console.error('정산완료 실패 오류:', error);
+  }
+};
+
 // RowItem 컴포넌트
-function RowItem({ payerName, amount, bankInfo, accountNum }) {
+function RowItem({ payerName, amount, bankInfo, accountNum, settlementId, settlerName }) {
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const handleUpdateStatus = async () => {
+    try {
+      await updateStatus(settlementId, settlerName);
+      setIsCompleted(true);  // Update the button state to show completion
+    } catch (error) {
+      console.error('Failed to update status:', error);
+    }
+  };
+
   return (
     <div style={{ width: "100%", display: 'flex' }}>
       <Column>{payerName}</Column>
@@ -31,10 +60,16 @@ function RowItem({ payerName, amount, bankInfo, accountNum }) {
       <LongColumn>
         <div style={{ marginLeft: '10px' }}>{accountNum}</div>
         <div style={{ display: 'flex', gap: '10px', marginLeft: '10px' }}>
-          <CopyToClipboard text={accountNum} onCopy={() => alert('복사 성공!')}>
+          <CopyToClipboard text={accountNum} onCopy={() => alert('계좌번호가 복사되었습니다.')}>
             <img src={copyIcon} alt="Copy Icon" style={{ cursor: 'pointer', width: '25px', height: '25px' }} />
           </CopyToClipboard>
-          <TransferButton>송금하기</TransferButton>
+          <ToggleButton
+            onClick={handleUpdateStatus}
+            disabled={isCompleted}
+            style={{ backgroundColor: isCompleted ? 'gray' : 'var(--400, #5562CA)' }}
+          >
+            {isCompleted ? '정산완료' : '정산미완'}
+          </ToggleButton>
         </div>
       </LongColumn>
     </div>
@@ -43,8 +78,8 @@ function RowItem({ payerName, amount, bankInfo, accountNum }) {
 
 // MultiMeetingDetails 컴포넌트
 export default function MultiMeetingDetails() {
-  const { link, settlerId } = useParams();
-  const [payerInfos, setPayerInfos] = useState([]);
+  const { link, settlerId, settlerName } = useParams();
+  const [payerInfos, setPayerInfos] = useState([]); //정산정보
   const [meetingName, setMeetingName] = useState('');
 
   // 정산자 정보 받는 API 호출
@@ -110,6 +145,8 @@ export default function MultiMeetingDetails() {
                   amount={info.shareAmount}
                   bankInfo={info.bank}
                   accountNum={info.accountNum}
+                  settlementId={info.settlementId}
+                  settlerName={settlerName}
                 />
               ))}
 

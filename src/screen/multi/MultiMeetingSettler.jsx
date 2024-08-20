@@ -58,7 +58,7 @@ export default function MultiMeetingSettler() {
     console.log(result);
 
     //다음 페이지로 이동
-    navigate(`/MultiMeetingDetails/${link}/${result.settlerId}`);
+    navigate(`/MultiMeetingDetails/${link}/${result.settlerId}/${input}`);
   }
 
 
