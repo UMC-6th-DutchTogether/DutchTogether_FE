@@ -53,6 +53,8 @@ function MeetingDetails() {
     }
   };
 
+
+
   useEffect(() => {
     const fetchMeetingData = async () => {
       try {
