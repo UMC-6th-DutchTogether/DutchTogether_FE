@@ -126,6 +126,16 @@ export default function SingleSettlerStatus() {
         <SlideUpContainer>
             <ContentCon>
                 <MeetingName>{meetingName}의 정산현황</MeetingName>
+                <PayerButtonContainer> {/* Use new container for payers */}
+                    {payers.map((payer) => (
+                        <PayerButton
+                            key={payer.settlementId}
+                            onClick={() => setSelectedPayer(payer.settlementId)}
+                        >
+                            {payer.payer}
+                        </PayerButton>
+                    ))}
+                </PayerButtonContainer>
                 <StatusContainer>
                     <StatsContainer>
                         <StatsTopBox>
@@ -145,16 +155,6 @@ export default function SingleSettlerStatus() {
                         </StatsBottomBox>
                     </StatsContainer>
                     <SettlerContainer>
-                        <PayerButtonContainer> {/* Use new container for payers */}
-                            {payers.map((payer) => (
-                                <PayerButton
-                                    key={payer.settlementId}
-                                    onClick={() => setSelectedPayer(payer.settlementId)}
-                                >
-                                    {payer.payer}
-                                </PayerButton>
-                            ))}
-                        </PayerButtonContainer>
                         <SearchContainer>
                             <SearchInput
                                 type="text"

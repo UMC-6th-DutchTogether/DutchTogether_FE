@@ -682,9 +682,10 @@ export const SingleNameInput = styled.input`
 
 export const PayerButtonContainer = styled.div`
     display: flex;
+    justify-content: flex-end;
     flex-wrap: wrap; /* Allows wrapping if there are too many buttons */
     gap: 10px; /* Spacing between buttons */
-    margin-bottom: 20px;
+    margin-right: 20px;
 `;
 
 export const PayerButton = styled.div`
@@ -1215,7 +1216,7 @@ export const StatsContainer = styled.div`
   border-radius: 30px;
   background: var(--light, #EDEEFF);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 30px;
   justify-content: flex-end;
   align-items: center;
@@ -1225,7 +1226,6 @@ export const StatsContainer = styled.div`
 export const StatsTopBox = styled.div`
   display: flex;
   text-align: center;
-  justify-content: space-around;
 `;
 
 export const StatsBottomBox = styled.div`
@@ -1249,20 +1249,28 @@ export const StatBox = styled.div`
 export const StatTitle = styled.p`
   font-size: 34px;
   margin: 0;
+  margin-bottom: 10px;
 `;
 
 export const StatNumber = styled.p`
-  color: var(--light-text, #5F6073);
+  color: #5F6073; 
   text-align: center;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  -webkit-text-stroke-width: 8;
-  -webkit-text-stroke-color: #000;
-  font-family: "SEBANG Gothic";
+  text-shadow: 
+    0px 4px 4px rgba(0, 0, 0, 0.25), 
+    0px 0px 15px rgba(255, 255, 255, 0.5);
+  
+  -webkit-text-stroke-width: 4px; /* Stroke width for the outline */
+  -webkit-text-stroke-color: #e1c6f1; /* Closest solid color approximation */
+  background: linear-gradient(180deg, rgba(251, 224, 255, 0.60) 0%, rgba(241, 222, 255, 0.60) 30.5%, rgba(212, 217, 255, 0.60) 100%);
+  -webkit-background-clip: text;
 
-  font-size: 120px;
+  font-family: "SEBANG Gothic";
+  font-size: 130px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   line-height: normal;
+  display: inline-block;
+  margin: 0;
 `;
 
 export const SettlerContainer = styled.div`
@@ -1272,7 +1280,7 @@ export const SettlerContainer = styled.div`
   border-radius: 30px;
   background: var(--light, #EDEEFF);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 30px;
   justify-content: flex-end;
   align-items: center;
@@ -1293,7 +1301,7 @@ export const SearchInput = styled.input`
   padding: 15px;
 `;
 
-export const SearchButtonCon = styled.button`
+export const SearchButtonCon = styled.div`
   padding: 8px 30px;
   border: none;
   background-color: #fff; 
