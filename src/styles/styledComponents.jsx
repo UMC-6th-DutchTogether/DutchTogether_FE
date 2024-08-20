@@ -700,11 +700,10 @@ export const Letter = styled.div`
   height: 300px;
   width: 1000px;
   cursor: pointer;
-  transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
+  transition: scale 0.2s ease-in-out;
 
   &:hover {
-    height: 330px;
-    width: 1030px;
+    scale: 1.05;
   }
 `;
 
