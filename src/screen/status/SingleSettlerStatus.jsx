@@ -22,8 +22,8 @@ import {
     TableRow,
     NameColumn,
     TimeColumn,
-    PayerButtonContainer,  // Add this import
-    PayerButton // Add this import
+    PayerButtonContainer,
+    PayerButton
 } from '../../styles/styledComponents'
 
 export default function SingleSettlerStatus() {
@@ -85,10 +85,17 @@ export default function SingleSettlerStatus() {
 
     useEffect(() => {
         if (selectedPayer) {
+            const selectedPayerData = payers.find(payer => payer.settlementId === selectedPayer);
             const filteredByPayer = settlements.filter(settlement => settlement.settlementId === selectedPayer);
+
+            if (selectedPayerData) {
+                setNumPeople(selectedPayerData.numPeople); // Update numPeople to the selected payer's numPeople
+            }
+
             setFilteredSettlements(filteredByPayer);
         } else {
             setFilteredSettlements(settlements);
+            setNumPeople(payers.reduce((acc, payer) => acc + payer.numPeople, 0)); // Reset numPeople to total
         }
     }, [selectedPayer, settlements]);
 
@@ -126,7 +133,10 @@ export default function SingleSettlerStatus() {
         <SlideUpContainer>
             <ContentCon>
                 <MeetingName>{meetingName}의 정산현황</MeetingName>
-                <PayerButtonContainer> {/* Use new container for payers */}
+                <PayerButtonContainer>
+                    <PayerButton onClick={() => setSelectedPayer(null)}>
+                        전체
+                    </PayerButton>
                     {payers.map((payer) => (
                         <PayerButton
                             key={payer.settlementId}
