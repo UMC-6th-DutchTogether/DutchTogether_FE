@@ -31,8 +31,12 @@ const updateStatus = async (settlementId, settlerName) => {
       settlerName: settlerName,
       status: "COMPLETED"
     });
+    if (response.data.isSuccess) {
+      console.log('정산완료', response);
+      alert('정산이 완료되었습니다!');
 
-    console.log('정산완료', response);
+    }
+
 
   } catch (error) {
     console.error('정산완료 실패 오류:', error);

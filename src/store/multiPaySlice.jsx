@@ -8,6 +8,7 @@ const initialState = {
   settlements: [], // 결제 정보를 저장하는 배열 { settlementId, payer, item, amount, settlers }
   receiptUrl: null,
   meetingLink: null
+
 };
 
 // createSlice를 사용하여 slice 정의
@@ -28,13 +29,13 @@ const multiPaySlice = createSlice({
       state.payers.push(action.payload);
     },
     updatePayer: (state, action) => {
-      const { payerId, name, bankName, account, settelmentId } = action.payload;
+      const { payerId, name, bankName, account, settlementId } = action.payload;
       const existingPayer = state.payers.find(payer => payer.payerId === payerId);
       if (existingPayer) {
         existingPayer.name = name;
         existingPayer.bankName = bankName;
         existingPayer.account = account;
-        existingPayer.settelmentId = settelmentId;
+        existingPayer.settelmentId = settlementId;
       }
     },
     removePayer: (state, action) => {
@@ -70,6 +71,7 @@ const multiPaySlice = createSlice({
     setMeetingLink: (state, action) => {
       state.meetingLink = action.payload;
     },
+
   },
 });
 
