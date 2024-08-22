@@ -269,7 +269,7 @@ export default function MultiQ4() {
                   <InputListItem key={index}>
                     <ItemInput
                       type="text"
-                      placeholder="정산인원 입력"
+                      placeholder="정산인원 입력( , 로 구분)"
                       value={settlement.settlers}
                       onChange={(e) => handleChange(index, 'settlers', e.target.value)}
                       style={{ width: '100%', border: "none" }}

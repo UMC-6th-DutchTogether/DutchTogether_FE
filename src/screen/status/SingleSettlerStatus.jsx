@@ -139,13 +139,17 @@ export default function SingleSettlerStatus() {
                     <MeetingNameText2>의 정산 현황</MeetingNameText2>
                 </MeetingNameTextCon>
                 <PayerButtonContainer>
-                    <PayerButton onClick={() => setSelectedPayer(null)}>
+                    <PayerButton
+                        onClick={() => setSelectedPayer(null)}
+                        selected={!selectedPayer}  // 전체 버튼이 선택되었을 때 selected prop 전달
+                    >
                         전체
                     </PayerButton>
                     {payers.map((payer) => (
                         <PayerButton
                             key={payer.settlementId}
                             onClick={() => setSelectedPayer(payer.settlementId)}
+                            selected={selectedPayer === payer.settlementId}  // 특정 payer가 선택되었을 때 selected prop 전달
                         >
                             {payer.payer}
                         </PayerButton>

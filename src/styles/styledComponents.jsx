@@ -525,8 +525,16 @@ export const SingleDetailContainer = styled.div`
   flex-direction: column;
   border-radius: 30px 30px 0px 0px;
 box-shadow: 5px -15px 30px 0px rgba(0, 0, 0, 0.15);
+position: relative;
 `;
-
+export const WaveImage = styled.img`
+  position: absolute;
+  bottom: 0; 
+  left: 0;
+  width: 100%;
+  height: auto; 
+  z-index:0;
+`;
 
 
 export const MeetingDetailInfo = styled.div`
@@ -900,7 +908,8 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 display:flex;
-border: 1px solid black;
+border: 0.5px dotted gray;
+border-radius:5px;
 margin:10px;
 `;
 
@@ -915,7 +924,8 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 display:flex;
-border: 1px solid black;
+border-radius:5px;
+border: 0.5px dotted gray;
 `;
 
 export const ToggleButton = styled.div`
@@ -933,6 +943,7 @@ font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+ cursor: pointer;
 `;
 
 export const BigNextButton = styled.button`
@@ -960,21 +971,22 @@ line-height: normal;
 export const PayerButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    flex-wrap: wrap; /* Allows wrapping if there are too many buttons */
-    gap: 10px; /* Spacing between buttons */
+    flex-wrap: wrap; 
+    gap: 10px; 
     margin-right: 20px;
 `;
 
 export const PayerButton = styled.div`
     cursor: pointer;
     padding: 10px 20px;
-    background: var(---light, #EDEEFF);
+    background: ${({ selected }) => (selected ? '#5562CA' : 'var(---light, #EDEEFF)')}; 
+    color: ${({ selected }) => (selected ? '#fff' : '#000')}; 
     border: 1px solid #ddd;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
     &:hover {
-        background-color: #e0e0e0;
+        background-color: ${({ selected }) => (selected ? '#4350B8' : '#e0e0e0')}; 
     }
 `;
 
@@ -1312,6 +1324,12 @@ padding: 10px 0px;
 justify-content: center;
 border-radius: 30px;
 background: linear-gradient(180deg, rgba(251, 224, 255, 0.60) 0%, rgba(241, 222, 255, 0.60) 30.5%, rgba(212, 217, 255, 0.60) 100%);
+color: var(--text, #323232);
+text-align: center;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 `;
 
 export const InputListLongHeader = styled(InputListHeader)`
@@ -1355,7 +1373,7 @@ line-height: normal;
 `;
 
 export const ItemInput = styled.input`
-font-size: 25px;
+font-size: 24px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
@@ -1363,11 +1381,11 @@ line-height: normal;
 height:99%;
 border: 0px;
 border-bottom: 1.5px solid black;
-widht:240px;
+widht:250px;
 `;
 
 export const Itemselect = styled.select`
-font-size: 25px;
+font-size: 24px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;

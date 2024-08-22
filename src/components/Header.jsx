@@ -19,7 +19,7 @@ export default function Header() {
         </HeaderLogo>
         <HeaderMenu>
           <Link to="/">
-            <HeaderMenuText style={{ cursor: 'pointer' }}>Home</HeaderMenuText>
+            <HeaderMenuText style={{ cursor: 'pointer' }} onClick={handleLogoClick} >Home</HeaderMenuText>
           </Link>
           <HeaderMenuText>Log-in</HeaderMenuText>
         </HeaderMenu>

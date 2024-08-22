@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import axios from 'axios';
 import copyIcon from '../../assets/복사아이콘.png';
+import wave from '../../assets/Waves.png';
+
+
 
 import {
   SingleDetailContainer,
@@ -18,7 +21,8 @@ import {
   ToggleButton,
   RowItemHeader,
   LongRowItemHeader,
-  BigNextButton
+  BigNextButton,
+  WaveImage
 } from '../../styles/styledComponents';
 
 
@@ -50,7 +54,7 @@ function RowItem({ payerName, amount, bankInfo, accountNum, settlementId, settle
   const handleUpdateStatus = async () => {
     try {
       await updateStatus(settlementId, settlerName);
-      setIsCompleted(true);  // Update the button state to show completion
+      setIsCompleted(true);
     } catch (error) {
       console.error('Failed to update status:', error);
     }
@@ -80,12 +84,13 @@ function RowItem({ payerName, amount, bankInfo, accountNum, settlementId, settle
   );
 }
 
+
 // MultiMeetingDetails 컴포넌트
 export default function MultiMeetingDetails() {
   const { link, settlerId, settlerName } = useParams();
   const [payerInfos, setPayerInfos] = useState([]); //정산정보
   const [meetingName, setMeetingName] = useState('');
-
+  const navigate = useNavigate();
   // 정산자 정보 받는 API 호출
   const getInfo = async (settlerId) => {
     try {
@@ -139,7 +144,7 @@ export default function MultiMeetingDetails() {
                 <RowItemHeader>결제자명</RowItemHeader>
                 <RowItemHeader>금액</RowItemHeader>
                 <RowItemHeader>은행정보</RowItemHeader>
-                <LongRowItemHeader>계좌번호 및 송금하기</LongRowItemHeader>
+                <LongRowItemHeader>계좌번호 및 정산완료하기</LongRowItemHeader>
               </div>
 
               {payerInfos.map((info, index) => (
@@ -155,11 +160,13 @@ export default function MultiMeetingDetails() {
               ))}
 
             </MultiMeetingDetailContainer>
-            <BigNextButton style={{ margin: '40px 0px ' }}>다음으로</BigNextButton>
+            <BigNextButton style={{ margin: '40px 0px ' }} onClick={() => { navigate('/'); localStorage.clear(); }}>처음으로</BigNextButton>
           </MultiMeetingDetailInfo>
 
         </div>
       </div>
-    </SingleDetailContainer>
+
+      <WaveImage src={wave} alt="Wave" />
+    </SingleDetailContainer >
   );
 }
