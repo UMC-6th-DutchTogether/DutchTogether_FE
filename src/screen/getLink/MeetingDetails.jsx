@@ -110,18 +110,20 @@ function MeetingDetails() {
         <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
       </MeetingNameText>
 
+      <Overlay isVisible={isOverlayVisible} onClick={handleOverlayClick}>
+        <div>
+          <MeetingNameText>
+            <MeetingNameText1>{`${meetingData.meetingName}`}</MeetingNameText1>
+            <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
+          </MeetingNameText>
+          <Letter> </Letter>
+        </div>
+      </Overlay>
+
       <div style={{ display: 'flex' }}>
         <MeetingDetailInfo>
 
-          <Overlay isVisible={isOverlayVisible} onClick={handleOverlayClick}>
-            <div>
-              <MeetingNameText>
-                <MeetingNameText1>{`${meetingData.meetingName}`}</MeetingNameText1>
-                <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
-              </MeetingNameText>
-              <Letter> </Letter>
-            </div>
-          </Overlay>
+
 
           <div style={{ display: "flex", gap: "200px" }}>
 

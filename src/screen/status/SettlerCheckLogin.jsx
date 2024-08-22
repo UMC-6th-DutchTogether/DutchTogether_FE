@@ -81,6 +81,7 @@ export default function SettlerCheckLogin() {
             if (response.data.isSuccess) {
                 // 로그인 성공 시, 토큰과 meetingNum 저장
                 localStorage.setItem('token', response.data.data.token);
+                localStorage.setItem('meetingNum', response.data.data.meetingNum);
                 dispatch(setMeetingNum(response.data.data.meetingNum)); // Redux 상태 업데이트
                 console.log('Meeting Number:', response.data.data.meetingNum);
 

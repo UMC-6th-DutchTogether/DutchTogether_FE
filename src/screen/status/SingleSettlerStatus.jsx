@@ -38,7 +38,7 @@ export default function SingleSettlerStatus() {
     const [payers, setPayers] = useState([]);
     const [selectedPayer, setSelectedPayer] = useState(null);
 
-    const meetingNum = useSelector((state) => state.singlePay.meetingNum);
+    const meetingNum = useSelector((state) => state.singlePay.meetingNum) || localStorage.getItem('meetingNum');
     const token = localStorage.getItem('token');
 
     useEffect(() => {
