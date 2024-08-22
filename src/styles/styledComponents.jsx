@@ -1050,7 +1050,7 @@ export const DecorationBarRight = styled.div`
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
   z-index: 5;
-  top: 39%;
+  top: 38%;
 
 `;
 
@@ -1526,7 +1526,6 @@ export const StatBox = styled.div`
   width: 10vw;
   padding: 10px 0 0 0;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
   text-align: center;
   border-radius: 15px;
