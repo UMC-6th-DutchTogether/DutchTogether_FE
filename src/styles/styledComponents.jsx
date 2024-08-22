@@ -778,7 +778,7 @@ export const SingleNameInput = styled.input`
   flex: 1;
   border: none;
   border-radius: 20px;
-  padding: 20px 180px 20px 10px;
+  padding: 20px 80px 20px 10px;
   background-color: #EDEEFF;
   width: calc(100% - 40px);
   font-size: 20px;
