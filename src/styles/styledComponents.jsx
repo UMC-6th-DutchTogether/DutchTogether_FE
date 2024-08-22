@@ -1239,7 +1239,19 @@ line-height: normal;
 width:900px;
 height:50px;
 `;
-
+export const SelectInput = styled.select`
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  color: #333;
+  &:focus {
+    outline: none;
+    border-color: #777;
+  }
+`;
 
 export const InputSubmitButton = styled.button`
 display: flex;
