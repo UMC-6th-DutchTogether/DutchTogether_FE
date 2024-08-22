@@ -22,32 +22,10 @@ import { setMeetingLink } from '../../store/multiPaySlice';
 
 
 export default function MultiCreateLink() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { meetingLink, meetingNum } = useSelector((state) => state.multiPay);
 
 
-  const getSettler = async () => {
-    try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/settler/d84a1176`)
-      const settlers = await response.data.data.settlers;
-      console.log('정산자', settlers);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const getInfo = async () => {
-    try {
-      const response = await axios.get(`https://umc.dutchtogether.com/api/payers/info/128`)
-      const payerInfos = await response.data.data.payerInfos;
-      console.log('정산자 정보', payerInfos);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   //링크 받기 함수
   const getLink = async () => {
@@ -75,8 +53,7 @@ export default function MultiCreateLink() {
   //복사 함수
   const handleCopy = () => {
     alert('링크가 복사되었습니다!');
-    getSettler();
-    getInfo();
+
   };
 
   const handleShare = () => {

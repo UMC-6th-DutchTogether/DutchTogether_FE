@@ -526,6 +526,7 @@ export const SingleDetailContainer = styled.div`
   border-radius: 30px 30px 0px 0px;
 box-shadow: 5px -15px 30px 0px rgba(0, 0, 0, 0.15);
 position: relative;
+
 `;
 export const WaveImage = styled.img`
   position: absolute;
@@ -1136,6 +1137,7 @@ font-weight: 700;
 line-height: normal;
 color:#fff;
 margin-left: 51px;
+margin-top:35px;
 `;
 
 export const ContentContainer = styled.div`
@@ -1153,7 +1155,7 @@ export const MultiPayContainerRight = styled.div`
 display:flex;
 align-items:center;
 flex-direction:column;
-min-height: 910px;
+min-height: 930px;
 border-radius: 0px 100px 100px 0px;
 box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
 background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360deg);
@@ -1305,7 +1307,7 @@ margin: 0px 22px 0px 22px;
 
 export const InputListContainer = styled.div`
 margin-top:19px;
-margin-bottom:25px;
+margin-bottom:35px;
 margin-left:32px;
 margin-right:90px;
 height:598px;

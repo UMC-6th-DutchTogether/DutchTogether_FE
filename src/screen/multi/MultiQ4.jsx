@@ -91,6 +91,15 @@ export default function MultiQ4() {
       );
     }
 
+
+    // 금액 필드에 숫자만 입력되도록 처리
+    if (field === 'amount') {
+      const numericValue = value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자는 모두 제거
+      updatedSettlements = updatedSettlements.map((settlement, idx) =>
+        idx === index ? { ...settlement, amount: numericValue } : settlement
+      );
+    }
+
     const currentRow = updatedSettlements[index];
     if (
       currentRow.payer.trim() !== '' &&
