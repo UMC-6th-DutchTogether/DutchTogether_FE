@@ -88,12 +88,14 @@ export default function SingleLogin() {
         navigate('/SingleQ1');
         console.log('응답:', response);
       } else {
-        setError('회원가입에 실패했습니다.');
+        setError('중복된 비밀번호 입니다.');
+        alert('중복된 비밀번호 입니다.');
         console.log('응답 오류:', response);
       }
     } catch (err) {
       // 요청 중 오류가 발생한 경우
-      setError('회원가입 요청 중 오류가 발생했습니다.');
+      setError('중복된 비밀번호 입니다.');
+      alert('중복된 비밀번호 입니다.');
       console.error('요청 오류:', err);
     } finally {
       setLoading(false);
@@ -140,7 +142,7 @@ export default function SingleLogin() {
           </ErrorConatiner>
 
           <NextButton onClick={handleSubmit} > 나만 정산하기 페이지 만들기</NextButton>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {/* {error && <ErrorMessage>{error}</ErrorMessage>} */}
         </div>
       </LoginConatiner>
     </SinglePageContainer>

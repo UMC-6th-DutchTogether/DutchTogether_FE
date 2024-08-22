@@ -219,6 +219,7 @@ background: conic-gradient(from -90deg at 0% 56.43%, #747FD3 0deg, #C4C7EC 360de
 z-index: 10;
 min-width:1400px;
 min-height: 775px;
+padding-bottom: 30px;
 `;
 
 export const SingleLoginInputContainer = styled.div`
@@ -397,7 +398,7 @@ export const ReceiptImage = styled.img`
 
 //--------------ChekSingleQ------------------
 
-export const CheckQuestionContainer = styled(LoginConatiner)`
+export const CheckQuestionContainer = styled.div`
   flex-grow: 1;
   display:flex;
   align-items:center;
