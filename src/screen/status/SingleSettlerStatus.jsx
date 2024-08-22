@@ -5,7 +5,9 @@ import {
     SlideUpContainer,
     ContentCon,
     StatusContainer,
-    MeetingName,
+    MeetingNameTextCon,
+    MeetingNameText1,
+    MeetingNameText2,
     StatsContainer,
     StatsTopBox,
     StatsBottomBox,
@@ -132,7 +134,10 @@ export default function SingleSettlerStatus() {
     return (
         <SlideUpContainer>
             <ContentCon>
-                <MeetingName>{meetingName}의 정산현황</MeetingName>
+                <MeetingNameTextCon>
+                    <MeetingNameText1>{meetingName}</MeetingNameText1>
+                    <MeetingNameText2>의 정산 현황</MeetingNameText2>
+                </MeetingNameTextCon>
                 <PayerButtonContainer>
                     <PayerButton onClick={() => setSelectedPayer(null)}>
                         전체

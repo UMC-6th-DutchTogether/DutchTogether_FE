@@ -589,6 +589,11 @@ export const MeetingNameText = styled.div`
   font-weight: 700;
 `;
 
+export const MeetingNameTextCon = styled(MeetingNameText)`
+  padding: 0;
+  margin-left: 20px;
+`;
+
 export const MeetingNameText1 = styled.div`
 display: flex;
 padding: 12px 60px;
