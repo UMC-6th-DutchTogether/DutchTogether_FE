@@ -12,8 +12,11 @@ import {
   InputSubmitButton,
   MultiGetLinkHeader,
   MeetingDetailMeetingName,
-  SelectInput
+  SelectInput,
+  LogoImg
 } from '../../styles/styledComponents';
+import logo from '../../assets/LOGO 1.png'
+
 
 export default function MultiMeetingSettler() {
   const { link } = useParams();
@@ -62,19 +65,20 @@ export default function MultiMeetingSettler() {
 
   return (
     <SingleDetailContainer>
-      {isOverlayVisible && (
-        <Overlay onClick={handleOverlayClick}>
-          <div>
-            <MeetingNameText>
-              <MeetingDetailMeetingName>
-                {meetingName}
-              </MeetingDetailMeetingName>
-              <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
-            </MeetingNameText>
-            <Letter> </Letter>
-          </div>
-        </Overlay>
-      )}
+
+      <Overlay isVisible={isOverlayVisible} onClick={handleOverlayClick}>
+        <div>
+          <MeetingNameText>
+            <MeetingDetailMeetingName>
+              {meetingName}
+            </MeetingDetailMeetingName>
+            <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
+          </MeetingNameText>
+          <Letter> </Letter>
+        </div>
+      </Overlay>
+
+
       <div style={{ margin: "76px", width: '90%', minWidth: '1400px' }}>
         <MeetingNameText style={{ paddingLeft: "0px" }}>
           <MeetingDetailMeetingName>
@@ -82,23 +86,26 @@ export default function MultiMeetingSettler() {
           </MeetingDetailMeetingName>
           <MeetingNameText2>의 정산 요청이 왔습니다.</MeetingNameText2>
         </MeetingNameText>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <MultiMeetingDetailInfo style={{ display: 'flex', flexDirection: "column", alignItems: 'center' }}>
-            <MultiGetLinkHeader style={{ marginTop: '115px', marginBottom: "81px" }}>당신은 누구십니까?</MultiGetLinkHeader>
-            <TextInputContainer style={{ boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', width: "70%", height: "60px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <SelectInput onChange={handleSelectChange} value={selectedSettler}>
-                <option value="">정산자를 선택하세요</option>
-                {settlers.map(settler => (
-                  <option key={settler.settlersId} value={settler.name}>
-                    {settler.name}
-                  </option>
-                ))}
-              </SelectInput>
-              <InputSubmitButton type="button" onClick={handleSubmit}>제출하기</InputSubmitButton>
-            </TextInputContainer>
-          </MultiMeetingDetailInfo>
-        </div>
+
+
+        <MultiMeetingDetailInfo style={{ display: 'flex', flexDirection: "column", alignItems: 'center' }}>
+          <MultiGetLinkHeader style={{ marginTop: '115px', marginBottom: "81px" }}>당신은 누구십니까?</MultiGetLinkHeader>
+          <TextInputContainer style={{ boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', width: "70%", height: "60px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <SelectInput onChange={handleSelectChange} value={selectedSettler}>
+              <option value="">결제자를 선택하세요</option>
+              {settlers.map(settler => (
+                <option key={settler.settlersId} value={settler.name}>
+                  {settler.name}
+                </option>
+              ))}
+            </SelectInput>
+            <InputSubmitButton type="button" onClick={handleSubmit}>제출하기</InputSubmitButton>
+          </TextInputContainer>
+          <LogoImg src={logo} alt="Logo" />
+        </MultiMeetingDetailInfo>
+
       </div>
+
     </SingleDetailContainer>
   );
 }

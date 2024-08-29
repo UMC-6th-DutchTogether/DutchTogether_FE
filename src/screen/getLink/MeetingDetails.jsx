@@ -20,8 +20,9 @@ import {
   MeetingNameText2,
   Overlay,
   Letter,
+  LogoImg
 } from '../../styles/styledComponents';
-
+import logo from '../../assets/LOGO 1.png'
 
 const bankUrlSchemes = {
   '토스': 'supertoss://send',
@@ -158,6 +159,7 @@ function MeetingDetails() {
             </BankSelect>
             <Transferbutton onClick={handleTransferClick}>[{`${meetingData.bank} ${meetingData.account_num}`}]로 송금하기</Transferbutton>
           </TransferSection>
+          <LogoImg style={{ height: "120px", width: '120px', bottom: "49px", right: '21px' }} src={logo} alt="Logo" />
         </MeetingDetailInfo>
 
         <ReceiptBox>

@@ -662,6 +662,7 @@ export const Transferbutton = styled.button`
   &:hover {
     background-color: darken(${INDIGO}, 10%);
   }
+  width:560px;
 `;
 
 export const ReceiptBox = styled.button`
@@ -801,8 +802,16 @@ height: 704px;
 flex-shrink: 0;
 border-radius: 15px;
 background: linear-gradient(0deg, rgba(250, 241, 249, 0.90) 0%, rgba(250, 241, 249, 0.90) 100%);
-
+position:relative;
 box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.40);
+`;
+
+export const LogoImg = styled.img`
+width: 150px;
+height: 150px;
+position:absolute;
+bottom: 16px;
+right: 39px;
 `;
 
 export const MultiMeetingDetailHeader = styled.div`
@@ -1077,6 +1086,7 @@ font-style: normal;
 font-weight: 700;
 line-height: normal;
 margin-right:74px;
+min-width:360px;
 `;
 
 
@@ -1086,6 +1096,7 @@ export const DecorationBarLeft = styled(DecorationBarRight)`
 `;
 export const DecorationBarLeftText = styled(DecorationBarRightText)`
 margin-left:64px;
+
 `;
 
 export const TitleText = styled.div`
@@ -1137,7 +1148,7 @@ font-weight: 700;
 line-height: normal;
 color:#fff;
 margin-left: 51px;
-margin-top:35px;
+
 `;
 
 export const ContentContainer = styled.div`
@@ -1254,12 +1265,16 @@ line-height: normal;
 width:900px;
 height:50px;
 `;
+
 export const SelectInput = styled.select`
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
   background-color: #f9f9f9;
   color: #333;
   &:focus {
@@ -1267,6 +1282,20 @@ export const SelectInput = styled.select`
     border-color: #777;
   }
 `;
+
+export const Itemselect = styled.select`
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+height:99%;
+border: 0px;
+border-bottom: 1.5px solid black;
+widht:240px;
+
+`;
+
 
 export const InputSubmitButton = styled.button`
 display: flex;
@@ -1309,7 +1338,7 @@ export const InputListContainer = styled.div`
 margin-top:19px;
 margin-bottom:35px;
 margin-left:32px;
-margin-right:90px;
+margin-right:40px;
 height:598px;
 display:flex;
 `;
@@ -1386,17 +1415,7 @@ border-bottom: 1.5px solid black;
 widht:250px;
 `;
 
-export const Itemselect = styled.select`
-font-size: 24px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
 
-height:99%;
-border: 0px;
-border-bottom: 1.5px solid black;
-widht:240px;
-`;
 
 export const LongInputListItem = styled(InputListItem)`
 
@@ -1415,6 +1434,8 @@ height: 68px;
 border-radius: 15px;
 background: var(--light, #EDEEFF);
 `;
+
+
 
 //CreateLink
 export const LinkTextContainer = styled.div`
