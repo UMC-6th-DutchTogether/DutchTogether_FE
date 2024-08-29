@@ -12,7 +12,7 @@ export default function SingleQ2() {
   const dispatch = useDispatch();
   const { bankName, accountNumber } = useSelector((state) => state.singlePay);
   const [selectedBank, setSelectedBank] = useState(bankName || '토스');
-  const [accountNumberInput, setAccountNumberInput] = useState(accountNumber || '');
+  const [accountNumberInput, setAccountNumberInput] = useState(accountNumber || 0);
 
   const bankUrlSchemes = {
     '토스': 'supertoss://send',
@@ -51,10 +51,6 @@ export default function SingleQ2() {
     setSelectedBank(event.target.value);
   };
 
-  const isInputValid = () => {
-    return selectedBank.trim() !== '' && accountNumberInput.trim() !== '';
-  };
-
   return (
     <SinglePageContainer>
       <DecorationBarRight>
@@ -81,7 +77,7 @@ export default function SingleQ2() {
             placeholder="계좌번호를 입력해주세요!"
           />
           <Link to="/SingleQ3">
-            <InputSubmitButton type="button" disabled={!isInputValid()} >제출하기</InputSubmitButton>
+            <InputSubmitButton type="button" >제출하기</InputSubmitButton>
           </Link>
 
         </TextInputContainer>
