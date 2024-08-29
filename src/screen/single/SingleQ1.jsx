@@ -28,8 +28,8 @@ export default function SingleQ1() {
 
   //입력시 호출 함수
   const handleInputChange = (e) => {
-    dispatch(setMeetingName(e.target.value));
-
+    const name = e.target.value;
+    dispatch(setMeetingName(name));
     localStorage.setItem('meetingName', name);
   };
 
