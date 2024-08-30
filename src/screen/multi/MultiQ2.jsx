@@ -82,7 +82,7 @@ export default function MultiQ2() {
       <TransparentBox />
 
       <MultiPayContainerLeft style={{ alignItems: "center", gap: '35px' }}>
-        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>정산에 참여하는 인원의 이름을 모두 작성해주세요.</TitleText>
+        <TitleText style={{ marginTop: "208px", marginBottom: "60px" }}>결제에 참여한 인원의 이름을 모두 작성해주세요.</TitleText>
 
         <TextInputContainer>
           <TextInput

@@ -92,7 +92,7 @@ export default function MultiMeetingSettler() {
           <MultiGetLinkHeader style={{ marginTop: '115px', marginBottom: "81px" }}>당신은 누구십니까?</MultiGetLinkHeader>
           <TextInputContainer style={{ boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', width: "70%", height: "60px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <SelectInput onChange={handleSelectChange} value={selectedSettler}>
-              <option value="">결제자를 선택하세요</option>
+              <option value="">당신의 이름을 선택하세요</option>
               {settlers.map(settler => (
                 <option key={settler.settlersId} value={settler.name}>
                   {settler.name}
